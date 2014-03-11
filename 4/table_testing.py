@@ -1,7 +1,7 @@
 import random, operator, copy, subprocess, sys
 
 def sea(n_generations,population_size,individual_size,parents_selection_group_size,
-	generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
+        generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
 	crossover_probability,mutation_probability,elite_percentage,ofile):
 
 	best_fitness = []
