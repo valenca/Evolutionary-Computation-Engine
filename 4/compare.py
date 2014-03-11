@@ -27,6 +27,7 @@ if __name__ == '__main__':
 	#print(all_data)
 
 	colours = ['r','g','b','y']
+	lines = [0 for i in range(len(all_data[index]))]
 	for l in range(len(all_data[index])):
 		with open("Results/"+all_data[0][l]+"_"+all_data[1][l]+"_"+all_data[2][l]+"_"+all_data[3][l]+\
 			"_"+all_data[4][l]+"_"+all_data[5][l]+"_"+all_data[6][l]+".out") as f:
@@ -49,9 +50,11 @@ if __name__ == '__main__':
 			final_data[1][i] /= n
 			final_data[2][i] /= n
 
-		pl.plot(final_data[0],final_data[1],colours[l])
+		lines[l], = pl.plot(final_data[0],final_data[1],colours[l])
 		pl.plot(final_data[0],final_data[2],colours[l]+'--')
 
+	print lines
+	pl.legend(lines, [all_data[index][i] for i in range(len(all_data[index]))],loc=4)
 	#pl.axis([0,max_generations-1,min(final_data[2])-5,max(final_data[1])+5])
 	pl.axhline(0, color='black')
 	pl.axvline(0, color='black')
