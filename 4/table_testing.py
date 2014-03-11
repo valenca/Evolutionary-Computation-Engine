@@ -142,7 +142,7 @@ def jbrandao_phenotype(individual):
 if __name__ == '__main__':
 
 	n_runs = 10
-	n_generations = [500]
+	n_generations = [50,100,500]
 	population_size = [100,250,500]
 	individual_size = [20,50,100]
 	parents_selection_group_size = [3,5,7]
