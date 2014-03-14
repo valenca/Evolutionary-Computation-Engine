@@ -4,43 +4,103 @@ global weight
 global value
 global max_w
 
+def bhc(n_generations,individual_size,generation,fitness,neighborhood,phenotype,status,ofile):
 
-def basic_hc(problem_size,fitness, max_iter):
-	"""Maximization."""
-	candidate = generate_population(1,problem_size)[0]
-	cost_candi = candidate[1]
-        arr=[]
-	for i in range(max_iter):
-		next_neighbors = [[random_neighbor_bin(candidate[0]),0] for j in range(problem_size)]
-		cost_next_neighbors = [fitness(next_neighbors[j])[0] for j in range(problem_size)]
-                for i in range(problem_size):
-                        next_neighbors[i][1]=cost_next_neighbors[i]
-		cost_next_neighbor=max(cost_next_neighbors)
-		next_neighbor = next_neighbors[cost_next_neighbors.index(cost_next_neighbor)]
-		if cost_next_neighbor >= cost_candi: 
-			candidate = next_neighbor
-			cost_candi = cost_next_neighbor
-                arr.append(cost_candi)
-                
-        print arr
-	with open("output", "a") as f:
-		f.write(str(len(arr)) + "\n")
-		[f.write(str(arr[i])+" "+str(arr[i])+"\n") for i in range(len(arr))]
-        print candidate
-	return [candidate,0]
+	best_fitness = []
 
-def random_neighbor_bin(individual):
-	"""Flip one position."""
-	new_individual = individual[:]
-	pos = random.randint(0,len(individual) - 1)
-	gene = individual[pos]
-	new_gene = (gene + 1) % 2
-	new_individual[pos] = new_gene
-	return new_individual
+	# GENERATE initial individual
+	individual = generation(1, individual_size)[0]
+
+	# Evaluate initial individual
+	individual[1] = fitness(individual[0])[0]
+
+	# Over the generations
+	for i in range(n_generations):
+
+		# Print individual status
+		status(individual, fitness, phenotype, str(i), 0)
+
+		# Get fitness of the individual
+		best_fitness.append(individual[1])
+
+		# Generate all neighbors
+		neighbors = [neighborhood(individual,j) for j in range(individual_size)]
+
+		# Evaluate neighbors by FITNESS; ORDER decreasingly
+		for j in range(len(neighbors)): neighbors[j][1] = fitness(neighbors[j][0])[0]
+		order(neighbors)
+
+		# If neighbor is equal or better: Replace individual
+		if neighbors[0][1] >= individual[1]:
+			individual = neighbors[0]
+
+	# Write best values of fitness to file
+	with open(ofile, "a") as f:
+		f.write(str(len(best_fitness)) + "\n")
+		[f.write(str(best_fitness[i])+"\n") for i in range(len(best_fitness))]
+
+	return individual
+
+def phc(n_generations,population_size,individual_size,generation,fitness,order,neighborhood,phenotype,status,ofile):
+
+	best_fitness = []
+	average_fitness = []
+
+	# GENERATE initial population
+	population = generation(population_size, individual_size)
+
+	# Evaluate initial population by FITNESS; ORDER decreasingly
+	for j in range(len(population)): population[j][1] = fitness(population[j][0])[0]
+	order(population)
+
+	# Over the generations
+	for i in range(n_generations):
+
+		# Print population status
+		status(population[0], fitness, phenotype, str(i), 0)
+
+		# Get best and average fitness of the population's individuals
+		best_fitness.append(fitness(population[0][0])[0])
+		average_fitness.append(sum([fitness(population[j][0])[0] for j in range(len(population))])/len(population))
+
+		# For every individual
+		for index,individual in enumerate(population):
+
+			# Get first best neighbor
+			indexes = list(range(individual_size))
+			random.shuffle(indexes)
+			for position in indexes:
+				# Mutate individual in a certain position
+				neighbor = neighborhood(individual,position)
+				neighbor[1] = fitness(neighbor[0])[0]
+				# If neighbor is equal or better
+				if neighbor[1] >= individual[1]:
+					individual = neighbor
+					break;
+
+			# Replace individual
+			population[index] = individual
+
+		# ORDER decreasingly
+		order(population)
+
+	# Write best and average values of fitness to file
+	with open(ofile, "a") as f:
+		f.write(str(len(best_fitness)) + "\n")
+		[f.write(str(best_fitness[i])+" "+str(average_fitness[i])+"\n") for i in range(len(best_fitness))]
+
+	# Return best individual ever
+	return population[0]
+
+# Mutate candidate (generate neighbor)
+def neighborhood(candidate,position):
+	neighbor = copy.deepcopy(candidate)
+	neighbor[0][position] ^= 1
+	return neighbor
 
 def sea(n_generations,population_size,individual_size,parents_selection_group_size,
-        generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
-        crossover_probability,mutation_probability,elite_percentage):
+	generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
+	crossover_probability,mutation_probability,elite_percentage,ofile):
 
 	best_fitness = []
 	average_fitness = []
@@ -63,7 +123,7 @@ def sea(n_generations,population_size,individual_size,parents_selection_group_si
 		average_fitness.append(sum([fitness(population[j][0])[0] for j in range(len(population))])/len(population))
 
 		# If there aren't changes in the best for a while -> END
-		if i > n_generations/5 and len(set(best_fitness[-n_generations/5:])) == 1: break;
+		#if i > n_generations/5 and len(set(best_fitness[-n_generations/5:])) == 1: break;
 
 		# SELECT PARENTS that will reproduce
 		parents = parents_selection(copy.deepcopy(population), parents_selection_group_size)
@@ -86,7 +146,7 @@ def sea(n_generations,population_size,individual_size,parents_selection_group_si
 		order(population)
 
 	# Write best and average values of fitness to file
-	with open("output", "a") as f:
+	with open(ofile, "a") as f:
 		f.write(str(len(best_fitness)) + "\n")
 		[f.write(str(best_fitness[i])+" "+str(average_fitness[i])+"\n") for i in range(len(best_fitness))]
 
@@ -119,7 +179,7 @@ def knapsack(individual):
 	total_w = sum([weight[i] for i in range(len(individual)) if individual[i] == 1])
 	total_v = sum([value[i] for i in range(len(individual)) if individual[i] == 1])
 	
-	if total_w > max_w: return (0, total_w-max_w)
+	if total_w > max_w: return (max_w-total_w, total_w-max_w)
 	else:               return (total_v, total_w-max_w)
 
 # Order population 
@@ -210,9 +270,9 @@ if __name__ == '__main__':
 		sys.exit(0)
 
 	n_runs = int(sys.argv[2])
-	n_generations = 50
-	population_size = 100
-	individual_size = 20
+	n_generations = 100
+	population_size = 250
+	individual_size = 50
 	parents_selection_group_size = 3
 	generation = generate_population
 	if sys.argv[1] == '1': fitness = jbrandao
@@ -221,13 +281,14 @@ if __name__ == '__main__':
 	parents_selection = parents_selection
 	crossover = crossover
 	mutation = mutation
+	neighborhood = neighborhood
 	survivors_selection = survivors_selection
 	if sys.argv[1] == '1': phenotype = jbrandao_phenotype
 	else:                  phenotype = knapsack_phenotype
 	if sys.argv[1] == '1': status = jbrandao_status
 	else:                  status = knapsack_status
 	crossover_probability = 0.9
-	mutation_probability = 0.05
+	mutation_probability = 0.1
 	elite_percentage = 0.05
 
 	if fitness == knapsack:
@@ -247,18 +308,37 @@ if __name__ == '__main__':
 		max_w = sum(weight)/2
 		random.seed()
 
-	with open("output", "w") as f:
+	ofile = "Results/jb.out"
+
+	with open(ofile, "w") as f:
 		f.write(str(n_runs)+"\n")
 
+	bests = [[],[],[]]
+
 	for i in range(n_runs):
-                
-		#best = sea(n_generations,population_size,individual_size,parents_selection_group_size,
-                #generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
-		#crossover_probability,mutation_probability,elite_percentage)
-                
-                best = basic_hc(individual_size,fitness,n_generations)
+		print i
+		print "sea"
+		bests[0].append(sea(n_generations,population_size,individual_size,parents_selection_group_size,
+			generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
+			crossover_probability,mutation_probability,elite_percentage,ofile))
+		print "phc"
+		bests[1].append(phc(n_generations,population_size,individual_size,
+			generation,fitness,order,neighborhood,phenotype,status,ofile))
+		print "bhc"
+		bests[2].append(bhc(n_generations,individual_size,
+			generation,fitness,neighborhood,phenotype,status,ofile))
 
-		status(best, fitness, phenotype, "Run " + str(i+1) + ": Best", 1)	
+	with open(ofile, "a") as f:
+		for i in range(n_runs):
+			for j in range(3):
+				f.write("\nIndividual: " + str(phenotype(bests[j][i]))+"\n")
+				f.write("   Fitness: " + str(fitness(bests[j][i][0])[0])+"\n")
+				f.write("     Total: " + str(sum(bests[j][i][0]))+"\n")
+				f.write("Violations: " + str((fitness(bests[j][i][0])[1]))+"\n")
 
-	subprocess.call("python2 plot.py", shell=True)
-	os.remove("output")
+	"""with open(ofile, "a") as f:
+		for i in range(n_runs):
+			for j in range(3):
+				f.write("\nIndividual: " + str(phenotype(bests[j][i]))+"\n")
+				f.write("   Fitness: " + str(fitness(bests[j][i][0])[0])+"\n")
+				f.write("     Total: " + str(sum([weight[k] for k in range(len(bests[j][i][0])) if bests[j][i][0][k] == 1])) + " / " + str(max_w)+"\n")"""
