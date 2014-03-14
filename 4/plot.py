@@ -1,6 +1,6 @@
 import matplotlib.pyplot as pl
 
-with open("Results/20_100_50_0.01_0.3_0.02_3.out") as f:
+with open("output") as f:
 	n_runs = int(f.readline())
 	data = []
 	for i in range(n_runs):
@@ -23,7 +23,7 @@ for i in range(len(final_data[0])):
 pl.plot(final_data[0],final_data[1])
 pl.plot(final_data[0],final_data[2])
 
-pl.axis([0,max_generations-1,min(final_data[2])-5,max(final_data[1])+5])
+#pl.axis([0,max_generations-1,min(final_data[2])-5,max(final_data[1])+5])
 pl.axhline(0, color='black')
 pl.axvline(0, color='black')
 pl.show()
