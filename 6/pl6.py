@@ -9,6 +9,7 @@ from Library.survivors import Survivors
 from Library.parents import Parents
 from Library.mutation import Mutation
 from Library.phenotype import Phenotype
+from Library.crossover import Crossover
 
 if __name__ == '__main__':
 

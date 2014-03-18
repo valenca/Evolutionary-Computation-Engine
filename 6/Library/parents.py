@@ -1,4 +1,4 @@
-from random import sample
+from random import sample, random
 
 ##### Parents Selection #####
 class Parents():
@@ -16,3 +16,18 @@ class Parents():
 			parents.append(population[min(t_parents)])
 		return parents
 	################
+
+	##### Roulette Wheel #####
+	def parents_roulette(self, population):
+		parents = []
+		fitnesses = [individual['fit'] for individual in population]
+		total_fitness = sum(fitnesses)
+		for i in range(self.population_size):
+			target = random()*total_fitness
+			index = 0
+			while target > 0:
+				target -= fitnesses[i]
+				index += 1
+			parents.append(population[index])
+		return parents
+	##########################
