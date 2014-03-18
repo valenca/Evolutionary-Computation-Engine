@@ -16,9 +16,9 @@ class Survivors():
 
 	##### Elite #####
 	def survivors_elitism(self, population, candidates):
-	elite_size = int(population_size * self.elite_percentage)
-	if elite_size > 0:
-		return population[:elite_size] + candidates[:-elite_size]
-	else:
-		return candidates
+		elite_size = int(population_size * self.elite_percentage)
+		if elite_size > 0:
+			return population[:elite_size] + candidates[:-elite_size]
+		else:
+			return candidates
 	#################

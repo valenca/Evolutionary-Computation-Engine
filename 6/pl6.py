@@ -1,4 +1,4 @@
-from Library.algorithm import *
+from Library.algorithms import Algorithms
 from Library.generation import Generation
 from Library.fitness import Fitness
 from Library.status import Status
@@ -6,6 +6,9 @@ from Library.stop import Stop
 from Library.neighbors import Neighbors
 from Library.sort import Sort
 from Library.survivors import Survivors
+from Library.parents import Parents
+from Library.mutation import Mutation
+from Library.phenotype import Phenotype
 
 if __name__ == '__main__':
 
