@@ -4,9 +4,43 @@ global weight
 global value
 global max_w
 
+
+def basic_hc(problem_size,fitness, max_iter):
+	"""Maximization."""
+	candidate = generate_population(1,problem_size)[0]
+	cost_candi = candidate[1]
+        arr=[]
+	for i in range(max_iter):
+		next_neighbors = [[random_neighbor_bin(candidate[0]),0] for j in range(problem_size)]
+		cost_next_neighbors = [fitness(next_neighbors[j])[0] for j in range(problem_size)]
+                for i in range(problem_size):
+                        next_neighbors[i][1]=cost_next_neighbors[i]
+		cost_next_neighbor=max(cost_next_neighbors)
+		next_neighbor = next_neighbors[cost_next_neighbors.index(cost_next_neighbor)]
+		if cost_next_neighbor >= cost_candi: 
+			candidate = next_neighbor
+			cost_candi = cost_next_neighbor
+                arr.append(cost_candi)
+                
+        print arr
+	with open("output", "a") as f:
+		f.write(str(len(arr)) + "\n")
+		[f.write(str(arr[i])+" "+str(arr[i])+"\n") for i in range(len(arr))]
+        print candidate
+	return [candidate,0]
+
+def random_neighbor_bin(individual):
+	"""Flip one position."""
+	new_individual = individual[:]
+	pos = random.randint(0,len(individual) - 1)
+	gene = individual[pos]
+	new_gene = (gene + 1) % 2
+	new_individual[pos] = new_gene
+	return new_individual
+
 def sea(n_generations,population_size,individual_size,parents_selection_group_size,
-	generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
-	crossover_probability,mutation_probability,elite_percentage):
+        generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
+        crossover_probability,mutation_probability,elite_percentage):
 
 	best_fitness = []
 	average_fitness = []
@@ -217,10 +251,12 @@ if __name__ == '__main__':
 		f.write(str(n_runs)+"\n")
 
 	for i in range(n_runs):
-
-		best = sea(n_generations,population_size,individual_size,parents_selection_group_size,
-		generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
-		crossover_probability,mutation_probability,elite_percentage)
+                
+		#best = sea(n_generations,population_size,individual_size,parents_selection_group_size,
+                #generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
+		#crossover_probability,mutation_probability,elite_percentage)
+                
+                best = basic_hc(individual_size,fitness,n_generations)
 
 		status(best, fitness, phenotype, "Run " + str(i+1) + ": Best", 1)	
 

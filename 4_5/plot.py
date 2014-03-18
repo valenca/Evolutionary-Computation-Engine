@@ -23,6 +23,7 @@ for i in range(len(final_data[0])):
 pl.plot(final_data[0],final_data[1])
 pl.plot(final_data[0],final_data[2])
 
+#pl.axis([0,max_generations-1,min(final_data[2])-5,max(final_data[1])+5])
 pl.axhline(0, color='black')
 pl.axvline(0, color='black')
 pl.show()
