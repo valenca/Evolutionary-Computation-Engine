@@ -31,3 +31,21 @@ class Parents():
 			parents.append(population[index])
 		return parents
 	##########################
+
+	##### Stochastic Universal Sampling #####
+	def parents_sus(self, population):
+		parents = []
+		fitnesses = [individual['fit'] for individual in population]
+		total_fitness = sum(fitnesses)
+		distance = float(total_fitness) / self.population_size
+		start = random() * distance
+		values = [start + i*distance for i in range(self.population_size)]
+		target = fitnesses[0]
+		index = 0
+		for value in values:
+			while target < value:
+				index += 1
+				target += fitnesses[index]
+			parents.append(population(index))
+		return parents
+	#########################################
