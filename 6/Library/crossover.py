@@ -22,6 +22,7 @@ def cycle_crossover(A,B):
         D.append(ab[(mask[i])%2][i])
     return C,D
     
+    
 Z=range(10)
 A=sample(Z,len(Z))
 B=sample(Z,len(Z))
