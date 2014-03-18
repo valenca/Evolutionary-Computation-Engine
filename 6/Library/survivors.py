@@ -14,6 +14,11 @@ class Survivors():
 			return [candidates[0]]
 	################
 
+	##### Generational #####
+	def survivors_generational(self, population, candidates):
+		return candidates
+	#################
+
 	##### Elite #####
 	def survivors_elitism(self, population, candidates):
 		elite_size = int(population_size * self.elite_percentage)

@@ -46,5 +46,37 @@ class Crossover():
 		return offspring1,offspring2
 	###########################
 
+	##### PMX #####
+	def crossover_pmx(self, parent1, parent2):
+	    cut=[0,0]
+		cut[0]=randint(0,int(size/2))
+		cut[1]=cut[0]+int(size/2)
+		offspring = size-1
+
+	    for i in range(cut[0],cut[1]):
+	        offspring[i]=parent1[i]
+
+	    slice=range(cut[0],cut[1])
+	    i = parent1[cut[0]]
+	    for i in range(cut[0],cut[1]):
+	        if  parent2[i] in offspring:
+	            continue
+	        else:
+	            j=i
+	            while True:
+	                var=parent2.index(parent1[j])
+	                if var not in slice:
+	                    offspring[var]=parent2[i]
+	                    slice.append(var)
+	                    break
+	                else:
+	                    j=parent2.index(parent1[j])
+	        
+	    for i in range(size):
+	        if offspring[i]==-1:
+	            offspring[i]=parent2[i]
+	    return offspring
+	###############
+
 
 
