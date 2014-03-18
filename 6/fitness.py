@@ -10,8 +10,8 @@ class Fitness():
 	##### General fitness function #####
 	def fitness(self, population):
 		for individual in population:
-			if 'phen' not in individual:
-				individual['phen'] = self.fitness(individual['gen'])
+			if 'fit' not in individual:
+				individual['fit'] = self.fitness(individual['gen'])
 	####################################
 
 	##### Joao Brandao Numbers ######

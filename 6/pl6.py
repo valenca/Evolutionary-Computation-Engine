@@ -27,5 +27,5 @@ if __name__ == '__main__':
 	generation = Generation(population_size, individual_size)
 	fitness = Fitness(population_size, individual_size, Fitness.fitness_jbrandao, None)
 	print fitness.fitness
-	a = generation.generation_character()
+	a = generation.generation_binary()
 	print a

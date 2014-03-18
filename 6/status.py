@@ -8,7 +8,7 @@ class Status():
 		self.values = values
 
 	##### General status function #####
-	def status(self, i, population, best_fitnesses, average_fitnesses):
+	def status(self, generation, population, best_fitnesses, average_fitnesses):
 
 		best_fitnesses.append(population[0]['fit'])
 		average_fitnesses.append(sum([individual['fit'] for individual in population])/self.population_size)
@@ -16,7 +16,7 @@ class Status():
 		if 'phen' not in population[0]:
 			population[0]['phen'] = self.phenotype(population[0]['gen'])
 
-		print("####### " + str(i) + " #######")
+		print("####### " + str(generation) + " #######")
 		print("Individual: " + str(population[0]['phen']))
 		print("   Fitness: " + str(best_fitnesses[-1]) + " / " + str(average_fitnesses[-1]))
 		self.status(population, best_fitnesses, average_fitnesses)
