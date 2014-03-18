@@ -24,15 +24,33 @@ class Crossover():
 		return offspring
 	######################################
 
-	##### One-Point Crossover #####
+	##### One-Point #####
 	def crossover_one_point(self, parent1, parent2):
 		cut_index = randint(1, self.individual_size-1)
 		offspring1 = parent1[:cut_index] + parent2[cut_index:]
 		offspring2 = parent2[:cut_index] + parent1[cut_index:]
 		return offspring1,offspring2
-	###############################
+	#####################
 
-	##### Cycle Crossover #####
+	##### Order #####
+	def crossover_order(self, parent1, parent2):
+		parents = [parent1, parent2]
+		offspring = [[None]*self.individual_size,[None]*self.individual_size]
+		cut_index = sample(list(range(self.individual_size)),2)
+		if cut_index[1] < cut_index[0]:
+			cut_index[0],cut_index[1] = cut_index[1],cut_index[0]
+		for i in range(2):
+			temp = deepcopy(parents[i^1])
+			for j in range(cut_index[0],cut_index[1]):
+				offspring[i][j] = parents[i][j]
+				temp.remove(offspring[i][j])
+			for j in range(self.individual_size):
+				if offspring[i][j] == None:
+					offspring[i][j] = temp.pop(0)
+		return offspring[0],offspring[1]
+	#################
+
+	##### Cycle #####
 	def crossover_cycle(self, parent1, parent2):
 		count = 1
 		mask = [0]*self.individual_size
@@ -52,39 +70,34 @@ class Crossover():
 			offspring1.append(parents[(mask[i]+1)%2][i])
 			offspring2.append(parents[(mask[i]+0)%2][i])
 		return offspring1,offspring2
-	###########################
+	#################
 
 	##### PMX #####
 	def crossover_pmx(self, parent1, parent2):
-	    cut=[0,0]
-		cut[0]=randint(0,int(size/2))
-		cut[1]=cut[0]+int(size/2)
-		offspring = size-1
-
-	    for i in range(cut[0],cut[1]):
-	        offspring[i]=parent1[i]
-
-	    slice=range(cut[0],cut[1])
-	    i = parent1[cut[0]]
-	    for i in range(cut[0],cut[1]):
-	        if  parent2[i] in offspring:
-	            continue
-	        else:
-	            j=i
-	            while True:
-	                var=parent2.index(parent1[j])
-	                if var not in slice:
-	                    offspring[var]=parent2[i]
-	                    slice.append(var)
-	                    break
-	                else:
-	                    j=parent2.index(parent1[j])
-	        
-	    for i in range(size):
-	        if offspring[i]==-1:
-	            offspring[i]=parent2[i]
-	    return offspring
+		parents = [parent1, parent2]
+		offspring = [[None]*self.individual_size,[None]*self.individual_size]
+		cut_index = sample(list(range(self.individual_size)),2)
+		if cut_index[1] < cut_index[0]:
+			cut_index[0],cut_index[1] = cut_index[1],cut_index[0]
+		for i in range(2):
+			for j in range(cut_index[0],cut_index[1]):
+				offspring[i][j] = parents[i][j]
+			indexes = list(range(cut_index[0],cut_index[1]))
+			for j in range(cut_index[0],cut_index[1]):
+				if parents[i^1][j] in offspring[i]:
+					continue
+				else:
+					index = j
+					while True:
+						temp = parents[i^1].index(parents[i][index])
+						if temp not in indexes:
+							offspring[i][temp] = parents[i^1][j]
+							indexes.append(temp)
+							break
+						else:
+							index = parents[i^1].index(parents[i][index])
+			for j in range(self.individual_size):
+				if offspring[i][j] == None:
+					offspring[i][j] = parents[i^1][j]
+		return offspring[0],offspring[1]
 	###############
-
-
-
