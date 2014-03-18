@@ -1,4 +1,5 @@
-from random import sample,choice
+from random import sample,choice,randint
+from copy import deepcopy
 
 def crossover_cycle(parent1, parent2,individual_size):
     count = 1
@@ -37,7 +38,7 @@ def pmx(size,parent1,parent2):
     slice=range(cut[0],cut[1])
     i = parent1[cut[0]]
     for i in range(cut[0],cut[1]):
-        if  parent2[i] in offspring:
+        if parent2[i] in offspring:
             continue
         else:
             j=i
@@ -55,7 +56,21 @@ def pmx(size,parent1,parent2):
             offspring[i]=parent2[i]
     return offspring
           
-          
+def ordered_crossover(size,parent1,parent2):
+    cut=[0,0]
+    cut[0]=randint(0,int(size/2))
+    cut[1]=cut[0]+int(size/2)
+    offspring=[-1]*size
+    p2=deepcopy(parent2)
+    for i in range(cut[0],cut[1]):
+        offspring[i]=parent1[i]
+        p2.remove(offspring[i])
+    for i in range(size):
+        if offspring[i]==-1:
+            offspring[i]=p2.pop(0)
+    print offspring
+        
+        
 #parent1=[8,4,7,3,6,2,5,1,9,0]
 #parent2=[0,1,2,3,4,5,6,7,8,9]
 Z=range(10)
@@ -63,5 +78,5 @@ A=sample(Z,len(Z))
 B=sample(Z,len(Z))
 print A
 print B
-print pmx(len(A),A,B)
+print ordered_crossover(len(A),A,B)
 
