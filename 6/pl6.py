@@ -1,6 +1,11 @@
-from algorithm import *
-from generation import Generation
-from fitness import Fitness
+from Library.algorithm import *
+from Library.generation import Generation
+from Library.fitness import Fitness
+from Library.status import Status
+from Library.stop import Stop
+from Library.neighbors import Neighbors
+from Library.sort import Sort
+from Library.survivors import Survivors
 
 if __name__ == '__main__':
 
@@ -26,6 +31,8 @@ if __name__ == '__main__':
 
 	generation = Generation(population_size, individual_size)
 	fitness = Fitness(population_size, individual_size, Fitness.fitness_jbrandao, None)
+	neighbors = Neighbors(population_size, individual_size)
 	print fitness.fitness
 	a = generation.generation_binary()
 	print a
+	print neighbors.neighbors_binary(a[0])
