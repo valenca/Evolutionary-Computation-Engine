@@ -1,10 +1,11 @@
 ##### Population Analyzer #####
 class Status():
 
-	def __init__(self, population_size, individual_size, status, values):
+	def __init__(self, population_size, individual_size, status, phenotype, values):
 		self.population_size = population_size
 		self.individual_size = individual_size
 		self.status = status
+		self.phenotype = phenotype
 		self.values = values
 
 	##### General status function #####

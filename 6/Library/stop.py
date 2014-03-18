@@ -15,7 +15,7 @@ class Stop():
 	##### Best Individual Stabilization #####
 	def stop_best_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
 		if generation >= self.n_generations * self.values['stab_perc']:
-			if len(set(best_fitnesses[int(-self.n_generations*self.values['stab_perc']:]))) == 1:
+			if len(set(best_fitnesses[int(-self.n_generations*self.values['stab_perc']):])) == 1:
 				return True
 		return False
 	#########################################
