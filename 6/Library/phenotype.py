@@ -11,6 +11,6 @@ class Phenotype():
 	#################################
 
 	##### Knapsack ######
-	def phenotype_jbrandao(self, genotype):
+	def phenotype_knapsack(self, genotype):
 		return [i+1 for i in range(self.individual_size) if genotype[i] == 1]
 	#####################

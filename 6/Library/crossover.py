@@ -1,4 +1,4 @@
-from random import sample, random
+from random import sample, random, randint
 from copy import deepcopy
 
 ##### Parent Crossover #####
@@ -23,6 +23,14 @@ class Crossover():
 				offspring.append(parents[i+1])
 		return offspring
 	######################################
+
+	##### One-Point Crossover #####
+	def crossover_one_point(self, parent1, parent2):
+		cut_index = randint(1, self.individual_size-1)
+		offspring1 = parent1[:cut_index] + parent2[cut_index:]
+		offspring2 = parent2[:cut_index] + parent1[cut_index:]
+		return offspring1,offspring2
+	###############################
 
 	##### Cycle Crossover #####
 	def crossover_cycle(self, parent1, parent2):
