@@ -46,6 +46,6 @@ class Parents():
 			while target < value:
 				index += 1
 				target += fitnesses[index]
-			parents.append(population(index))
+			parents.append(population[index])
 		return parents
 	#########################################

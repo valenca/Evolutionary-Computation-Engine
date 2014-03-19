@@ -16,7 +16,7 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	n_runs = 1
-	n_generations = 500
+	n_generations = 5000
 	population_size = 250
 	individual_size = 10
 	crossover_probability = 0.9
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 	values = {}
 
 	values['tournament_size'] = 3
-	values['stabilise_percentage'] = 0.2
+	values['stabilise_percentage'] = 1
 	values['elite_percentage'] = 0.05
 
 	#seed("knapsack")
@@ -96,7 +96,7 @@ if __name__ == '__main__':
 				'generation':	generation.rastrigin,
 				'fitness':		fitness.rastrigin,
 				'phenotype':	phenotype.rastrigin,
-				'parents':		parents.roulette,
+				'parents':		parents.sus,
 				'survivors':	survivors.elitism,
 				'crossover':	crossover.one_point,
 				'mutation':		mutation.float,
