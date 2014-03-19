@@ -17,7 +17,7 @@ from cPickle import dump, load
 if __name__ == '__main__':
 
 	n_runs = 50
-	output = "output"
+	output = "Results/output"
 
 	n_generations = 2500
 	population_size = 500

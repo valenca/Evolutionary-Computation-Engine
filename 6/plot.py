@@ -1,7 +1,7 @@
 from matplotlib import pyplot
 from cPickle import load
 
-outputs = ['output1','output2','output3']
+outputs = ['Results/output1','Results/output2','Results/output3']
 colours = ['r','g','b']
 lines = [0,0,0]
 for k in range(3):
