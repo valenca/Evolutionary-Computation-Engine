@@ -1,8 +1,7 @@
 ##### Individual Phenotype #####
 class Phenotype():
 
-	def __init__(self, population_size, individual_size):
-		self.population_size = population_size
+	def __init__(self, individual_size):
 		self.individual_size = individual_size
 
 	##### Joao Brandao Numbers ######

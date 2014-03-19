@@ -5,7 +5,7 @@ class Algorithms():
 		self.n_generations = n_generations
 
 	##### Basic Hill Climbing #####
-	def bhc(generation,fitness,sort,neighborhood,survivors_selection,status,stop):
+	def bhc(self,generation,fitness,sort,neighborhood,survivors_selection,status,stop):
 		best_fitnesses = []; average_fitnesses = []
 		population = generation()												# Generate initial population
 		fitness(population)														# Evaluate population
@@ -21,7 +21,7 @@ class Algorithms():
 
 
 	##### Parallel Hill Climbing #####
-	def phc(generation,fitness,sort,neighborhood,survivors_selection,status,stop):
+	def phc(self,generation,fitness,sort,neighborhood,survivors_selection,status,stop):
 		best_fitnesses = []; average_fitnesses = []
 		population = generation()												# Generate initial population
 		fitness(population); sort(population)									# Evaluate and sort population
@@ -38,7 +38,7 @@ class Algorithms():
 
 
 	##### Simple Evolutionary Algorithm #####
-	def sea(generation,fitness,sort,parents_selection,crossover,mutation,survivors_selection,status,stop):
+	def sea(self,generation,fitness,sort,parents_selection,crossover,mutation,survivors_selection,status,stop):
 		best_fitnesses = []; average_fitnesses = []
 		population = generation()												# Generate initial population
 		fitness(population); sort(population)									# Evaluate and sort population

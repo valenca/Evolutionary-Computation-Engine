@@ -4,23 +4,22 @@ from copy import deepcopy
 ##### Parent Crossover #####
 class Crossover():
 
-	def __init__(self, population_size, individual_size, crossover, crossover_probability):
-		self.population_size = population_size
+	def __init__(self, individual_size, crossover_probability):
 		self.individual_size = individual_size
-		self.crossover = crossover
 		self.crossover_probability = crossover_probability
+		self.crossover_function = None
 
 	##### General crossover function #####
 	def crossover(self, parents):
 		offspring = []
 		for i in range(0, len(parents)-1, 2):
-			if random < crossover_probability:
-				offspring1,offspring2 = self.crossover(parents[i]['gen'],parents[i+1]['gen'])
+			if random() < self.crossover_probability:
+				offspring1,offspring2 = self.crossover_function(parents[i]['gen'],parents[i+1]['gen'])
 				offspring.append({'gen':offspring1})
 				offspring.append({'gen':offspring2})
 			else:
-				offspring.append(parents[i])
-				offspring.append(parents[i+1])
+				offspring.append(deepcopy(parents[i]))
+				offspring.append(deepcopy(parents[i+1]))
 		return offspring
 	######################################
 

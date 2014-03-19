@@ -1,12 +1,11 @@
 ##### Population Analyzer #####
 class Status():
 
-	def __init__(self, population_size, individual_size, status, phenotype, values):
+	def __init__(self, population_size, phenotype, print_type):
 		self.population_size = population_size
-		self.individual_size = individual_size
-		self.status = status
 		self.phenotype = phenotype
-		self.values = values
+		self.print_type = print_type
+		self.status_function = None
 
 	##### General status function #####
 	def status(self, generation, population, best_fitnesses, average_fitnesses):
@@ -16,11 +15,14 @@ class Status():
 
 		if 'phen' not in population[0]:
 			population[0]['phen'] = self.phenotype(population[0]['gen'])
-
-		print("####### " + str(generation) + " #######")
-		print("Individual: " + str(population[0]['phen']))
-		print("   Fitness: " + str(best_fitnesses[-1]) + " / " + str(average_fitnesses[-1]))
-		self.status(population, best_fitnesses, average_fitnesses)
+			
+		if(self.print_type == 'iter'):
+			print("####### " + str(generation) + " #######")
+		elif(self.print_type == 'all'):
+			print("####### " + str(generation) + " #######")
+			print("Individual: " + str(population[0]['phen']))
+			print("   Fitness: " + str(best_fitnesses[-1]) + " / " + str(average_fitnesses[-1]))
+			self.status_function(population, best_fitnesses, average_fitnesses)
 	###################################
 
 	##### Joao Brandao Numbers ######

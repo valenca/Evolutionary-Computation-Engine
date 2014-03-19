@@ -1,11 +1,9 @@
 ##### Algorithm Stop Condition #####
 class Stop():
 
-	def __init__(self, n_generations, population_size, individual_size, values):
+	def __init__(self, n_generations, stabilization_percentage):
 		self.n_generations = n_generations
-		self.population_size = population_size
-		self.individual_size = individual_size
-		self.values = values
+		self.stabilization_percentage = stabilization_percentage
 
 	##### Do Nothing #####
 	def stop_nothing(self, generation, population, best_fitnesses, average_fitnesses):
@@ -14,8 +12,8 @@ class Stop():
 
 	##### Best Individual Stabilization #####
 	def stop_best_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
-		if generation >= self.n_generations * self.values['stab_perc']:
-			if len(set(best_fitnesses[int(-self.n_generations*self.values['stab_perc']):])) == 1:
+		if generation >= self.n_generations * self.stabilization_percentage:
+			if len(set(best_fitnesses[int(-self.n_generations*self.stabilization_percentage):])) == 1:
 				return True
 		return False
 	#########################################

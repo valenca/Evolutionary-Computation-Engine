@@ -1,9 +1,8 @@
 ##### Survivors Selection #####
 class Survivors():
 
-	def __init__(self, population_size, individual_size, elite_percentage):
+	def __init__(self, population_size, elite_percentage):
 		self.population_size = population_size
-		self.individual_size = individual_size
 		self.elite_percentage = elite_percentage
 
 	##### Best #####
@@ -21,7 +20,7 @@ class Survivors():
 
 	##### Elite #####
 	def survivors_elitism(self, population, candidates):
-		elite_size = int(population_size * self.elite_percentage)
+		elite_size = int(self.population_size * self.elite_percentage)
 		if elite_size > 0:
 			return population[:elite_size] + candidates[:-elite_size]
 		else:

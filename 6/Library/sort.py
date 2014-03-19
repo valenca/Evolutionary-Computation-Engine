@@ -3,9 +3,8 @@ from operator import itemgetter
 ##### Individual Sorter #####
 class Sort():
 
-	def __init__(self, population_size, individual_size):
-		self.population_size = population_size
-		self.individual_size = individual_size
+	def __init__(self):
+		pass
 
 	##### Decreasingly Sorter #####
 	def sort_decrease(self, population):

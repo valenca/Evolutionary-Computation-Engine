@@ -1,17 +1,16 @@
 ##### Individual Evaluator #####
 class Fitness():
 
-	def __init__(self, population_size, individual_size, fitness, values):
-		self.population_size = population_size
+	def __init__(self, individual_size, values):
 		self.individual_size = individual_size
-		self.fitness = fitness
 		self.values = values
+		self.fitness_function = None
 
 	##### General fitness function #####
 	def fitness(self, population):
 		for individual in population:
 			if 'fit' not in individual:
-				individual['fit'] = self.fitness(individual['gen'])
+				individual['fit'] = self.fitness_function(individual['gen'])
 	####################################
 
 	##### Joao Brandao Numbers ######

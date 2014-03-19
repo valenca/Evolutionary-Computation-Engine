@@ -210,9 +210,9 @@ if __name__ == '__main__':
 		sys.exit(0)
 
 	n_runs = int(sys.argv[2])
-	n_generations = 50
+	n_generations = 500
 	population_size = 100
-	individual_size = 20
+	individual_size = 100
 	parents_selection_group_size = 3
 	generation = generate_population
 	if sys.argv[1] == '1': fitness = jbrandao
@@ -252,13 +252,11 @@ if __name__ == '__main__':
 
 	for i in range(n_runs):
                 
-		#best = sea(n_generations,population_size,individual_size,parents_selection_group_size,
-                #generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
-		#crossover_probability,mutation_probability,elite_percentage)
-                
-                best = basic_hc(individual_size,fitness,n_generations)
+		best = sea(n_generations,population_size,individual_size,parents_selection_group_size,
+                generation,fitness,order,parents_selection,crossover,mutation,survivors_selection,phenotype,status,
+		crossover_probability,mutation_probability,elite_percentage)
 
 		status(best, fitness, phenotype, "Run " + str(i+1) + ": Best", 1)	
 
-	subprocess.call("python2 plot.py", shell=True)
-	os.remove("output")
+	#subprocess.call("python2 plot.py", shell=True)
+	#os.remove("output")
