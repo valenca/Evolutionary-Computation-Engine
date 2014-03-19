@@ -20,16 +20,15 @@ class Status():
 			population[0]['phen'] = self.phenotype(population[0]['gen'])
 			
 		if self.print_type == 'bar':
-			length=70
+			length=40
 			pcurr=length*(generation+1)/self.n_generations
 			ptotal=length
 			subprog=pcurr
-			if generation==0: print "\n\n"
-			clean="\r\b\r\b\r\b\r"
+			clean="\r"
 			bar="["+("#"*int(ceil(pcurr)))+("-"*int(floor(ptotal-pcurr)))+"]"
-			perc="("+str(generation+1)+"/"+str(self.n_generations)+")"
-			bfit="\n   Best Fitness - "+str('%.8f'%best_fitnesses[-1])+ " "
-			afit="\nAverage Fitness - "+str('%.8f'%average_fitnesses[-1])+ " \n"
+			perc=" ("+str(generation+1)+"/"+str(self.n_generations)+") "
+			bfit="Best: "+str('%.8f'%best_fitnesses[-1])+ " "
+			afit="Avg: " +str('%.8f'%average_fitnesses[-1])+ " "
 
 			out.write(clean+bar+perc+bfit+afit)
 			out.flush()

@@ -17,8 +17,8 @@ if __name__ == '__main__':
 
 	n_runs = 1
 
-	n_generations = 1000
-	population_size = 250
+	n_generations = 10000
+	population_size = 5000
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
