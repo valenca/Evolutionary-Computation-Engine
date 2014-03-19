@@ -26,9 +26,9 @@ class Parents():
 			target = random()*total_fitness
 			index = 0
 			while target > 0:
-				target -= fitnesses[i]
+				target -= fitnesses[index]
 				index += 1
-			parents.append(population[index])
+			parents.append(population[index-1])
 		return parents
 	##########################
 
