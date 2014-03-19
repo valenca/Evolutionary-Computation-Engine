@@ -1,3 +1,5 @@
+from math import cos, pi
+
 ##### Individual Evaluator #####
 class Fitness():
 
@@ -39,7 +41,9 @@ class Fitness():
 
 	##### Traveling Salesman Problem #####
 	def rastrigin(self, genotype):
-		
+		value = self.values['A'] * self.individual_size
+		for i in range(self.individual_size):
+			values += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
 		return total_distance
 	######################################
 

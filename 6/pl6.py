@@ -18,7 +18,7 @@ if __name__ == '__main__':
 	n_runs = 1
 	n_generations = 500
 	population_size = 250
-	individual_size = 100
+	individual_size = 10
 	tournament_size = 3
 	crossover_probability = 0.9
 	mutation_probability = 0.1
@@ -27,6 +27,7 @@ if __name__ == '__main__':
 	print_type = ''
 
 	values = {}
+
 	#seed("knapsack")
 	v = 10
 	r = 5
@@ -42,6 +43,8 @@ if __name__ == '__main__':
 	#
 	values['max_weight'] = sum(values['weights'])/2
 	#seed()
+
+	values['A'] = 10
 
 
 	algorithms = Algorithms(n_generations)
