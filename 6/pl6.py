@@ -137,3 +137,4 @@ if __name__ == '__main__':
 	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
 	
 	with open("outfile"):
+		pass
