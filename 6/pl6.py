@@ -38,21 +38,21 @@ if __name__ == '__main__':
 	stop = Stop(n_generations, stabilization_percentage)
 
 	database = {
-			'jbrandao':
-				{
-					'generation':	generation.generation_binary,
-					'fitness':		fitness.fitness_jbrandao,
-					'phenotype':	phenotype.phenotype_jbrandao,
-					'parents':		parents.parents_tournament,
-					'survivors':	survivors.survivors_elitism,
-					'crossover':	crossover.crossover_one_point,
-					'mutation':		mutation.mutation_binary,
-					'neighbors':	None,
-					'sort':			sort.sort_decrease,
-					'status':		status.status_jbrandao,
-					'stop':			stop.stop_best_stabilization
-				}
-		   }
+		'jbrandao':
+		{
+			'generation':	generation.generation_binary,
+			'fitness':		fitness.fitness_jbrandao,
+			'phenotype':	phenotype.phenotype_jbrandao,
+			'parents':		parents.parents_tournament,
+			'survivors':	survivors.survivors_elitism,
+			'crossover':	crossover.crossover_one_point,
+			'mutation':		mutation.mutation_binary,
+			'neighbors':	None,
+			'sort':			sort.sort_decrease,
+			'status':		status.status_jbrandao,
+			'stop':			stop.stop_best_stabilization
+		}
+	}
 
 	problem = database['jbrandao']
 
