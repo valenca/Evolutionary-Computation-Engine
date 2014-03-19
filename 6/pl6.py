@@ -46,7 +46,7 @@ if __name__ == '__main__':
 	#seed()
 
 	values['A'] = 10
-	values['sigma'] = 0.01
+	values['sigma'] = 0.1
 
 	algorithms = Algorithms(n_generations)
 	generation = Generation(population_size, individual_size)
@@ -128,9 +128,12 @@ if __name__ == '__main__':
 	status.status_function = problem['status']
 	status.phenotype = problem['phenotype']
 
-	population,best_fitnesses,average_fitnesses = algorithms.sea(problem['generation'],
-		fitness.fitness,problem['sort'],problem['parents'],crossover.crossover,
-		problem['mutation'],problem['survivors'],status.status,problem['stop'])
+	results = {}
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = \
+	algorithms.sea(problem['generation'],fitness.fitness,problem['sort'],problem['parents'],
+		crossover.crossover,problem['mutation'],problem['survivors'],status.status,problem['stop'])
 	
 	status.print_type = 'all'
-	status.status('Final', population, best_fitnesses, average_fitnesses)
+	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
+
+	#with open("outfile")
