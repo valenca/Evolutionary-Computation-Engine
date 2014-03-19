@@ -17,16 +17,16 @@ class Status():
 			population[0]['phen'] = self.phenotype(population[0]['gen'])
 			
 		if self.print_type == 'iter':
-			print("####### " + str(generation) + " #######")
+			print str(generation)
+		
+		elif self.print_type == 'fit':
+			print str(generation) + " "+str('%.8f'%best_fitnesses[-1]) + " " + str('%.8f'%average_fitnesses[-1])
 
 		elif self.print_type == 'all':
-			print("####### " + str(generation) + " #######")
-			print("Individual: " + str(population[0]['phen']))
-			print("   Fitness: " + str(round(best_fitnesses[-1],7)) + " / " + str(round(average_fitnesses[-1],7)))
+			print ">>" + str(generation) + ": "+str('%.8f'%best_fitnesses[-1]) + " | " + str('%.8f'%average_fitnesses[-1])
+			print str(population[0]['phen'])
 			self.status_function(population, best_fitnesses, average_fitnesses)
 
-		elif self.print_type == 'machine':			
-			print str(generation),str(round(best_fitnesses[-1],7)),str(round(average_fitnesses[-1],7))
 			
 	###################################
 

@@ -16,12 +16,12 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	n_runs = 1
-	n_generations = 5000
-	population_size = 1000
+	n_generations = 500
+	population_size = 100
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = 'machine'
+	print_type = 'fit'
 
 	values = {}
 
@@ -135,5 +135,4 @@ if __name__ == '__main__':
 	
 	status.print_type = 'all'
 	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
-	print "Generations:", len(results['best_fitnesses'])
 	#with open("outfile")
