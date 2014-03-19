@@ -15,6 +15,8 @@ from random import uniform, seed
 
 if __name__ == '__main__':
 
+	n_runs = 1
+
 	n_generations = 1000
 	population_size = 500
 	individual_size = 10
