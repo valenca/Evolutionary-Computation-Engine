@@ -16,7 +16,7 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	n_runs = 1
-	n_generations = 5000
+	n_generations = 10000
 	population_size = 250
 	individual_size = 10
 	crossover_probability = 0.9
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 	#seed()
 
 	values['A'] = 10
-	values['sigma'] = 0.01
+	values['sigma'] = 0.1
 
 	algorithms = Algorithms(n_generations)
 	generation = Generation(population_size, individual_size)
@@ -96,7 +96,7 @@ if __name__ == '__main__':
 				'generation':	generation.rastrigin,
 				'fitness':		fitness.rastrigin,
 				'phenotype':	phenotype.rastrigin,
-				'parents':		parents.sus,
+				'parents':		parents.tournament,
 				'survivors':	survivors.elitism,
 				'crossover':	crossover.one_point,
 				'mutation':		mutation.float,
