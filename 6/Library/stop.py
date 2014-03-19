@@ -1,3 +1,5 @@
+from math import ceil
+
 ##### Algorithm Stop Condition #####
 class Stop():
 
@@ -11,19 +13,24 @@ class Stop():
 	######################
 
 	##### Best Individual Stabilization #####
-	def best_stabilisation(self, generation, population, best_fitnesses, average_fitnesses):
-		if generation >= self.n_generations * self.values['stabilise_percentage']:
-			if len(set(best_fitnesses[int(-self.n_generations*self.values['stabilise_percentage']):])) == 1:
+	def best_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
+		if generation >= self.n_generations * self.values['stabilize_percentage']:
+			index = -int(ceil(self.n_generations*self.values['stabilize_percentage']))
+			if len(set(best_fitnesses[index:])) == 1:
 				return True
 		return False
 	#########################################
 
 	##### Interval Stabilization #####
-	#def interval_stabilisation(self, generation, population, best_fitnesses, average_fitnesses):
-	#	epsilon = 0.00001
-	#	if generation >= self.n_generations * self.values['stabilise_percentage']:
-	#		if abs(best_fitnesses[-1] - best_fitnesses[-self.n_generations*self.values['stabilise_percentage']]) < epsilon:
-	#			return True
-	#	return False
+	def interval_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
+		print 'qwer', generation, self.n_generations * self.values['stabilize_percentage']
+		if generation >= self.n_generations * self.values['stabilize_percentage']:
+			print 'asdf'
+			index = -int(ceil(self.n_generations*self.values['stabilize_percentage']))
+			interval = abs(best_fitnesses[-1] - best_fitnesses[index])
+			print interval
+			if interval < self.values['stop_interval']:
+				return True
+		return False
 	##################################
 

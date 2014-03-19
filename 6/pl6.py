@@ -16,18 +16,18 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	n_runs = 1
-	n_generations = 1000
-	population_size = 10000
+	n_generations = 10000
+	population_size = 1000
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = 'machine'
+	print_type = ''
 
 	values = {}
-
 	values['tournament_size'] = 3
-	values['stabilise_percentage'] = 1
+	values['stabilize_percentage'] = 0.2
 	values['elite_percentage'] = 0.1
+	values['stop_interval'] = 0.00001
 
 	#seed("knapsack")
 	v = 10
@@ -71,10 +71,10 @@ if __name__ == '__main__':
 				'survivors':	survivors.elitism,
 				'crossover':	crossover.one_point,
 				'mutation':		mutation.binary,
-				'neighbors':	None,
+				'neighbors':	neighbors.binary,
 				'sort':			sort.decrease,
 				'status':		status.jbrandao,
-				'stop':			stop.best_stabilisation
+				'stop':			stop.best_stabilization
 			},
 
 		'knapsack':
@@ -86,10 +86,10 @@ if __name__ == '__main__':
 				'survivors':	survivors.elitism,
 				'crossover':	crossover.one_point,
 				'mutation':		mutation.binary,
-				'neighbors':	None,
+				'neighbors':	neighbors.binary,
 				'sort':			sort.decrease,
 				'status':		status.knapsack,
-				'stop':			stop.best_stabilisation
+				'stop':			stop.best_stabilization
 			},
 		'rastrigin':
 			{
@@ -99,26 +99,12 @@ if __name__ == '__main__':
 				'parents':		parents.tournament,
 				'survivors':	survivors.elitism,
 				'crossover':	crossover.one_point,
-				'mutation':		mutation.float,
+				'mutation':		mutation.rastrigin,
 				'neighbors':	None,
 				'sort':			sort.increase,
 				'status':		status.rastrigin,
-				'stop':			stop.best_stabilisation
-			}#,
-		#'tsp':
-		#	{
-		#		'generation':	generation.integer,
-		#		'fitness':		fitness.tsp,
-		#		'phenotype':	phenotype.tsp,
-		#		'parents':		parents.tournament,
-		#		'survivors':	survivors.elitism,
-		#		'crossover':	crossover.pmx,
-		#		'mutation':		mutation.switch,
-		#		'neighbors':	None,
-		#		'sort':			sort.decrease,
-		#		'status':		status.tsp,
-		#		'stop':			stop.best_stabilisation
-		#	}
+				'stop':			stop.best_stabilization
+			}
 		}
 
 	problem = database['rastrigin']
@@ -135,6 +121,3 @@ if __name__ == '__main__':
 	
 	status.print_type = 'all'
 	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
-	
-	with open("outfile"):
-		pass
