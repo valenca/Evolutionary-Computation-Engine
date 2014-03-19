@@ -19,14 +19,15 @@ if __name__ == '__main__':
 	n_generations = 500
 	population_size = 250
 	individual_size = 10
-	tournament_size = 3
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	elite_percentage = 0.05
-	stabilization_percentage = 1
 	print_type = ''
 
 	values = {}
+
+	values['tournament_size'] = 3
+	values['stabilise_percentage'] = 0.2
+	values['elite_percentage'] = 0.05
 
 	#seed("knapsack")
 	v = 10
@@ -51,14 +52,14 @@ if __name__ == '__main__':
 	generation = Generation(population_size, individual_size)
 	fitness = Fitness(individual_size,values)
 	phenotype = Phenotype(individual_size, values)
-	parents = Parents(population_size, individual_size, tournament_size)
-	survivors = Survivors(population_size, elite_percentage)
+	parents = Parents(population_size, individual_size, values)
+	survivors = Survivors(population_size, values)
 	crossover = Crossover(individual_size,crossover_probability)
 	mutation = Mutation(individual_size, mutation_probability, values)
 	neighbors = Neighbors(individual_size)
 	sort = Sort()
 	status = Status(population_size,print_type)
-	stop = Stop(n_generations, stabilization_percentage)
+	stop = Stop(n_generations, values)
 
 	database = {
 		'jbrandao':
@@ -73,7 +74,7 @@ if __name__ == '__main__':
 				'neighbors':	None,
 				'sort':			sort.decrease,
 				'status':		status.jbrandao,
-				'stop':			stop.best_stabilization
+				'stop':			stop.best_stabilisation
 			},
 
 		'knapsack':
@@ -88,7 +89,7 @@ if __name__ == '__main__':
 				'neighbors':	None,
 				'sort':			sort.decrease,
 				'status':		status.knapsack,
-				'stop':			stop.best_stabilization
+				'stop':			stop.best_stabilisation
 			},
 		'rastrigin':
 			{
@@ -102,7 +103,7 @@ if __name__ == '__main__':
 				'neighbors':	None,
 				'sort':			sort.increase,
 				'status':		status.rastrigin,
-				'stop':			stop.best_stabilization
+				'stop':			stop.best_stabilisation
 			}#,
 		#'tsp':
 		#	{
@@ -116,7 +117,7 @@ if __name__ == '__main__':
 		#		'neighbors':	None,
 		#		'sort':			sort.decrease,
 		#		'status':		status.tsp,
-		#		'stop':			stop.best_stabilization
+		#		'stop':			stop.best_stabilisation
 		#	}
 		}
 

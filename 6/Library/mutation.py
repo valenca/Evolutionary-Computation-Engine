@@ -24,7 +24,7 @@ class Mutation():
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 	##########################
 
-	##### Float genotype #####
+	##### Rastrigin #####
 	def rastrigin(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
@@ -32,4 +32,4 @@ class Mutation():
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 					if individual['gen'][j] > 5.12: individual['gen'][j] = 5.12
 					elif individual['gen'][j] < -5.12: individual['gen'][j] = -5.12
-	##########################
+	#####################

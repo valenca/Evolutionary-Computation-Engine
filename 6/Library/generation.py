@@ -40,11 +40,11 @@ class Generation():
 		return population
 	##############################
 
-	##### Float genotype #####
+	##### Rastrigin #####
 	def rastrigin(self):
 		population = []
 		for i in range(self.population_size):
 			population.append({'gen': [random()*10.24-5.12 for j in range(self.individual_size)]})
 		return population
-	##########################
+	#####################
 
