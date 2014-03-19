@@ -16,10 +16,11 @@ from cPickle import dump, load
 
 if __name__ == '__main__':
 
-	n_runs = 10
+	n_runs = 50
+	output = "output"
 
-	n_generations = 1000
-	population_size = 250
+	n_generations = 2500
+	population_size = 500
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
@@ -100,7 +101,7 @@ if __name__ == '__main__':
 				'generation':	generation.rastrigin,
 				'fitness':		fitness.rastrigin,
 				'phenotype':	phenotype.rastrigin,
-				'parents':		parents.tournament,
+				'parents':		parents.sus,
 				'survivors':	survivors.elitism,
 				'crossover':	crossover.one_point,
 				'mutation':		mutation.rastrigin,
@@ -118,7 +119,7 @@ if __name__ == '__main__':
 	status.status_function = problem['status']
 	status.phenotype = problem['phenotype']
 
-	with open("output", "w") as f:
+	with open(output, "w") as f:
 		dump(n_runs, f)
 
 	for i in range(n_runs):
@@ -132,11 +133,5 @@ if __name__ == '__main__':
 		status.status(n_generations-1, results['population'],results['best_fitnesses'],results['average_fitnesses'])
 		print ''
 
-		with open("output", "a") as f:
+		with open(output, "a") as f:
 			dump([results['best_fitnesses'],results['average_fitnesses']],f)
-
-	#with open("output", "r") as f:
-	#	print load(f)
-	#	for i in range(n_runs):
-	#		print load(f)
-
