@@ -24,7 +24,7 @@ class Crossover():
 	######################################
 
 	##### One-Point #####
-	def crossover_one_point(self, parent1, parent2):
+	def one_point(self, parent1, parent2):
 		cut_index = randint(1, self.individual_size-1)
 		offspring1 = parent1[:cut_index] + parent2[cut_index:]
 		offspring2 = parent2[:cut_index] + parent1[cut_index:]
@@ -32,7 +32,7 @@ class Crossover():
 	#####################
 
 	##### Order #####
-	def crossover_order(self, parent1, parent2):
+	def ordered(self, parent1, parent2):
 		parents = [parent1, parent2]
 		offspring = [[None]*self.individual_size,[None]*self.individual_size]
 		cut_index = sample(list(range(self.individual_size)),2)
@@ -50,7 +50,7 @@ class Crossover():
 	#################
 
 	##### Cycle #####
-	def crossover_cycle(self, parent1, parent2):
+	def cycle(self, parent1, parent2):
 		count = 1
 		mask = [0]*self.individual_size
 		toggle = False
@@ -72,7 +72,7 @@ class Crossover():
 	#################
 
 	##### PMX #####
-	def crossover_pmx(self, parent1, parent2):
+	def pmx(self, parent1, parent2):
 		parents = [parent1, parent2]
 		offspring = [[None]*self.individual_size,[None]*self.individual_size]
 		cut_index = sample(list(range(self.individual_size)),2)

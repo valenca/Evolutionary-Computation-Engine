@@ -7,11 +7,11 @@ class Sort():
 		pass
 
 	##### Decreasingly Sorter #####
-	def sort_decrease(self, population):
+	def decrease(self, population):
 		population.sort(key=itemgetter('fit'), reverse = True)
 	###############################
 
 	##### Increasingly Sorter #####
-	def sort_increase(self, population):
+	def increase(self, population):
 		population.sort(key=itemgetter('fit'), reverse = False)
 	###############################
