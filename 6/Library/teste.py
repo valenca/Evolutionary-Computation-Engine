@@ -71,20 +71,12 @@ def ordered_crossover(size, parent1, parent2):
                 if offspring[i][j] == None:
                     offspring[i][j] = temp.pop(0)
         return offspring[0],offspring[1]
+from math import cos,pi
+def rastrigin(genotype):
+    value = 10 * 10
+    for i in range(10):
+        value += (genotype[i]**2 - 10*cos(2*pi*genotype[i]))
+    return value
 
-def crossover_one_point(size, parent1, parent2):
-        cut_index = randint(1, size-1)
-        offspring1 = parent1[:cut_index] + parent2[cut_index:]
-        offspring2 = parent2[:cut_index] + parent1[cut_index:]
-        return offspring1,offspring2
+print rastrigin([0,0,0,0,0,0,0,0,0,0])
         
-        
-#parent1=[8,4,7,3,6,2,5,1,9,0]
-#parent2=[0,1,2,3,4,5,6,7,8,9]
-Z=range(10)
-A=sample(Z,len(Z))
-B=sample(Z,len(Z))
-print A
-print B
-print ordered_crossover(len(A),A,B)
-

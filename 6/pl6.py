@@ -45,16 +45,16 @@ if __name__ == '__main__':
 	#seed()
 
 	values['A'] = 10
-
+	values['sigma'] = 0.01
 
 	algorithms = Algorithms(n_generations)
 	generation = Generation(population_size, individual_size)
 	fitness = Fitness(individual_size,values)
-	phenotype = Phenotype(individual_size)
+	phenotype = Phenotype(individual_size, values)
 	parents = Parents(population_size, individual_size, tournament_size)
 	survivors = Survivors(population_size, elite_percentage)
 	crossover = Crossover(individual_size,crossover_probability)
-	mutation = Mutation(individual_size, mutation_probability)
+	mutation = Mutation(individual_size, mutation_probability, values)
 	neighbors = Neighbors(individual_size)
 	sort = Sort()
 	status = Status(population_size,print_type)
@@ -89,10 +89,10 @@ if __name__ == '__main__':
 				'sort':			sort.decrease,
 				'status':		status.knapsack,
 				'stop':			stop.best_stabilization
-			}
+			},
 		'rastrigin':
 			{
-				'generation':	generation.float,
+				'generation':	generation.rastrigin,
 				'fitness':		fitness.rastrigin,
 				'phenotype':	phenotype.rastrigin,
 				'parents':		parents.tournament,
@@ -103,24 +103,24 @@ if __name__ == '__main__':
 				'sort':			sort.increase,
 				'status':		status.rastrigin,
 				'stop':			stop.best_stabilization
-			}
-		'tsp':
-			{
-				'generation':	generation.integer,
-				'fitness':		fitness.tsp,
-				'phenotype':	phenotype.tsp,
-				'parents':		parents.tournament,
-				'survivors':	survivors.elitism,
-				'crossover':	crossover.pmx,
-				'mutation':		mutation.switch,
-				'neighbors':	None,
-				'sort':			sort.decrease,
-				'status':		status.tsp,
-				'stop':			stop.best_stabilization
-			}
+			}#,
+		#'tsp':
+		#	{
+		#		'generation':	generation.integer,
+		#		'fitness':		fitness.tsp,
+		#		'phenotype':	phenotype.tsp,
+		#		'parents':		parents.tournament,
+		#		'survivors':	survivors.elitism,
+		#		'crossover':	crossover.pmx,
+		#		'mutation':		mutation.switch,
+		#		'neighbors':	None,
+		#		'sort':			sort.decrease,
+		#		'status':		status.tsp,
+		#		'stop':			stop.best_stabilization
+		#	}
 		}
 
-	problem = database['knapsack']
+	problem = database['rastrigin']
 
 	fitness.fitness_function = problem['fitness']
 	crossover.crossover_function = problem['crossover']

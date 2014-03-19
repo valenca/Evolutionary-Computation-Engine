@@ -39,3 +39,8 @@ class Status():
 	def tsp(self, population, best_fitnesses, average_fitnesses):
 		pass
 	######################################
+
+	##### Rastrigin #####
+	def rastrigin(self, population, best_fitnesses, average_fitnesses):
+		pass
+	#####################
