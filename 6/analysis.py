@@ -12,15 +12,18 @@ from Library.status import Status
 from Library.stop import Stop
 
 from random import uniform, seed
+from cPickle import dump, load
 
 if __name__ == '__main__':
 
-	n_generations = 10000
-	population_size = 1000
-	individual_size = 10
+	n_runs = 1
+
+	n_generations = 10
+	population_size = 5
+	individual_size = 2
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = ''
+	print_type = 'iter'
 
 	values = {}
 	values['tournament_size'] = 3
@@ -63,46 +66,46 @@ if __name__ == '__main__':
 	database = {
 		'jbrandao':
 			{
-				'generation':	generation.binary,
-				'fitness':		fitness.jbrandao,
-				'phenotype':	phenotype.jbrandao,
-				'parents':		parents.tournament,
-				'survivors':	survivors.elitism,
-				'crossover':	crossover.one_point,
-				'mutation':		mutation.binary,
-				'neighbors':	neighbors.binary,
-				'sort':			sort.maximization,
-				'status':		status.jbrandao,
-				'stop':			stop.best_stabilization
+				'generation':	[generation.binary],
+				'fitness':		[fitness.jbrandao],
+				'phenotype':	[phenotype.jbrandao],
+				'parents':		[parents.tournament],
+				'survivors':	[survivors.elitism],
+				'crossover':	[crossover.one_point],
+				'mutation':		[mutation.binary],
+				'neighbors':	[neighbors.binary],
+				'sort':			[sort.maximization],
+				'status':		[status.jbrandao],
+				'stop':			[stop.best_stabilization]
 			},
 
 		'knapsack':
 			{
-				'generation':	generation.binary,
-				'fitness':		fitness.knapsack,
-				'phenotype':	phenotype.knapsack,
-				'parents':		parents.tournament,
-				'survivors':	survivors.elitism,
-				'crossover':	crossover.one_point,
-				'mutation':		mutation.binary,
-				'neighbors':	neighbors.binary,
-				'sort':			sort.maximization,
-				'status':		status.knapsack,
-				'stop':			stop.best_stabilization
+				'generation':	[generation.binary],
+				'fitness':		[fitness.knapsack],
+				'phenotype':	[phenotype.knapsack],
+				'parents':		[parents.tournament],
+				'survivors':	[survivors.elitism],
+				'crossover':	[crossover.one_point],
+				'mutation':		[mutation.binary],
+				'neighbors':	[neighbors.binary],
+				'sort':			[sort.maximization],
+				'status':		[status.knapsack],
+				'stop':			[stop.best_stabilization]
 			},
 		'rastrigin':
 			{
-				'generation':	generation.rastrigin,
-				'fitness':		fitness.rastrigin,
-				'phenotype':	phenotype.rastrigin,
-				'parents':		parents.tournament,
-				'survivors':	survivors.elitism,
-				'crossover':	crossover.one_point,
-				'mutation':		mutation.rastrigin,
-				'neighbors':	None,
-				'sort':			sort.minimization,
-				'status':		status.rastrigin,
-				'stop':			stop.best_stabilization
+				'generation':	[generation.rastrigin],
+				'fitness':		[fitness.rastrigin],
+				'phenotype':	[phenotype.rastrigin],
+				'parents':		[parents.tournament],
+				'survivors':	[survivors.elitism],
+				'crossover':	[crossover.one_point],
+				'mutation':		[mutation.rastrigin],
+				'neighbors':	[None],
+				'sort':			[sort.minimization],
+				'status':		[status.rastrigin],
+				'stop':			[stop.best_stabilization]
 			}
 		}
 
@@ -113,10 +116,24 @@ if __name__ == '__main__':
 	status.status_function = problem['status']
 	status.phenotype = problem['phenotype']
 
-	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = \
-	algorithms.sea(problem['generation'],fitness.fitness,problem['sort'],problem['parents'],
-		crossover.crossover,problem['mutation'],problem['survivors'],status.status,problem['stop'])
-	
-	status.print_type = 'all'
-	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
+	with open("output", "w") as f:
+		dump(n_runs, f)
+
+	for i in range(n_runs):
+
+		results = {}
+		results['population'],results['best_fitnesses'],results['average_fitnesses'] = \
+		algorithms.sea(problem['generation'],fitness.fitness,problem['sort'],problem['parents'],
+			crossover.crossover,problem['mutation'],problem['survivors'],status.status,problem['stop'])
+		
+		status.print_type = 'all'
+		status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
+
+		with open("output", "a") as f:
+			dump([results['best_fitnesses'],results['average_fitnesses']],f)
+
+	with open("output", "r") as f:
+		print load(f)
+		for i in range(n_runs):
+			print load(f)
+

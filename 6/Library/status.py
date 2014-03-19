@@ -1,7 +1,8 @@
 ##### Population Analyzer #####
 class Status():
 
-	def __init__(self, population_size, print_type):
+	def __init__(self, n_generations, population_size, print_type):
+		self.n_generations = n_generations
 		self.population_size = population_size
 		self.print_type = print_type
 		self.phenotype = None
