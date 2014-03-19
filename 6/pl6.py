@@ -61,64 +61,64 @@ if __name__ == '__main__':
 	stop = Stop(n_generations, stabilization_percentage)
 
 	database = {
-			'jbrandao':
-				{
-					'generation':	generation.binary,
-					'fitness':		fitness.jbrandao,
-					'phenotype':	phenotype.jbrandao,
-					'parents':		parents.tournament,
-					'survivors':	survivors.elitism,
-					'crossover':	crossover.one_point,
-					'mutation':		mutation.binary,
-					'neighbors':	None,
-					'sort':			sort.decrease,
-					'status':		status.jbrandao,
-					'stop':			stop.best_stabilization
-				},
+		'jbrandao':
+			{
+				'generation':	generation.binary,
+				'fitness':		fitness.jbrandao,
+				'phenotype':	phenotype.jbrandao,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.one_point,
+				'mutation':		mutation.binary,
+				'neighbors':	None,
+				'sort':			sort.decrease,
+				'status':		status.jbrandao,
+				'stop':			stop.best_stabilization
+			},
 
-			'knapsack':
-				{
-					'generation':	generation.binary,
-					'fitness':		fitness.knapsack,
-					'phenotype':	phenotype.knapsack,
-					'parents':		parents.tournament,
-					'survivors':	survivors.elitism,
-					'crossover':	crossover.one_point,
-					'mutation':		mutation.binary,
-					'neighbors':	None,
-					'sort':			sort.decrease,
-					'status':		status.knapsack,
-					'stop':			stop.best_stabilization
-				}
-			'rastrigin':
-				{
-					'generation':	generation.float,
-					'fitness':		fitness.rastrigin,
-					'phenotype':	phenotype.rastrigin,
-					'parents':		parents.tournament,
-					'survivors':	survivors.elitism,
-					'crossover':	crossover.one_point,
-					'mutation':		mutation.float,
-					'neighbors':	None,
-					'sort':			sort.increase,
-					'status':		status.rastrigin,
-					'stop':			stop.best_stabilization
-				}
-			'tsp':
-				{
-					'generation':	generation.integer,
-					'fitness':		fitness.tsp,
-					'phenotype':	phenotype.tsp,
-					'parents':		parents.tournament,
-					'survivors':	survivors.elitism,
-					'crossover':	crossover.pmx,
-					'mutation':		mutation.switch,
-					'neighbors':	None,
-					'sort':			sort.decrease,
-					'status':		status.tsp,
-					'stop':			stop.best_stabilization
-				}
-		   }
+		'knapsack':
+			{
+				'generation':	generation.binary,
+				'fitness':		fitness.knapsack,
+				'phenotype':	phenotype.knapsack,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.one_point,
+				'mutation':		mutation.binary,
+				'neighbors':	None,
+				'sort':			sort.decrease,
+				'status':		status.knapsack,
+				'stop':			stop.best_stabilization
+			}
+		'rastrigin':
+			{
+				'generation':	generation.float,
+				'fitness':		fitness.rastrigin,
+				'phenotype':	phenotype.rastrigin,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.one_point,
+				'mutation':		mutation.float,
+				'neighbors':	None,
+				'sort':			sort.increase,
+				'status':		status.rastrigin,
+				'stop':			stop.best_stabilization
+			}
+		'tsp':
+			{
+				'generation':	generation.integer,
+				'fitness':		fitness.tsp,
+				'phenotype':	phenotype.tsp,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.pmx,
+				'mutation':		mutation.switch,
+				'neighbors':	None,
+				'sort':			sort.decrease,
+				'status':		status.tsp,
+				'stop':			stop.best_stabilization
+			}
+		}
 
 	problem = database['knapsack']
 
