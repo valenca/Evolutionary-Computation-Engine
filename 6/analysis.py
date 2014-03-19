@@ -16,19 +16,21 @@ from cPickle import dump, load
 
 if __name__ == '__main__':
 
-	n_runs = 1
+	n_runs = 10
 
-	n_generations = 10
-	population_size = 5
-	individual_size = 2
+	n_generations = 1000
+	population_size = 250
+	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = 'iter'
+	print_type = 'bar'
+
+	if population_size%2 == 1: population_size ^= 1
 
 	values = {}
 	values['tournament_size'] = 3
-	values['stabilize_percentage'] = 0.2
-	values['elite_percentage'] = 0.1
+	values['stabilize_percentage'] = 1
+	values['elite_percentage'] = 0.05
 	values['stop_interval'] = 0.00001
 
 	#seed("knapsack")
@@ -66,46 +68,46 @@ if __name__ == '__main__':
 	database = {
 		'jbrandao':
 			{
-				'generation':	[generation.binary],
-				'fitness':		[fitness.jbrandao],
-				'phenotype':	[phenotype.jbrandao],
-				'parents':		[parents.tournament],
-				'survivors':	[survivors.elitism],
-				'crossover':	[crossover.one_point],
-				'mutation':		[mutation.binary],
-				'neighbors':	[neighbors.binary],
-				'sort':			[sort.maximization],
-				'status':		[status.jbrandao],
-				'stop':			[stop.best_stabilization]
+				'generation':	generation.binary,
+				'fitness':		fitness.jbrandao,
+				'phenotype':	phenotype.jbrandao,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.one_point,
+				'mutation':		mutation.binary,
+				'neighbors':	neighbors.binary,
+				'sort':			sort.maximization,
+				'status':		status.jbrandao,
+				'stop':			stop.best_stabilization
 			},
 
 		'knapsack':
 			{
-				'generation':	[generation.binary],
-				'fitness':		[fitness.knapsack],
-				'phenotype':	[phenotype.knapsack],
-				'parents':		[parents.tournament],
-				'survivors':	[survivors.elitism],
-				'crossover':	[crossover.one_point],
-				'mutation':		[mutation.binary],
-				'neighbors':	[neighbors.binary],
-				'sort':			[sort.maximization],
-				'status':		[status.knapsack],
-				'stop':			[stop.best_stabilization]
+				'generation':	generation.binary,
+				'fitness':		fitness.knapsack,
+				'phenotype':	phenotype.knapsack,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.one_point,
+				'mutation':		mutation.binary,
+				'neighbors':	neighbors.binary,
+				'sort':			sort.maximization,
+				'status':		status.knapsack,
+				'stop':			stop.best_stabilization
 			},
 		'rastrigin':
 			{
-				'generation':	[generation.rastrigin],
-				'fitness':		[fitness.rastrigin],
-				'phenotype':	[phenotype.rastrigin],
-				'parents':		[parents.tournament],
-				'survivors':	[survivors.elitism],
-				'crossover':	[crossover.one_point],
-				'mutation':		[mutation.rastrigin],
-				'neighbors':	[None],
-				'sort':			[sort.minimization],
-				'status':		[status.rastrigin],
-				'stop':			[stop.best_stabilization]
+				'generation':	generation.rastrigin,
+				'fitness':		fitness.rastrigin,
+				'phenotype':	phenotype.rastrigin,
+				'parents':		parents.tournament,
+				'survivors':	survivors.elitism,
+				'crossover':	crossover.one_point,
+				'mutation':		mutation.rastrigin,
+				'neighbors':	None,
+				'sort':			sort.minimization,
+				'status':		status.rastrigin,
+				'stop':			stop.best_stabilization
 			}
 		}
 
@@ -126,14 +128,15 @@ if __name__ == '__main__':
 		algorithms.sea(problem['generation'],fitness.fitness,problem['sort'],problem['parents'],
 			crossover.crossover,problem['mutation'],problem['survivors'],status.status,problem['stop'])
 		
-		status.print_type = 'all'
-		status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
+		status.print_type = 'bar'
+		status.status(n_generations-1, results['population'],results['best_fitnesses'],results['average_fitnesses'])
+		print ''
 
 		with open("output", "a") as f:
 			dump([results['best_fitnesses'],results['average_fitnesses']],f)
 
-	with open("output", "r") as f:
-		print load(f)
-		for i in range(n_runs):
-			print load(f)
+	#with open("output", "r") as f:
+	#	print load(f)
+	#	for i in range(n_runs):
+	#		print load(f)
 
