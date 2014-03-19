@@ -16,13 +16,18 @@ class Status():
 		if 'phen' not in population[0]:
 			population[0]['phen'] = self.phenotype(population[0]['gen'])
 			
-		if(self.print_type == 'iter'):
+		if self.print_type == 'iter':
 			print("####### " + str(generation) + " #######")
-		elif(self.print_type == 'all'):
+
+		elif self.print_type == 'all':
 			print("####### " + str(generation) + " #######")
 			print("Individual: " + str(population[0]['phen']))
-			print("   Fitness: " + str(best_fitnesses[-1]) + " / " + str(average_fitnesses[-1]))
+			print("   Fitness: " + str(round(best_fitnesses[-1],7)) + " / " + str(round(average_fitnesses[-1],7)))
 			self.status_function(population, best_fitnesses, average_fitnesses)
+
+		elif self.print_type == 'machine':			
+			print str(generation),str(round(best_fitnesses[-1],7)),str(round(average_fitnesses[-1],7))
+			
 	###################################
 
 	##### Joao Brandao Numbers ######

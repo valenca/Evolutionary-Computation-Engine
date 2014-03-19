@@ -21,13 +21,13 @@ if __name__ == '__main__':
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = ''
+	print_type = 'machine'
 
 	values = {}
 
 	values['tournament_size'] = 3
 	values['stabilise_percentage'] = 1
-	values['elite_percentage'] = 0.05
+	values['elite_percentage'] = 0.1
 
 	#seed("knapsack")
 	v = 10
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 	#seed()
 
 	values['A'] = 10
-	values['sigma'] = 0.1
+	values['sigma'] = 0.4
 
 	algorithms = Algorithms(n_generations)
 	generation = Generation(population_size, individual_size)
