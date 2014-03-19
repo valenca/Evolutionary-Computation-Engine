@@ -135,5 +135,5 @@ if __name__ == '__main__':
 	
 	status.print_type = 'all'
 	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
-
+	print "Generations:", len(results['best_fitnesses'])
 	#with open("outfile")
