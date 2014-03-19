@@ -1,7 +1,10 @@
 ##### Population Analyzer #####
+from sys import stdout as out
+from math import ceil,floor
 class Status():
 
-	def __init__(self, population_size, print_type):
+	def __init__(self, n_generations, population_size, print_type):
+		self.n_generations = n_generations
 		self.population_size = population_size
 		self.print_type = print_type
 		self.phenotype = None
@@ -16,6 +19,21 @@ class Status():
 		if 'phen' not in population[0]:
 			population[0]['phen'] = self.phenotype(population[0]['gen'])
 			
+		if self.print_type == 'bar':
+			length=70
+			pcurr=length*(generation+1)/self.n_generations
+			ptotal=length
+			subprog=pcurr
+			if generation==0: print "\n\n"
+			clean="\r\b\r\b\r\b\r"
+			bar="["+("#"*int(ceil(pcurr)))+("-"*int(floor(ptotal-pcurr)))+"]"
+			perc="("+str(generation+1)+"/"+str(self.n_generations)+")"
+			bfit="\n   Best Fitness - "+str('%.8f'%best_fitnesses[-1])+ " "
+			afit="\nAverage Fitness - "+str('%.8f'%average_fitnesses[-1])+ " \n"
+
+			out.write(clean+bar+perc+bfit+afit)
+			out.flush()
+
 		if self.print_type == 'iter':
 			print str(generation)
 		
@@ -23,7 +41,7 @@ class Status():
 			print str(generation) + " "+str('%.8f'%best_fitnesses[-1]) + " " + str('%.8f'%average_fitnesses[-1])
 
 		elif self.print_type == 'all':
-			print ">>" + str(generation) + ": "+str('%.8f'%best_fitnesses[-1]) + " | " + str('%.8f'%average_fitnesses[-1])
+			print "\n>>" + str(generation) + ": "+str('%.8f'%best_fitnesses[-1]) + " | " + str('%.8f'%average_fitnesses[-1]+"\n\n")
 			print str(population[0]['phen'])
 			self.status_function(population, best_fitnesses, average_fitnesses)
 

@@ -17,16 +17,16 @@ if __name__ == '__main__':
 
 	n_runs = 1
 
-	n_generations = 10000
-	population_size = 1000
+	n_generations = 1000
+	population_size = 250
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = ''
+	print_type = 'bar'
 
 	values = {}
 	values['tournament_size'] = 3
-	values['stabilize_percentage'] = 0.2
+	values['stabilize_percentage'] = 1
 	values['elite_percentage'] = 0.1
 	values['stop_interval'] = 0.00001
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	mutation = Mutation(individual_size, mutation_probability, values)
 	neighbors = Neighbors(individual_size)
 	sort = Sort()
-	status = Status(population_size,print_type)
+	status = Status(n_generations,population_size,print_type)
 	stop = Stop(n_generations, values)
 
 	database = {
@@ -120,5 +120,5 @@ if __name__ == '__main__':
 	algorithms.sea(problem['generation'],fitness.fitness,problem['sort'],problem['parents'],
 		crossover.crossover,problem['mutation'],problem['survivors'],status.status,problem['stop'])
 	
-	status.print_type = 'all'
-	status.status('Final', results['population'],results['best_fitnesses'],results['average_fitnesses'])
+	status.print_type = 'bar'
+	status.status(n_generations-1, results['population'],results['best_fitnesses'],results['average_fitnesses'])
