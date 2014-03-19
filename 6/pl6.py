@@ -11,6 +11,8 @@ from Library.sort import Sort
 from Library.status import Status
 from Library.stop import Stop
 
+from random import uniform, seed
+
 if __name__ == '__main__':
 
 	n_runs = 1
@@ -24,9 +26,27 @@ if __name__ == '__main__':
 	stabilization_percentage = 1
 	print_type = ''
 
+	values = {}
+	#seed("knapsack")
+	v = 10
+	r = 5
+	#NC
+	#values['weights'] = [int(uniform(0, v)) for i in range(individual_size)]
+	#values['values'] = [int(uniform(0, v)) for i in range(individual_size)]
+	#WC
+	#values['weights'] = [int(uniform(0, v)) for i in range(individual_size)]
+	#values['values'] = [values['weights'][i] + int(uniform(0, v)) for i in range(individual_size)]
+	#SC
+	values['weights'] = [int(uniform(0, v)) for i in range(individual_size)]
+	values['values'] = [values['weights'][i] + r for i in range(individual_size)]
+	#
+	values['max_weight'] = sum(values['weights'])/2
+	#seed()
+
+
 	algorithms = Algorithms(n_generations)
 	generation = Generation(population_size, individual_size)
-	fitness = Fitness(individual_size,None)
+	fitness = Fitness(individual_size,values)
 	phenotype = Phenotype(individual_size)
 	parents = Parents(population_size, individual_size, tournament_size)
 	survivors = Survivors(population_size, elite_percentage)
@@ -34,31 +54,75 @@ if __name__ == '__main__':
 	mutation = Mutation(individual_size, mutation_probability)
 	neighbors = Neighbors(individual_size)
 	sort = Sort()
-	status = Status(population_size,phenotype.phenotype_jbrandao,print_type)
+	status = Status(population_size,print_type)
 	stop = Stop(n_generations, stabilization_percentage)
 
 	database = {
 			'jbrandao':
 				{
-					'generation':	generation.generation_binary,
-					'fitness':		fitness.fitness_jbrandao,
-					'phenotype':	phenotype.phenotype_jbrandao,
-					'parents':		parents.parents_tournament,
-					'survivors':	survivors.survivors_elitism,
-					'crossover':	crossover.crossover_one_point,
-					'mutation':		mutation.mutation_binary,
+					'generation':	generation.binary,
+					'fitness':		fitness.jbrandao,
+					'phenotype':	phenotype.jbrandao,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.one_point,
+					'mutation':		mutation.binary,
 					'neighbors':	None,
-					'sort':			sort.sort_decrease,
-					'status':		status.status_jbrandao,
-					'stop':			stop.stop_best_stabilization
+					'sort':			sort.decrease,
+					'status':		status.jbrandao,
+					'stop':			stop.best_stabilization
+				},
+
+			'knapsack':
+				{
+					'generation':	generation.binary,
+					'fitness':		fitness.knapsack,
+					'phenotype':	phenotype.knapsack,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.one_point,
+					'mutation':		mutation.binary,
+					'neighbors':	None,
+					'sort':			sort.decrease,
+					'status':		status.knapsack,
+					'stop':			stop.best_stabilization
+				}
+			'rastrigin':
+				{
+					'generation':	generation.float,
+					'fitness':		fitness.rastrigin,
+					'phenotype':	phenotype.rastrigin,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.one_point,
+					'mutation':		mutation.float,
+					'neighbors':	None,
+					'sort':			sort.increase,
+					'status':		status.rastrigin,
+					'stop':			stop.best_stabilization
+				}
+			'tsp':
+				{
+					'generation':	generation.integer,
+					'fitness':		fitness.tsp,
+					'phenotype':	phenotype.tsp,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.pmx,
+					'mutation':		mutation.switch,
+					'neighbors':	None,
+					'sort':			sort.decrease,
+					'status':		status.tsp,
+					'stop':			stop.best_stabilization
 				}
 		   }
 
-	problem = database['jbrandao']
+	problem = database['knapsack']
 
 	fitness.fitness_function = problem['fitness']
 	crossover.crossover_function = problem['crossover']
 	status.status_function = problem['status']
+	status.phenotype = problem['phenotype']
 
 	population,best_fitnesses,average_fitnesses = algorithms.sea(problem['generation'],
 		fitness.fitness,problem['sort'],problem['parents'],crossover.crossover,

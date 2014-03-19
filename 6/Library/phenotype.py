@@ -5,11 +5,11 @@ class Phenotype():
 		self.individual_size = individual_size
 
 	##### Joao Brandao Numbers ######
-	def phenotype_jbrandao(self, genotype):
+	def jbrandao(self, genotype):
 		return [i+1 for i in range(self.individual_size) if genotype[i] == 1]
 	#################################
 
 	##### Knapsack ######
-	def phenotype_knapsack(self, genotype):
+	def knapsack(self, genotype):
 		return [i+1 for i in range(self.individual_size) if genotype[i] == 1]
 	#####################

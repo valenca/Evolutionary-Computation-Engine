@@ -7,7 +7,7 @@ class Neighbors():
 		self.individual_size = individual_size
 
 	##### Binary genotype #####
-	def neighbors_binary(self, individual):
+	def binary(self, individual):
 		neighbors = []
 		for i in range(self.individual_size):
 			neighbor = {'gen':deepcopy(individual['gen'])}

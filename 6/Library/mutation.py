@@ -8,7 +8,7 @@ class Mutation():
 		self.mutation_probability = mutation_probability
 
 	##### Binary genotype #####
-	def mutation_binary(self, population):
+	def binary(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
 				if random() < self.mutation_probability:

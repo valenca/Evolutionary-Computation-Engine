@@ -9,7 +9,7 @@ class Parents():
 		self.tournament_size = tournament_size
 
 	##### Tournament #####
-	def parents_tournament(self, population):
+	def tournament(self, population):
 		parents = []
 		for i in range(self.population_size):
 			t_parents = sample(list(range(self.population_size)), self.tournament_size)
@@ -18,7 +18,7 @@ class Parents():
 	################
 
 	##### Roulette Wheel #####
-	def parents_roulette(self, population):
+	def roulette(self, population):
 		parents = []
 		fitnesses = [individual['fit'] for individual in population]
 		total_fitness = sum(fitnesses)
@@ -33,7 +33,7 @@ class Parents():
 	##########################
 
 	##### Stochastic Universal Sampling #####
-	def parents_sus(self, population):
+	def sus(self, population):
 		parents = []
 		fitnesses = [individual['fit'] for individual in population]
 		total_fitness = sum(fitnesses)

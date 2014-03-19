@@ -1,10 +1,10 @@
 ##### Population Analyzer #####
 class Status():
 
-	def __init__(self, population_size, phenotype, print_type):
+	def __init__(self, population_size, print_type):
 		self.population_size = population_size
-		self.phenotype = phenotype
 		self.print_type = print_type
+		self.phenotype = None
 		self.status_function = None
 
 	##### General status function #####
@@ -26,16 +26,16 @@ class Status():
 	###################################
 
 	##### Joao Brandao Numbers ######
-	def status_jbrandao(self, population, best_fitnesses, average_fitnesses):
+	def jbrandao(self, population, best_fitnesses, average_fitnesses):
 		print("     Value: " + str(sum(population[0]['gen'])))
 	#################################
 
 	##### Knapsack ######
-	def status_knapsack(self, population, best_fitnesses, average_fitnesses):
+	def knapsack(self, population, best_fitnesses, average_fitnesses):
 		pass
 	#####################
 
 	##### Traveling Salesman Problem #####
-	def status_tsp(self, population, best_fitnesses, average_fitnesses):
+	def tsp(self, population, best_fitnesses, average_fitnesses):
 		pass
 	######################################
