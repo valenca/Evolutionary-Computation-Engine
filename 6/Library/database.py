@@ -74,7 +74,7 @@ class Database():
 					'parents':		parents.tournament,
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.ordered,
-					'mutation':		mutation.switch,
+					'mutation':		mutation.swap,
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.minimization,
 					'status':		status.tsp,

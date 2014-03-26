@@ -1,4 +1,4 @@
-from random import random, gauss, sample, choice
+from random import random, gauss, sample, choice, randint, shuffle
 from string import letters
 
 ##### Individual Mutator #####
@@ -25,13 +25,34 @@ class Mutation():
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 	##########################
 
-	##### Switch Values #####
-	def switch(self, population):
+	##### Swap Values #####
+	def swap(self, population):
 		for individual in population:
 			for j in range(0,self.individual_size-1,2):
 				if random() < self.mutation_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
-	#########################
+	#######################
+
+	##### Insert #####
+	def insert(self, population):
+		for individual in population:
+			for j in range(self.individual_size):
+				if random() < self.mutation_probability:
+					value = individual['gen'].pop(j)
+					individual['gen'].insert(randint(0,self.individual_size-2), value)
+	##################
+
+	##### Scramble #####
+	def scramble(self, population):
+		for individual in population:
+			if random() < self.mutation_probability:
+				indexes = sample(list(range(self.individual_size)),2)
+				if indexes[1] < indexes[0]:
+					indexes[0],indexes[1] = indexes[1],indexes[0]
+				temp = individual['gen'][indexes[0]:indexes[1]]
+				shuffle(temp)
+				individual['gen'][indexes[0]:indexes[1]] = temp
+	####################
 
 	##### Methinks ######
 	def methinks(self, population):
