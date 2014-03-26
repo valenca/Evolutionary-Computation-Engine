@@ -14,21 +14,18 @@ class Stop():
 
 	##### Best Individual Stabilization #####
 	def best_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
-		if generation >= self.n_generations * self.values['stabilize_percentage']:
+		if generation+1 >= self.n_generations * self.values['stabilize_percentage']:
 			index = -int(ceil(self.n_generations*self.values['stabilize_percentage']))
-			if len(set(best_fitnesses[index:])) == 1:
+			if len(list(set(best_fitnesses[index:]))) == 1:
 				return True
 		return False
 	#########################################
 
 	##### Interval Stabilization #####
 	def interval_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
-		print 'qwer', generation, self.n_generations * self.values['stabilize_percentage']
-		if generation >= self.n_generations * self.values['stabilize_percentage']:
-			print 'asdf'
+		if generation+1 >= self.n_generations * self.values['stabilize_percentage']:
 			index = -int(ceil(self.n_generations*self.values['stabilize_percentage']))
 			interval = abs(best_fitnesses[-1] - best_fitnesses[index])
-			print interval
 			if interval < self.values['stop_interval']:
 				return True
 		return False
