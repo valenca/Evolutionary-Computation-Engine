@@ -18,9 +18,9 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'rastrigin'
+	problem = 'tsp'
 	n_generations = 1000
-	population_size = 500
+	population_size = 5
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 		functions['survivors'],status.status,functions['stop'])
 
 	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('bhc')
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
 	
 	print''
 	#status.print_type = 'all'

@@ -1,4 +1,5 @@
 from random import seed, uniform
+from scipy.spatial.distance import euclidean as euclidian
 
 ##### Values #####
 class Values():
@@ -11,6 +12,8 @@ class Values():
 			pass
 		elif problem == 'knapsack':
 			self.knapsack()
+		elif problem == 'tsp':
+			self.tsp()
 		elif problem == 'rastrigin':
 			self.rastrigin()
 
@@ -36,7 +39,20 @@ class Values():
 		#
 		self.values['max_weight'] = sum(self.values['weights'])/2
 		seed()
-	#####################		
+	#####################
+
+	##### Traveling Salesman Problem #####
+	def tsp(self):
+		with open('Data/wi29.tsp') as f:
+			while f.readline() != "NODE_COORD_SECTION\n": True
+			coord = [[float(string) for string in line.split()[1:]] for line in f]
+			coord.pop(-1)
+			self.values['distances'] = [[0 for j in range(len(coord))] for i in range(len(coord))]
+			for i in range(len(coord)):
+				for j in range(i,len(coord)):
+					self.values['distances'][i][j] = self.values['distances'][j][i] = euclidian(coord[i],coord[j])
+		print '\n'.join(list(map(str,self.values['distances'])))
+	######################################
 
 	##### Rastrigin #####
 	def rastrigin(self):

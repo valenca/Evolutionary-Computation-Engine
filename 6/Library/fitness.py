@@ -39,14 +39,6 @@ class Fitness():
 			return total_values
 	#####################
 
-	##### Rastrigin #####
-	def rastrigin(self, genotype):
-		value = self.values['A'] * self.individual_size
-		for i in range(self.individual_size):
-			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
-		return value
-	#####################
-
 	##### Traveling Salesman Problem #####
 	def tsp(self, genotype):
 		total_distance = 0
@@ -55,3 +47,11 @@ class Fitness():
 		total_distance += self.values['distances'][genotype[-1]][genotype[0]]
 		return total_distance
 	######################################
+
+	##### Rastrigin #####
+	def rastrigin(self, genotype):
+		value = self.values['A'] * self.individual_size
+		for i in range(self.individual_size):
+			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
+		return value
+	#####################

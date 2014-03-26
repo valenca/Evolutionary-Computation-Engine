@@ -35,7 +35,7 @@ class Algorithms():
 		fitness(population)														# Evaluate population
 		for i in range(self.n_generations):										# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)			# Collecting data from population
-			if stop(i, population, best_fitnesses, average_fitnesses): break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses): i-=1; break	# Stop condition
 			neighbors = neighborhood(population[0])								# Generate neighbors
 			fitness(neighbors); sort(neighbors)									# Evaluate and sort neighbors
 			population = survivors_selection(population, neighbors)				# Survivors selection
@@ -51,7 +51,7 @@ class Algorithms():
 		fitness(population); sort(population)									# Evaluate and sort population
 		for i in range(self.n_generations):										# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)			# Collecting data from population
-			if stop(i, population, best_fitnesses, average_fitnesses): break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses): i-=1; break	# Stop condition
 			for j in range(len(population)):									# Over the population
 				neighbors = neighborhood(population[j])							# Generate neighbors
 				fitness(neighbors); sort(neighbors)								# Evaluate and sort neighbors
@@ -67,14 +67,16 @@ class Algorithms():
 		population = generation()												# Generate initial population
 		fitness(population); sort(population)									# Evaluate and sort population
 		for i in range(self.n_generations):										# Over the generations
+			print population
 			status(i, population, best_fitnesses, average_fitnesses)			# Collecting data from population
-			if stop(i, population, best_fitnesses, average_fitnesses): break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses): i-=1; break	# Stop condition
 			parents = parents_selection(population)								# Parents selection
 			offspring = crossover(parents)										# Generate offspring
 			mutation(offspring)													# Mutate offspring
 			fitness(offspring); sort(offspring)									# Evaluate and sort offspring
 			population = survivors_selection(population, offspring)				# Survivors selection
 			fitness(population); sort(population)								# Evaluate and sort population
+			print''
 		status(i+1, population, best_fitnesses, average_fitnesses)				# Collecting data from population
 		return population, best_fitnesses, average_fitnesses					# Return final data
 	#########################################

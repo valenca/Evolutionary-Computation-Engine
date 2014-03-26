@@ -18,11 +18,11 @@ class Phenotype():
 	#####################
 
 	##### Rastrigin ######
-	def rastrigin(self, genotype):
+	def tsp(self, genotype):
 		return genotype
 	######################
 
 	##### Rastrigin ######
-	def tsp(self, genotype):
-		pass
+	def rastrigin(self, genotype):
+		return genotype
 	######################

@@ -36,6 +36,21 @@ class Database():
 					'stop':			stop.best_stabilization
 				},
 
+			'tsp':
+				{
+					'generation':	generation.integer,
+					'fitness':		fitness.tsp,
+					'phenotype':	phenotype.tsp,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.ordered,
+					'mutation':		mutation.switch,
+					'neighbors':	neighbors.rastrigin,
+					'sort':			sort.minimization,
+					'status':		status.tsp,
+					'stop':			stop.interval_stabilization
+				},
+
 			'rastrigin':
 				{
 					'generation':	generation.rastrigin,
