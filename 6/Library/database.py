@@ -6,6 +6,36 @@ class Database():
 
 		self.database = {
 
+			'onemax':
+				{
+					'generation':	generation.binary,
+					'fitness':		fitness.onemax,
+					'phenotype':	phenotype.onemax,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.one_point,
+					'mutation':		mutation.binary,
+					'neighbors':	neighbors.binary,
+					'sort':			sort.maximization,
+					'status':		status.onemax,
+					'stop':			stop.best_stabilization
+				},
+
+			'methinks':
+				{
+					'generation':	generation.methinks,
+					'fitness':		fitness.methinks,
+					'phenotype':	phenotype.methinks,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.one_point,
+					'mutation':		mutation.methinks,
+					'neighbors':	neighbors.methinks,
+					'sort':			sort.minimization,
+					'status':		status.methinks,
+					'stop':			stop.best_stabilization
+				},
+
 			'jbrandao':
 				{
 					'generation':	generation.binary,

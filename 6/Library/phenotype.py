@@ -7,6 +7,16 @@ class Phenotype():
 		self.individual_size = individual_size
 		self.values = values
 
+	##### Onemax #####
+	def onemax(self, genotype):
+		return [i+1 for i in range(self.individual_size) if genotype[i] == 1]
+	##################
+
+	##### Methinks ######
+	def methinks(self, genotype):
+		return ''.join(genotype)
+	#####################
+
 	##### Joao Brandao Numbers ######
 	def jbrandao(self, genotype):
 		return [i+1 for i in range(self.individual_size) if genotype[i] == 1]
@@ -17,10 +27,10 @@ class Phenotype():
 		return [i+1 for i in range(self.individual_size) if genotype[i] == 1]
 	#####################
 
-	##### Rastrigin ######
+	##### Traveling Salesman Problem #####
 	def tsp(self, genotype):
 		return genotype
-	######################
+	######################################
 
 	##### Rastrigin ######
 	def rastrigin(self, genotype):

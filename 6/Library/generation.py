@@ -40,6 +40,14 @@ class Generation():
 		return population
 	##############################
 
+	##### Methinks #####
+	def methinks(self):
+		population = []
+		for i in range(self.population_size):
+			population.append({'gen': [choice(letters+' ') for j in range(self.individual_size)]})
+		return population
+	####################
+
 	##### Rastrigin #####
 	def rastrigin(self):
 		population = []

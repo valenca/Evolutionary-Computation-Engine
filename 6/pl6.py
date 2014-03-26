@@ -18,13 +18,13 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'tsp'
+	problem = 'methinks'
 	n_generations = 1000
 	population_size = 500
-	individual_size = 29
+	individual_size = 28
 	crossover_probability = 0.9
 	mutation_probability = 0.1
-	print_type = 'bar'
+	print_type = 'all'
 
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3

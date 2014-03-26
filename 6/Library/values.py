@@ -7,7 +7,9 @@ class Values():
 		self.individual_size = individual_size
 		self.values = {}
 
-		if problem == 'jbrandao':
+		if problem == 'methinks':
+			self.methinks()
+		elif problem == 'jbrandao':
 			pass
 		elif problem == 'knapsack':
 			self.knapsack()
@@ -15,6 +17,11 @@ class Values():
 			self.tsp()
 		elif problem == 'rastrigin':
 			self.rastrigin()
+
+	##### Methinks ######
+	def methinks(self):
+		self.values['sentence'] = 'Methinks it is like a weasel'
+	#####################
 
 	##### Knapsack ######
 	def knapsack(self):

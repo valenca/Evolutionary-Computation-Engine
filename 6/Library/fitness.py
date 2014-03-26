@@ -1,4 +1,5 @@
 from math import cos, pi
+from string import letters
 
 ##### Individual Evaluator #####
 class Fitness():
@@ -14,6 +15,20 @@ class Fitness():
 			if 'fit' not in individual:
 				individual['fit'] = self.fitness_function(individual['gen'])
 	####################################
+
+	##### Onemax #####
+	def onemax(self, genotype):
+		return sum(genotype)
+	##################
+
+	##### Methinks ######
+	def methinks(self, genotype):
+		characters = letters + ' '
+		difference = 0
+		for i in range(self.individual_size):
+			difference += abs(characters.index(self.values['sentence'][i]) - characters.index(genotype[i]))
+		return difference
+	#####################
 
 	##### Joao Brandao Numbers ######
 	def jbrandao(self, genotype):

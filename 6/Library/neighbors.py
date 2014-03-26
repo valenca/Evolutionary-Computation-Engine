@@ -1,5 +1,6 @@
 from copy import deepcopy
-from random import gauss
+from random import gauss, choice
+from string import letters
 
 ##### Neighbors Generator #####
 class Neighbors():
@@ -17,6 +18,22 @@ class Neighbors():
 			neighbors.append(neighbor)
 		return neighbors
 	###########################
+
+	##### Methinks ######
+	def methinks(self, individual):
+		characters = letters + ' '
+		neighbors = []
+		for i in range(self.individual_size):
+			neighbor = {'gen':deepcopy(individual['gen'])}
+			if neighbor['gen'][i] == characters[0]:
+				neighbor['gen'][i] = characters[1]
+			elif neighbor['gen'][i] == characters[-1]:
+				neighbor['gen'][i] = characters[-2]
+			else:
+				neighbor['gen'][i] = characters[characters.index(neighbor['gen'][i])+choice([-1,1])]
+			neighbors.append(neighbor)
+		return neighbors
+	#####################
 
 	##### Rastrigin #####
 	def rastrigin(self, individual):
