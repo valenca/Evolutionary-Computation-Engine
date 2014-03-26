@@ -27,7 +27,7 @@ class Mutation():
 	##### Switch Values #####
 	def switch(self, population):
 		for individual in population:
-			for j in range(0,self.individual_size,2):
+			for j in range(0,self.individual_size-1,2):
 				if random() < self.mutation_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
 

@@ -67,7 +67,6 @@ class Algorithms():
 		population = generation()												# Generate initial population
 		fitness(population); sort(population)									# Evaluate and sort population
 		for i in range(self.n_generations):										# Over the generations
-			print population
 			status(i, population, best_fitnesses, average_fitnesses)			# Collecting data from population
 			if stop(i,population,best_fitnesses,average_fitnesses): i-=1; break	# Stop condition
 			parents = parents_selection(population)								# Parents selection
@@ -76,7 +75,6 @@ class Algorithms():
 			fitness(offspring); sort(offspring)									# Evaluate and sort offspring
 			population = survivors_selection(population, offspring)				# Survivors selection
 			fitness(population); sort(population)								# Evaluate and sort population
-			print''
 		status(i+1, population, best_fitnesses, average_fitnesses)				# Collecting data from population
 		return population, best_fitnesses, average_fitnesses					# Return final data
 	#########################################

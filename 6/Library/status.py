@@ -23,14 +23,15 @@ class Status():
 		if self.print_type == 'bar':
 			length=40
 			pcurr=int((length*generation*1.0/self.n_generations)+0.5)
-			ptotal=length
-			clean='\r'
-			bar='['+('#'*pcurr)+('-'*(ptotal-pcurr))+']'
-			perc=' ('+str(generation)+'/'+str(self.n_generations)+') '
-			bfit='Best: '+str(best_fitnesses[-1])+' '
-			afit='Avg: '+str(average_fitnesses[-1])+' '
-			stdout.write(clean+bar+perc+bfit+afit)
-			stdout.flush()
+			if pcurr - int((length*(generation-1)*1.0/self.n_generations)+0.5) > 0:
+				ptotal=length
+				clean='\r'
+				bar='['+('#'*pcurr)+('-'*(ptotal-pcurr))+']'
+				perc=' ('+str(generation)+'/'+str(self.n_generations)+') '
+				bfit='Best: '+str(best_fitnesses[-1])+' '
+				afit='Avg: '+str(average_fitnesses[-1])+' '
+				stdout.write(clean+bar+perc+bfit+afit)
+				stdout.flush()
 
 		if self.print_type == 'iter':
 			stdout.write('\rIteration: ('+str(generation)+'/'+str(self.n_generations)+') ')

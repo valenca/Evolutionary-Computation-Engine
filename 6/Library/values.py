@@ -1,5 +1,4 @@
 from random import seed, uniform
-from scipy.spatial.distance import euclidean as euclidian
 
 ##### Values #####
 class Values():
@@ -50,8 +49,8 @@ class Values():
 			self.values['distances'] = [[0 for j in range(len(coord))] for i in range(len(coord))]
 			for i in range(len(coord)):
 				for j in range(i,len(coord)):
-					self.values['distances'][i][j] = self.values['distances'][j][i] = euclidian(coord[i],coord[j])
-		print '\n'.join(list(map(str,self.values['distances'])))
+					distance = (((coord[i][0]-coord[j][0])**2+(coord[i][1]-coord[j][1])**2))**(0.5)
+					self.values['distances'][i][j] = self.values['distances'][j][i] = distance
 	######################################
 
 	##### Rastrigin #####

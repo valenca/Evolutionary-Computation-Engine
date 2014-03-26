@@ -20,8 +20,8 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'tsp'
 	n_generations = 1000
-	population_size = 5
-	individual_size = 10
+	population_size = 500
+	individual_size = 29
 	crossover_probability = 0.9
 	mutation_probability = 0.1
 	print_type = 'bar'
@@ -64,7 +64,7 @@ if __name__ == '__main__':
 
 	results = {}
 	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
-	
+
 	print''
 	#status.print_type = 'all'
 	#status.status('Final',results['population'],results['best_fitnesses'],results['average_fitnesses'])
