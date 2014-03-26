@@ -1,4 +1,4 @@
-from random import random, gauss
+from random import random, gauss, sample
 
 ##### Individual Mutator #####
 class Mutation():
@@ -23,6 +23,14 @@ class Mutation():
 				if random() < self.mutation_probability:
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 	##########################
+
+	##### Switch Values #####
+	def switch(self, population):
+		for individual in population:
+			for j in range(0,self.individual_size,2):
+				if random() < self.mutation_probability:
+					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
+
 
 	##### Rastrigin #####
 	def rastrigin(self, population):

@@ -21,7 +21,6 @@ class Survivors():
 	##### Elite #####
 	def elitism(self, population, candidates):
 		elite_size = int(self.population_size * self.values['elite_percentage'])
-		print elite_size
 		if elite_size > 0:
 			return population[:elite_size] + candidates[:-elite_size]
 		else:
