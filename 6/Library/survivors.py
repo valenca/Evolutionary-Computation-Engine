@@ -26,3 +26,10 @@ class Survivors():
 		else:
 			return candidates
 	#################
+
+	##### Steady-State #####
+	def steady_state(self, population, candidates):
+		temp = population + candidates
+		self.sort_function(temp)
+		return temp[:self.population_size]
+	########################
