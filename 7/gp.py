@@ -358,7 +358,7 @@ def run(num_runs,target,problem,numb_gen,pop_size, in_max_depth, max_len,prob_mu
     
 if __name__ == '__main__':
     count = 0
-    run(1,'Simbolic Regression','data_symb.txt',10,5,6,10000,0.05,0.9,2, True)
+    run(1,'Simbolic Regression','data_symb.txt',10,100,6,10000,0.05,0.9,10,0.05, False)
     #gp('data_sin.txt',100,50,6,1000,0.1,0.7,3, True)
 
   
