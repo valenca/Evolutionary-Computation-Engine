@@ -12,12 +12,12 @@ where indiv is an individual represented recursively as a list of lists. For exa
 is represented as [f, rep(t_1), ..., rep(t_n)]
 
 """
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from random import random, choice,uniform,sample, seed
 from types import FunctionType
 from operator import itemgetter
 from copy import deepcopy
-
+from pprint import pprint
 MIN_RND = -5
 MAX_RND = 5
 
@@ -107,6 +107,12 @@ def div_prot_w(x,y):
 		return x
 	else:
 		return x/y
+
+def exp_w(x,y):
+	if int(x)==0:
+		return 0
+	else:
+		return int(x)**int(y)
 
 # --------------------------------------- Variation operators
 
@@ -343,6 +349,7 @@ def run(num_runs,target,problem,numb_gen,pop_size, in_max_depth, max_len,prob_mu
 	resultados_gera = list(zip(*estatistica_total))   
 	melhores = [sum([indiv[0] for indiv in gera])/float(num_runs) for gera in resultados_gera]
 	medias = [sum([indiv[1] for indiv in gera])/float(num_runs) for gera in resultados_gera]
+	pprint(melhores)
 	# Show plot
 	plt.ylabel('Fitness')
 	plt.xlabel('Generation')
@@ -352,10 +359,10 @@ def run(num_runs,target,problem,numb_gen,pop_size, in_max_depth, max_len,prob_mu
 	p2 = plt.plot(medias,'g-s',label="Average")
 	# Process Target
 	# TODO
+
 	plt.legend(loc='lower right')
 	plt.show() 
-	
-	
+
 if __name__ == '__main__':
 	count = 0
 	run(1,'Simbolic Regression','data_symb.txt',10,100,6,10000,0.05,0.9,10,0.05, False)
