@@ -14,10 +14,10 @@ is represented as [f, rep(t_1), ..., rep(t_n)]
 """
 import matplotlib.pyplot as plt
 from random import random, choice,uniform,sample, seed
-from types import FunctionType
+from types import *
 from operator import itemgetter
 from copy import deepcopy
-from pprint import pprint
+from pprint import *
 MIN_RND = -5
 MAX_RND = 5
 
@@ -59,7 +59,9 @@ def gp(problem,numb_gen,pop_size, in_max_depth, max_len,prob_mut_node, prob_cros
 	average_fitness = sum([indiv[1] for indiv in population])/ pop_size
 	best_indiv,best_fitness = best_indiv_population(population)
 	statistics.append((best_fitness,average_fitness))
-	print('Best at Generation %d:\n%s\n----------------' % (0,best_indiv))
+	#print('Best at Generation %d:\n%s\n----------------' % (0,best_indiv))
+	#print('Best at Generation %d:\n\n----------------' % 0)
+	#pprint(best_indiv)
 	# Evolve
 	for i in range(numb_gen):
 		# offspring after variation
@@ -83,11 +85,36 @@ def gp(problem,numb_gen,pop_size, in_max_depth, max_len,prob_mut_node, prob_cros
 		average_fitness = sum([indiv[1] for indiv in population])/ pop_size
 		best_indiv,best_fitness = best_indiv_population(population)
 		statistics.append((best_fitness,average_fitness))
-		print('Best at Generation %d:\n%s\n----------------' % (i,best_indiv))	
+		print('\nGeneration %d - Fit %f:\n' % (i,best_fitness))
+		#print sprint(best_indiv)
+		pprint (best_indiv)
 	
-	print('FINAL BEST\n%s\nFitness ---> %f' % (best_indiv,best_fitness))
+	print('\nFinal - Fit %f:\n' % best_fitness)
+	pprint(best_indiv)
 	return statistics
 
+# ----------------------------- String print:
+
+global trad 
+global par
+
+trad = {'add_w':'+','sub_w':'-','mult_w':'*','div_prot_w':'/'}
+par=0
+
+def lrpar():
+	global par
+	par+=1
+	return [('(',')'),('[',']'),('{','}')][par%3]
+
+def sprint(v):
+	global trad
+	if isinstance(v,ListType):
+		l,r=lrpar()
+		return l+sprint(v[1])+trad[v[0]]+sprint(v[2])+r
+	elif isinstance(v,FloatType):
+		return str(round(v,3))
+	else:
+		return str(v)
 
 
 # ----------------------------- Function Set Wrappers
