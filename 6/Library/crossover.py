@@ -1,12 +1,13 @@
-from random import sample, random, randint
+from random import sample, random, randint, choice
 from copy import deepcopy
 
 ##### Parent Crossover #####
 class Crossover():
 
-	def __init__(self, individual_size, crossover_probability):
+	def __init__(self, individual_size, crossover_probability, values):
 		self.individual_size = individual_size
 		self.crossover_probability = crossover_probability
+		self.values = values
 		self.crossover_function = None
 
 	##### General crossover function #####
@@ -28,16 +29,40 @@ class Crossover():
 		cut_index = randint(1, self.individual_size-1)
 		offspring1 = parent1[:cut_index] + parent2[cut_index:]
 		offspring2 = parent2[:cut_index] + parent1[cut_index:]
-		return offspring1,offspring2
+		return offspring1, offspring2
 	#####################
+
+	##### N-Points #####
+	def n_points(self, parent1, parent2):
+		parents = [parent1, parent2]
+		cut_indexes = [0]
+		cut_indexes.extend(sorted(sample(list(range(1,self.individual_size)),self.values['n_points'])))
+		cut_indexes.append(self.individual_size)
+		offspring1 = []
+		offspring2 = []
+		for i in range(len(cut_indexes)-1):
+			offspring1.extend(parents[i%2][cut_indexes[i]:cut_indexes[i+1]])
+			offspring2.extend(parents[(i+1)%2][cut_indexes[i]:cut_indexes[i+1]])
+		return offspring1, offspring2
+	####################
+
+	##### Uniform #####
+	def uniform(self, parent1, parent2):
+		parents = [parent1, parent2]
+		mask = [choice([0,1]) for i in range(self.individual_size)]
+		offspring1 = []
+		offspring2 = []
+		for i in range(self.individual_size):
+			offspring1.append(parents[mask[i]][i])
+			offspring2.append(parents[mask[(i+1)%2]][i])
+		return offspring1, offspring2
+	####################
 
 	##### Order #####
 	def ordered(self, parent1, parent2):
 		parents = [parent1, parent2]
 		offspring = [[None]*self.individual_size,[None]*self.individual_size]
-		cut_index = sample(list(range(self.individual_size)),2)
-		if cut_index[1] < cut_index[0]:
-			cut_index[0],cut_index[1] = cut_index[1],cut_index[0]
+		cut_index = sorted(sample(list(range(self.individual_size)),2))
 		for i in range(2):
 			temp = deepcopy(parents[i^1])
 			for j in range(cut_index[0],cut_index[1]):
@@ -75,9 +100,7 @@ class Crossover():
 	def pmx(self, parent1, parent2):
 		parents = [parent1, parent2]
 		offspring = [[None]*self.individual_size,[None]*self.individual_size]
-		cut_index = sample(list(range(self.individual_size)),2)
-		if cut_index[1] < cut_index[0]:
-			cut_index[0],cut_index[1] = cut_index[1],cut_index[0]
+		cut_index = sorted(sample(list(range(self.individual_size)),2))
 		for i in range(2):
 			for j in range(cut_index[0],cut_index[1]):
 				offspring[i][j] = parents[i][j]

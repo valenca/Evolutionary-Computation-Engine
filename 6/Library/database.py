@@ -28,7 +28,7 @@ class Database():
 					'phenotype':	phenotype.methinks,
 					'parents':		parents.tournament,
 					'survivors':	survivors.elitism,
-					'crossover':	crossover.one_point,
+					'crossover':	crossover.uniform,
 					'mutation':		mutation.methinks,
 					'neighbors':	neighbors.methinks,
 					'sort':			sort.minimization,

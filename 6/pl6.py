@@ -31,6 +31,7 @@ if __name__ == '__main__':
 	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1
 	values.values['stop_interval'] = 0.00001
+	values.values['n_points'] = 2
 	##########################
 
 
@@ -39,7 +40,7 @@ if __name__ == '__main__':
 	phenotype = Phenotype(individual_size, values.values)
 	parents = Parents(population_size, individual_size, values.values)
 	survivors = Survivors(population_size, values.values)
-	crossover = Crossover(individual_size,crossover_probability)
+	crossover = Crossover(individual_size,crossover_probability, values.values)
 	mutation = Mutation(individual_size, mutation_probability, values.values)
 	neighbors = Neighbors(individual_size, values.values)
 	sort = Sort()
