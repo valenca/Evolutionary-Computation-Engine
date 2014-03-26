@@ -12,7 +12,7 @@ where indiv is an individual represented recursively as a list of lists. For exa
 is represented as [f, rep(t_1), ..., rep(t_n)]
 
 """
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from random import random, choice,uniform,sample, seed
 from types import FunctionType
 from operator import itemgetter
