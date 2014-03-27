@@ -20,8 +20,8 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'jbrandao'
 	n_generations = 500
-	population_size = 1
-	individual_size = 28
+	population_size = 250
+	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
