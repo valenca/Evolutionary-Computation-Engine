@@ -1,6 +1,6 @@
 from copy import deepcopy
 from random import gauss, choice
-from string import letters
+from string import printable
 
 ##### Neighbors Generator #####
 class Neighbors():
@@ -21,16 +21,15 @@ class Neighbors():
 
 	##### Methinks ######
 	def methinks(self, individual):
-		characters = letters + ' '
 		neighbors = []
 		for i in range(self.individual_size):
 			neighbor = {'gen':deepcopy(individual['gen'])}
-			if neighbor['gen'][i] == characters[0]:
-				neighbor['gen'][i] = characters[1]
-			elif neighbor['gen'][i] == characters[-1]:
-				neighbor['gen'][i] = characters[-2]
+			if neighbor['gen'][i] == printable[0]:
+				neighbor['gen'][i] = printable[1]
+			elif neighbor['gen'][i] == printable[-1]:
+				neighbor['gen'][i] = printable[-2]
 			else:
-				neighbor['gen'][i] = characters[characters.index(neighbor['gen'][i])+choice([-1,1])]
+				neighbor['gen'][i] = printable[printable.index(neighbor['gen'][i])+choice([-1,1])]
 			neighbors.append(neighbor)
 		return neighbors
 	#####################

@@ -1,5 +1,5 @@
 from math import cos, pi
-from string import letters
+from string import printable
 
 ##### Individual Evaluator #####
 class Fitness():
@@ -23,10 +23,9 @@ class Fitness():
 
 	##### Methinks ######
 	def methinks(self, genotype):
-		characters = letters + ' '
 		difference = 0
 		for i in range(self.individual_size):
-			difference += abs(characters.index(self.values['sentence'][i]) - characters.index(genotype[i]))
+			difference += abs(printable.index(self.values['sentence'][i]) - printable.index(genotype[i]))
 		return difference
 	#####################
 

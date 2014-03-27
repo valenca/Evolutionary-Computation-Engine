@@ -1,5 +1,5 @@
 from random import choice, sample, random
-from string import letters
+from string import letters, printable
 
 ##### Population Generator #####
 class Generation():
@@ -44,7 +44,7 @@ class Generation():
 	def methinks(self):
 		population = []
 		for i in range(self.population_size):
-			population.append({'gen': [choice(letters+' ') for j in range(self.individual_size)]})
+			population.append({'gen': [choice(printable) for j in range(self.individual_size)]})
 		return population
 	####################
 

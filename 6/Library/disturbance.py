@@ -1,19 +1,19 @@
 from random import random, gauss, sample, choice, randint, shuffle
 from string import printable
 
-##### Individual Mutator #####
-class Mutation():
+##### Individual Disturber #####
+class Disturbance():
 
-	def __init__(self, individual_size, mutation_probability, values):
+	def __init__(self, individual_size, disturbance_probability, values):
 		self.individual_size = individual_size
-		self.mutation_probability = mutation_probability
+		self.disturbance_probability = disturbance_probability
 		self.values = values
 
 	##### Binary genotype #####
 	def binary(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
-				if random() < self.mutation_probability:
+				if random() < self.disturbance_probability:
 					individual['gen'][j] ^= 1
 	###########################
 
@@ -21,7 +21,7 @@ class Mutation():
 	def float(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
-				if random() < self.mutation_probability:
+				if random() < self.disturbance_probability:
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 	##########################
 
@@ -29,7 +29,7 @@ class Mutation():
 	def swap(self, population):
 		for individual in population:
 			for j in range(0,self.individual_size-1,2):
-				if random() < self.mutation_probability:
+				if random() < self.disturbance_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
 	#######################
 
@@ -37,7 +37,7 @@ class Mutation():
 	def insert(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
-				if random() < self.mutation_probability:
+				if random() < self.disturbance_probability:
 					value = individual['gen'].pop(j)
 					individual['gen'].insert(randint(0,self.individual_size-2), value)
 	##################
@@ -45,7 +45,7 @@ class Mutation():
 	##### Scramble #####
 	def scramble(self, population):
 		for individual in population:
-			if random() < self.mutation_probability:
+			if random() < self.disturbance_probability:
 				indexes = sample(list(range(self.individual_size)),2)
 				if indexes[1] < indexes[0]:
 					indexes[0],indexes[1] = indexes[1],indexes[0]
@@ -58,7 +58,7 @@ class Mutation():
 	def methinks(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
-				if random() < self.mutation_probability:
+				if random() < self.disturbance_probability:
 					if individual['gen'][j] == printable[0]:
 						individual['gen'][j] = printable[1]
 					elif individual['gen'][j] == printable[-1]:
@@ -71,7 +71,7 @@ class Mutation():
 	def rastrigin(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
-				if random() < self.mutation_probability:
+				if random() < self.disturbance_probability:
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 					if individual['gen'][j] > 5.12: individual['gen'][j] = 5.12
 					elif individual['gen'][j] < -5.12: individual['gen'][j] = -5.12

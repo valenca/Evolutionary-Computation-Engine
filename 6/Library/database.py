@@ -2,7 +2,7 @@
 class Database():
 
 	def __init__(self, generation, fitness, phenotype, parents, survivors,
-				 crossover, mutation, neighbors, sort, status, stop):
+		crossover, mutation, disturbance, neighbors, sort, status, stop):
 
 		self.database = {
 
@@ -15,6 +15,7 @@ class Database():
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.one_point,
 					'mutation':		mutation.binary,
+					'disturbance':	disturbance.binary,
 					'neighbors':	neighbors.binary,
 					'sort':			sort.maximization,
 					'status':		status.onemax,
@@ -30,6 +31,7 @@ class Database():
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.uniform,
 					'mutation':		mutation.methinks,
+					'disturbance':	disturbance.methinks,
 					'neighbors':	neighbors.methinks,
 					'sort':			sort.minimization,
 					'status':		status.methinks,
@@ -45,6 +47,7 @@ class Database():
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.one_point,
 					'mutation':		mutation.binary,
+					'disturbance':	disturbance.binary,
 					'neighbors':	neighbors.binary,
 					'sort':			sort.maximization,
 					'status':		status.jbrandao,
@@ -60,6 +63,7 @@ class Database():
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.one_point,
 					'mutation':		mutation.binary,
+					'disturbance':	disturbance.binary,
 					'neighbors':	neighbors.binary,
 					'sort':			sort.maximization,
 					'status':		status.knapsack,
@@ -75,6 +79,7 @@ class Database():
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.ordered,
 					'mutation':		mutation.swap,
+					'disturbance':	disturbance.swap,
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.minimization,
 					'status':		status.tsp,
@@ -90,6 +95,7 @@ class Database():
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.one_point,
 					'mutation':		mutation.rastrigin,
+					'disturbance':	disturbance.rastrigin,
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.minimization,
 					'status':		status.rastrigin,
