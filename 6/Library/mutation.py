@@ -77,3 +77,11 @@ class Mutation():
 					if individual['gen'][j] > 5.12: individual['gen'][j] = 5.12
 					elif individual['gen'][j] < -5.12: individual['gen'][j] = -5.12
 	#####################
+
+	##### ILS Special #####
+	def ils(self, population, mutation_probability):
+		temp = self.mutation_probability
+		self.mutation_probability = mutation_probability
+		self.methinks(population)
+		self.mutation_probability = temp
+	#######################

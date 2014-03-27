@@ -23,6 +23,8 @@ class Algorithms():
 		elif algorithm == 'phc':
 			return self.phc(self.generation,self.fitness,self.sort,self.neighborhood,
 				self.survivors_selection,self.status,self.stop)
+		elif algorithm == 'ils':
+			pass
 		elif algorithm == 'sea':
 			return self.sea(self.generation,self.fitness,self.sort,self.parents_selection,self.crossover,
 				self.mutation,self.survivors_selection,self.status,self.stop)
@@ -60,6 +62,22 @@ class Algorithms():
 		status(i+1, population, best_fitnesses, average_fitnesses)				# Collecting data from population
 		return population, best_fitnesses, average_fitnesses					# Return final data
 	##################################
+
+	##### Iterated Local Search #####
+	def ils(self,generation,fitness,mutation,status,stop):
+		best_fitnesses = []; average_fitnesses = []
+		population = generation()												# Generate initial population
+		fitness(population)														# Evaluate population
+		for i in range(self.n_generations):										# Over the generations
+			status(i, population, best_fitnesses, average_fitnesses)			# Collecting data from population
+			if stop(i,population,best_fitnesses,average_fitnesses): i-=1; break	# Stop condition
+			mutation(population, 0.2)											# Mutate population
+			for j in range(len(population)):									# Over the population
+				pass
+			fitness(population); sort(population)								# Evaluate and sort population
+		status(i+1, population, best_fitnesses, average_fitnesses)				# Collecting data from population
+		return population, best_fitnesses, average_fitnesses					# Return final data
+	#################################
 
 	##### Simple Evolutionary Algorithm #####
 	def sea(self,generation,fitness,sort,parents_selection,crossover,mutation,survivors_selection,status,stop):
