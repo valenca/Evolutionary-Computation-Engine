@@ -18,7 +18,7 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'methinks'
+	problem = 'jbrandao'
 	n_generations = 500
 	population_size = 1
 	individual_size = 28
@@ -47,7 +47,7 @@ if __name__ == '__main__':
 	disturbance = Mutation(individual_size, disturbance_probability, values.values)
 	neighbors = Neighbors(individual_size, values.values)
 	sort = Sort()
-	status = Status(n_generations, population_size, print_type)
+	status = Status(n_generations, population_size, individual_size, print_type)
 	stop = Stop(n_generations, values.values)
 
 	database = Database(generation, fitness, phenotype, parents, survivors,
@@ -67,7 +67,7 @@ if __name__ == '__main__':
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
 	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('ils')
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
 
 	print''
 	#status.print_type = 'all'
