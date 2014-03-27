@@ -12,6 +12,13 @@ class Stop():
 		return False
 	######################
 
+	##### Arrival at value #####
+	def arrival_x(self, generation, population, best_fitnesses, average_fitnesses):
+		if best_fitnesses[-1] == self.values['fitness_arrival']:
+			return True
+		return False
+	########################
+
 	##### Best Individual Stabilization #####
 	def best_stabilization(self, generation, population, best_fitnesses, average_fitnesses):
 		if generation+1 >= self.n_generations * self.values['stabilize_percentage']:

@@ -4,9 +4,10 @@ from math import ceil, floor
 ##### Population Analyzer #####
 class Status():
 
-	def __init__(self, n_generations, population_size, print_type):
+	def __init__(self, n_generations, population_size, individual_size, print_type):
 		self.n_generations = n_generations
 		self.population_size = population_size
+		self.individual_size = individual_size
 		self.print_type = print_type
 		self.phenotype_function = None
 		self.status_function = None
@@ -63,6 +64,16 @@ class Status():
 	##### Joao Brandao Numbers ######
 	def jbrandao(self, population, best_fitnesses, average_fitnesses):
 		stdout.write('    Value: '+str(sum(population[0]['gen']))+'\n')
+		violations_t = 0;
+		violations = 0;
+		for i in range(self.individual_size):
+			if population[0]['gen'][i] == 1:
+				flag = 0
+				for j in range(1,min(i+1, self.individual_size-i)):
+					if population[0]['gen'][i-j] == population[0]['gen'][i+j] == 1:
+						violations_t += 1;
+						if flag == 0: violations += 1; flag=1
+		stdout.write('Violation: '+str(violations)+' '+str(violations_t)+'\n')
 	#################################
 
 	##### Knapsack ######

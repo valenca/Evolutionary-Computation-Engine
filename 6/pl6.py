@@ -8,7 +8,6 @@ from Library.parents import Parents
 from Library.survivors import Survivors
 from Library.crossover import Crossover
 from Library.mutation import Mutation
-from Library.disturbance import Disturbance
 from Library.neighbors import Neighbors
 from Library.sort import Sort
 from Library.status import Status
@@ -19,22 +18,22 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'methinks'
-	n_generations = 50000
-	population_size = 500
-	individual_size = 1386
+	problem = 'jbrandao'
+	n_generations = 500
+	population_size = 250
+	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
 	print_type = 'all'
 
 	values = Values(problem, individual_size)
-
 	values.values['tournament_size'] = 3
 	values.values['stabilize_percentage'] = 0.1
 	values.values['elite_percentage'] = 0.1
 	values.values['stop_interval'] = 0.00001
 	values.values['n_points'] = 2
+	values.values['fitness_arrival'] = 0
 	##########################
 
 
@@ -45,10 +44,10 @@ if __name__ == '__main__':
 	survivors = Survivors(population_size, values.values)
 	crossover = Crossover(individual_size,crossover_probability, values.values)
 	mutation = Mutation(individual_size, mutation_probability, values.values)
-	disturbance = Disturbance(individual_size, disturbance_probability, values.values)
+	disturbance = Mutation(individual_size, disturbance_probability, values.values)
 	neighbors = Neighbors(individual_size, values.values)
 	sort = Sort()
-	status = Status(n_generations, population_size, print_type)
+	status = Status(n_generations, population_size, individual_size, print_type)
 	stop = Stop(n_generations, values.values)
 
 	database = Database(generation, fitness, phenotype, parents, survivors,

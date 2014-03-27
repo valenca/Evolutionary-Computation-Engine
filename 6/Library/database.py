@@ -28,14 +28,14 @@ class Database():
 					'fitness':		fitness.methinks,
 					'phenotype':	phenotype.methinks,
 					'parents':		parents.tournament,
-					'survivors':	survivors.elitism,
+					'survivors':	survivors.best,
 					'crossover':	crossover.uniform,
 					'mutation':		mutation.methinks,
 					'disturbance':	disturbance.methinks,
 					'neighbors':	neighbors.methinks,
 					'sort':			sort.minimization,
 					'status':		status.methinks,
-					'stop':			stop.best_stabilization
+					'stop':			stop.arrival_x
 				},
 
 			'jbrandao':

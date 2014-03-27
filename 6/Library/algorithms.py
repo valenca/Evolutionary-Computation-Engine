@@ -81,7 +81,6 @@ class Algorithms():
 			fitness(population); sort(population)									# Evaluate and sort population
 			for j in range(len(population)):										# Over the population
 				for k in range(100):												# Over the generations
-					print 'a'
 					neighbors = neighborhood(population[j])							# Generate neighbors
 					fitness(neighbors); sort(neighbors)								# Evaluate and sort neighbors
 					population[j]=survivors_selection([population[j]],neighbors)[0]	# Survivors selection

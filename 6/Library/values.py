@@ -20,7 +20,7 @@ class Values():
 
 	##### Methinks ######
 	def methinks(self):
-		self.values['sentence'] = 'GNU  Emacs  is  a  version of Emacs, written by the author of the original (PDP-10) Emacs, Richard Stallman.  The user functionality of GNU Emacs encompasses\n       everything other editors do, and it is easily extensible since its editing commands are written in Lisp.\n\n       The primary documentation of GNU Emacs is in the GNU Emacs Manual, which you can read using Info, either from Emacs or as a standalone program.  Please  look\n       there for complete and up-to-date documentation.  This man page is updated only when someone volunteers to do so.\n\n       Emacs  has  an  extensive interactive help facility, but the facility assumes that you know how to manipulate Emacs windows and buffers.  CTRL-h or F1 enters\n       the Help facility.  Help Tutorial (CTRL-h t) starts an interactive tutorial to quickly teach beginners the fundamentals of Emacs.  Help  Apropos  (CTRL-h  a)\n       helps  you  find a command with a name matching a given pattern, Help Key (CTRL-h k) describes a given key sequence, and Help Function (CTRL-h f) describes a\n       given Lisp function.\n\n       GNU Emacs\'s many special packages handle mail reading (RMail) and sending (Mail), outline editing (Outline), compiling (Compile),  running  subshells  within\n       Emacs windows (Shell), running a Lisp read-eval-print loop (Lisp-Interaction-Mode), automated psychotherapy (Doctor), and much more.'
+		self.values['sentence'] = 'Methinks it is like a weasel'
 	#####################
 
 	##### Knapsack ######
