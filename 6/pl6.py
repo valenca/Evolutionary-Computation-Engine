@@ -20,9 +20,9 @@ if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
 	problem = 'methinks'
-	n_generations = 1000
+	n_generations = 50000
 	population_size = 500
-	individual_size = 554
+	individual_size = 1386
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
@@ -31,7 +31,7 @@ if __name__ == '__main__':
 	values = Values(problem, individual_size)
 
 	values.values['tournament_size'] = 3
-	values.values['stabilize_percentage'] = 0.2
+	values.values['stabilize_percentage'] = 0.1
 	values.values['elite_percentage'] = 0.1
 	values.values['stop_interval'] = 0.00001
 	values.values['n_points'] = 2
