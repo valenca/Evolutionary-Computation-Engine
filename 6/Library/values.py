@@ -20,7 +20,7 @@ class Values():
 
 	##### Methinks ######
 	def methinks(self):
-		self.values['sentence'] = 'Methinks it is like a weasel'
+		self.values['sentence'] = 'The primary documentation of GNU Emacs is in the GNU Emacs Manual  which you can read using Info  either from Emacs or as a standalone program   Please look there for complete and  up to date documentation   This man page is updated only when someone volunteers to do so'
 	#####################
 
 	##### Knapsack ######

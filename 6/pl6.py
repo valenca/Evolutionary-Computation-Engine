@@ -19,11 +19,11 @@ if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
 	problem = 'methinks'
-	n_generations = 1000
-	population_size = 500
-	individual_size = 28
+	n_generations = 5000
+	population_size = 1000
+	individual_size = 270
 	crossover_probability = 0.9
-	mutation_probability = 0.1
+	mutation_probability = 0.003
 	print_type = 'all'
 
 	values = Values(problem, individual_size)
