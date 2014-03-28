@@ -1,4 +1,5 @@
 from math import cos, pi
+from string import printable
 
 ##### Individual Evaluator #####
 class Fitness():
@@ -14,6 +15,19 @@ class Fitness():
 			if 'fit' not in individual:
 				individual['fit'] = self.fitness_function(individual['gen'])
 	####################################
+
+	##### Onemax #####
+	def onemax(self, genotype):
+		return sum(genotype)
+	##################
+
+	##### Methinks ######
+	def methinks(self, genotype):
+		difference = 0
+		for i in range(self.individual_size):
+			difference += abs(printable.index(self.values['sentence'][i]) - printable.index(genotype[i]))
+		return difference
+	#####################
 
 	##### Joao Brandao Numbers ######
 	def jbrandao(self, genotype):
@@ -39,14 +53,6 @@ class Fitness():
 			return total_values
 	#####################
 
-	##### Rastrigin #####
-	def rastrigin(self, genotype):
-		value = self.values['A'] * self.individual_size
-		for i in range(self.individual_size):
-			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
-		return value
-	#####################
-
 	##### Traveling Salesman Problem #####
 	def tsp(self, genotype):
 		total_distance = 0
@@ -55,3 +61,11 @@ class Fitness():
 		total_distance += self.values['distances'][genotype[-1]][genotype[0]]
 		return total_distance
 	######################################
+
+	##### Rastrigin #####
+	def rastrigin(self, genotype):
+		value = self.values['A'] * self.individual_size
+		for i in range(self.individual_size):
+			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
+		return value
+	#####################
