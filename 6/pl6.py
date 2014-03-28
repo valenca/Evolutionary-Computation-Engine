@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3
-	values.values['stabilize_percentage'] = 0.1
+	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1
 	values.values['stop_interval'] = 0.00001
 	values.values['n_points'] = 2
