@@ -15,8 +15,8 @@ from random import uniform, seed
 
 if __name__ == '__main__':
 
-	n_generations = 1000
-	population_size = 500
+	n_generations = 500
+	population_size = 1000
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 0.1
