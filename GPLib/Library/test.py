@@ -1,12 +1,8 @@
 from random import sample,choice,randint
 from copy import deepcopy
 
-        
-with open('../Data/data_symb.txt', 'r') as f:
-	values = {}
-	header = f.readline().split()
-	values['header'] = [int(header.pop(0))]
-	values['header'] += [[[header[i], int(header[i+1])] for i in range(0,len(header),2)]]
-	values['data'] = [[float(j) for j in i.split()] for i in f.readlines()]
-	print data
+a=[['a',1],['b',2],['c',3]]
+function_set = [i for i in a if i[0] != 'b' and i[1] == 2]
+print function_set
+print a
 

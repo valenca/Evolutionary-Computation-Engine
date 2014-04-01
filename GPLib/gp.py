@@ -28,6 +28,7 @@ if __name__ == '__main__':
 	print_type = 'all'
 
 	values = Values(problem, individual_size)
+	values.values['crossover_vs_mutation'] = 0.9
 	values.values['tournament_size'] = 3
 	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1
@@ -64,7 +65,7 @@ if __name__ == '__main__':
 
 	algorithms = Algorithms(n_generations,functions['generation'],fitness.fitness,functions['sort'],
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
-		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
+		functions['disturbance'],functions['survivors'],status.status,functions['stop'],values.values)
 
 	results = {}
 	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
