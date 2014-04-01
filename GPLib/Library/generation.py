@@ -12,31 +12,19 @@ class Generation():
 	##### Mathematical Regression #####
 	def math_reg(self):
 		population = []
-		variables = ['x'+str(i) for i in list(range(self.values['header'][0]))]
-		for i in range(self.population_size):
-			population.append({'gen':[choice([0,1]) for j in range(self.individual_size)]})
+		for i in range(0,self.population_size//2):
+			population.append({'gen':self.math_reg_node('grow', self.values['max_depth'])})
+		for i in range(self.population_size//2,self.population_size):
+			population.append({'gen':self.math_reg_node('full', self.values['max_depth'])})
 		return population
+
+	def math_reg_node(self, method, depth):
+		if depth == 0 or (method == 'grow' and random() < float(len(self.values['terminal_set']))/\
+			(len(self.values['terminal_set'])+len(self.values['function_set']))):
+			terminal = choice(self.values['terminal_set'])
+			if callable(terminal): return terminal(-5,5)
+			else: return terminal
+		else:
+			function = choice(self.values['function_set'])
+			return [function[0]] + [math_reg_node(method,depth-1) for i in range(function[1])]
 	###################################
-
-
-	numb_vars, function_set = get_header(problem)
-	vars_set = generate_vars(numb_vars)
-	ephemeral_constant = 'uniform(MIN_RND,MAX_RND)'
-	const_set = [ephemeral_constant]
-	terminal_set = vars_set + const_set
-	statistics = []
-	# Define initial population
-	chromosomes = ramped_half_and_half(function_set,terminal_set,pop_size, in_max_depth)
-
-
-# Method ramped half-and-half.	
-def ramped_half_and_half(func_set,term_set,size, max_depth):
-	depth=list(range(3,max_depth))
-	pop=[]
-	for i in range(size//2):
-		pop.append(gen_rnd_expr(func_set,term_set,choice(depth),'grow'))
-	for i in range(size//2):
-		pop.append(gen_rnd_expr(func_set,term_set,choice(depth),'full'))
-	if (size % 2 ) != 0:
-		pop.append(gen_rnd_expr(func_set,term_set,choice(depth),'full'))
-	return pop
