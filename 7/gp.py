@@ -51,6 +51,7 @@ def gp(problem,numb_gen,pop_size, in_max_depth, max_len,prob_mut_node, prob_cros
 	ephemeral_constant = 'uniform(MIN_RND,MAX_RND)'
 	const_set = [ephemeral_constant]
 	terminal_set = vars_set + const_set
+	print terminal_set
 	statistics = []
 	# Define initial population
 	chromosomes = ramped_half_and_half(function_set,terminal_set,pop_size, in_max_depth)
