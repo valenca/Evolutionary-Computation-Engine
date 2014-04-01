@@ -50,3 +50,8 @@ class Status():
 			self.status_function(population, best_fitnesses, average_fitnesses)
 			stdout.flush()
 	###################################
+
+	##### Mathematical Regression  #####
+	def math_reg(self, population, best_fitnesses, average_fitnesses):
+		pass
+	##################

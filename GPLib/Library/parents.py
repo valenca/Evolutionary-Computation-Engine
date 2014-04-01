@@ -7,3 +7,12 @@ class Parents():
 		self.population_size = population_size
 		self.individual_size = individual_size
 		self.values = values
+
+	##### Tournament #####
+	def tournament(self, population):
+		parents = []
+		for i in range(self.population_size):
+			t_parents = sample(list(range(self.population_size)), self.values['tournament_size'])
+			parents.append(population[min(t_parents)])
+		return parents
+	################
