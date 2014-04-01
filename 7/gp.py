@@ -86,8 +86,8 @@ def gp(problem,numb_gen,pop_size, in_max_depth, max_len,prob_mut_node, prob_cros
 		best_indiv,best_fitness = best_indiv_population(population)
 		statistics.append((best_fitness,average_fitness))
 		print('\nGeneration %d - Fit %f:\n' % (i,best_fitness))
-		#print sprint(best_indiv)
-		pprint (best_indiv)
+		print sprint(best_indiv)
+		#pprint (best_indiv)
 	
 	print('\nFinal - Fit %f:\n' % best_fitness)
 	pprint(best_indiv)
