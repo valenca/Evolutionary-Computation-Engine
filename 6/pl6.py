@@ -17,6 +17,7 @@ from random import uniform, seed
 
 if __name__ == '__main__':
 
+
 	##### EDIT ONLY THIS #####
 	problem = 'jbrandao'
 	n_generations = 500
