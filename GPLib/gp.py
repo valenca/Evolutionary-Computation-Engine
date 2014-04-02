@@ -28,7 +28,7 @@ if __name__ == '__main__':
 	print_type = 'all'
 
 	values = Values(problem, individual_size)
-	values.values['crossover_vs_mutation'] = 0.9
+	values.values['crossover_vs_mutation'] = 0.0
 	values.values['tournament_size'] = 3
 	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1
