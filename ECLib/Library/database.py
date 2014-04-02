@@ -93,7 +93,7 @@ class Database():
 					'phenotype':	phenotype.rastrigin,
 					'parents':		parents.tournament,
 					'survivors':	survivors.elitism,
-					'crossover':	crossover.one_point,
+					'crossover':	crossover.uniform,
 					'mutation':		mutation.rastrigin,
 					'disturbance':	disturbance.rastrigin,
 					'neighbors':	neighbors.rastrigin,

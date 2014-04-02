@@ -57,11 +57,10 @@ class Algorithms():
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
 			if stop(i,population,best_fitnesses,average_fitnesses): i -= 1; break	# Stop condition
 			parents = parents_selection(population)									# Parents selection
-			if random() < self.values['crossover_vs_mutation']:						# Choose crossover over mutation
-				offspring = crossover(parents)										# Generate offspring
-			else:																	# Choose mutation over crossover
-				offspring = deepcopy(parents)										# Generate offspring
-				mutation(offspring)													# Mutate offspring
+			offspring=crossover(parents[:int(len(parents)*self.values['c_vs_m'])])	# Generate crossover offspring
+			m_offspring=deepcopy(parents[int(len(parents)*self.values['c_vs_m']):])	# Generate mutation offspring
+			mutation(m_offspring)													# Mutate offspring
+			offspring += m_offspring												# Join offspring
 			fitness(offspring); sort(offspring)										# Evaluate and sort offspring
 			population = survivors_selection(population, offspring)					# Survivors selection
 			fitness(population); sort(population)									# Evaluate and sort population

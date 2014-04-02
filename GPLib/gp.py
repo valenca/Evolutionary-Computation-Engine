@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'symb_reg'
 	n_generations = 500
-	population_size = 3
+	population_size = 2
 	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 	print_type = 'all'
 
 	values = Values(problem, individual_size)
-	values.values['crossover_vs_mutation'] = 1
+	values.values['c_vs_m'] = 0.9
 	values.values['tournament_size'] = 3
 	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1

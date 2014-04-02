@@ -17,19 +17,21 @@ from random import uniform, seed
 
 if __name__ == '__main__':
 
+	seed('rastrigin')
+
 	##### EDIT ONLY THIS #####
-	problem = 'jbrandao'
-	n_generations = 500
-	population_size = 250
-	individual_size = 100
+	problem = 'rastrigin'
+	n_generations = 1000
+	population_size = 500
+	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'all'
+	print_type = ''
 
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3
-	values.values['stabilize_percentage'] = 0.2
+	values.values['stabilize_percentage'] = 1
 	values.values['elite_percentage'] = 0.1
 	values.values['stop_interval'] = 0.00001
 	values.values['n_points'] = 2
@@ -66,8 +68,15 @@ if __name__ == '__main__':
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
-	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+	out = []
+
+	for i in range(50):
+		results = {}
+		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+		out.append(results['best_fitnesses'][-1])
+
+	with open('results','a') as f:
+		f.write(','.join(map(str,out))+'\n')
 
 	print''
 	#status.print_type = 'all'

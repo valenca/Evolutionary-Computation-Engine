@@ -16,6 +16,7 @@ class Generation():
 			population.append({'gen':self.math_reg_node('grow', self.values['max_depth'])})
 		for i in range(self.population_size//2,self.population_size):
 			population.append({'gen':self.math_reg_node('full', self.values['max_depth'])})
+		print population
 		return population
 
 	def math_reg_node(self, method, depth):
