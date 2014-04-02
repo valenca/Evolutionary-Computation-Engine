@@ -17,12 +17,10 @@ from random import uniform, seed
 
 if __name__ == '__main__':
 
-	seed('rastrigin')
-
 	##### EDIT ONLY THIS #####
 	problem = 'rastrigin'
-	n_generations = 1000
-	population_size = 500
+	n_generations = 500
+	population_size = 250
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
@@ -68,15 +66,32 @@ if __name__ == '__main__':
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
-	out = []
+	out = [[],[]]
+
+	seed('rastrigin')
 
 	for i in range(50):
+		print i
 		results = {}
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
-		out.append(results['best_fitnesses'][-1])
+		out[0].append(results['best_fitnesses'][-1])
 
-	with open('results','a') as f:
-		f.write(','.join(map(str,out))+'\n')
+	functions['crossover'] = crossover.uniform
+	crossover.crossover_function = functions['crossover']
+
+	seed('rastrigin')
+
+	for i in range(50):
+		print i
+		results = {}
+		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+		out[1].append(results['best_fitnesses'][-1])
+
+	with open('results.csv','w') as f:
+		for i in range(50):
+			f.write(str(out[0][i])+','+str(out[1][i])+'\n')
+
+
 
 	print''
 	#status.print_type = 'all'
