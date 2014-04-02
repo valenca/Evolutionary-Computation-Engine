@@ -1,6 +1,6 @@
 from random import sample, random, randint, choice
 from copy import deepcopy
-
+from pprint import pprint
 ##### Parent Crossover #####
 class Crossover():
 
@@ -43,6 +43,8 @@ class Crossover():
 		if not isinstance(indiv, list):
 			return 1
 		else:
+			pprint(indiv)
+			print ""
 			return 1 + sum(map(self.indiv_size, indiv[1:]))
 
 	def sub_tree(self, tree, position, count):
