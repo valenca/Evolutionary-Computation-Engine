@@ -13,7 +13,7 @@ class Mutation():
 	##### Point #####
 	def point(self, population):
 		for individual in population:
-			individual['gen'] = point_node(individual['gen'])
+			individual['gen'] = self.point_node(individual['gen'])
 	
 	def point_node(self, genotype):
 		if random() < self.mutation_probability:
@@ -21,7 +21,7 @@ class Mutation():
 				function_set = [i for i in self.values['function_set'] if i[0] != genotype[0] and i[1] == len(genotype[1:])]
 				if not function_set: function = [genotype[0], len(genotype[1:])]
 				else: function = choice(function_set)
-				return [function[0]] + [point_node(son) for son in genotype[1:]]
+				return [function[0]] + [self.point_node(son) for son in genotype[1:]]
 			elif isinstance(genotype, (float,int,str)):
 				terminal = genotype
 				while terminal == genotype:

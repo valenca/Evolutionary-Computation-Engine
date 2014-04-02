@@ -1,4 +1,3 @@
-
 from random import sample, random, randint, choice
 from copy import deepcopy
 
@@ -27,14 +26,14 @@ class Crossover():
 
 	##### Subtree #####
 	def subtree(self, parent1, parent2):
-		size_1 = indiv_size(parent1)
-		size_2 = indiv_size(parent2)
+		size_1 = self.indiv_size(parent1)
+		size_2 = self.indiv_size(parent2)
 		cross_point_1 = choice(range(size_1))
 		cross_point_2 = choice(range(size_2))
-		sub_tree_1 = sub_tree(par_1, cross_point_1,0)
-		sub_tree_2 = sub_tree(par_2, cross_point_2,0)
+		sub_tree_1 = self.sub_tree(par_1, cross_point_1,0)
+		sub_tree_2 = self.sub_tree(par_2, cross_point_2,0)
 		new_par_1 = deepcopy(parent1)
-		offspring = replace_sub_tree(new_par_1,sub_tree_1,sub_tree_2)
+		offspring = self.replace_sub_tree(new_par_1,sub_tree_1,sub_tree_2)
 		return offspring
 	###################
 
@@ -53,7 +52,7 @@ class Crossover():
 			count += 1
 			if isinstance(tree,list):
 				for i,sub in enumerate(tree[1:]):
-					res_aux = sub_tree(sub, position,count)
+					res_aux = self.sub_tree(sub, position,count)
 					if res_aux:
 						break
 				return res_aux
@@ -62,7 +61,7 @@ class Crossover():
 		if tree == sub_tree_1: return sub_tree_2
 		elif isinstance(tree, list):
 			for i,sub in enumerate(tree[1:]):
-				res = replace_sub_tree(sub, sub_tree_1, sub_tree_2)
+				res = self.replace_sub_tree(sub, sub_tree_1, sub_tree_2)
 				if res and (res != sub):
 					return [tree[0]] + tree[1:i+1] + [res] + tree[i+2:]
 			return tree
