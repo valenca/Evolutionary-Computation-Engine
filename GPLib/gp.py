@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'symb_reg'
 	n_generations = 500
-	population_size = 250
+	population_size = 3
 	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'],values.values)
 
 	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('cmea')
 
 	print''
 	#status.print_type = 'all'

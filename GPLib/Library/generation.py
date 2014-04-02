@@ -26,5 +26,5 @@ class Generation():
 			else: return terminal
 		else:
 			function = choice(self.values['function_set'])
-			return [function[0]] + [math_reg_node(method,depth-1) for i in range(function[1])]
+			return [function[0]] + [self.math_reg_node(method,depth-1) for i in range(function[1])]
 	###################################

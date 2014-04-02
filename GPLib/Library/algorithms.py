@@ -26,7 +26,7 @@ class Algorithms():
 			return self.sea(self.generation,self.fitness,self.sort,self.parents_selection,self.crossover,
 				self.mutation,self.survivors_selection,self.status,self.stop)
 		elif algorithm == 'cmea':
-			return self.sea(self.generation,self.fitness,self.sort,self.parents_selection,self.crossover,
+			return self.cmea(self.generation,self.fitness,self.sort,self.parents_selection,self.crossover,
 				self.mutation,self.survivors_selection,self.status,self.stop)
 	###################################
 	
