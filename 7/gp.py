@@ -20,7 +20,7 @@ from copy import deepcopy
 from pprint import *
 MIN_RND = -5
 MAX_RND = 5
-
+seed(12345)
 # Evolver
 def gp(problem,numb_gen,pop_size, in_max_depth, max_len,prob_mut_node, prob_cross, t_size,seed_=False):
 	""" 
@@ -51,10 +51,12 @@ def gp(problem,numb_gen,pop_size, in_max_depth, max_len,prob_mut_node, prob_cros
 	ephemeral_constant = 'uniform(MIN_RND,MAX_RND)'
 	const_set = [ephemeral_constant]
 	terminal_set = vars_set + const_set
-	print terminal_set
 	statistics = []
 	# Define initial population
 	chromosomes = ramped_half_and_half(function_set,terminal_set,pop_size, in_max_depth)
+	pprint(chromosomes)
+	#import sys
+	#sys.exit()
 	# Evaluate population
 	population = [[chromo,evaluate(chromo,fit_cases)] for chromo in chromosomes]
 	average_fitness = sum([indiv[1] for indiv in population])/ pop_size
@@ -176,6 +178,7 @@ def replace_sub_tree(tree, sub_tree_1, sub_tree_2):
 
 
 def subtree_crossover(par_1,par_2):
+	print('a',par_1,'b',par_2)
 	"""ATENTION:if identical sub_trees replace the first ocorrence..."""
 	# Choose crossover point (indepently)
 	size_1 = indiv_size(par_1)
@@ -188,6 +191,7 @@ def subtree_crossover(par_1,par_2):
 	# Exchange
 	new_par_1 = deepcopy(par_1)
 	offspring = replace_sub_tree(new_par_1, sub_tree_1,sub_tree_2)
+	print('c',offspring)
 	return offspring
 
 
@@ -237,6 +241,7 @@ def change_variable(variable,vars_set):
 # FGGP: algorithm 2.1, pg.14
 def gen_rnd_expr(func_set,term_set,max_depth,method):
 	"""Generation of tree structures using full or grow."""
+	print(len(term_set) / (len(term_set) + len(func_set)))
 	if (max_depth == 0) or (method == 'grow' 
 							and (random() < 
 								 (len(term_set) / (len(term_set) + len(func_set))))):
@@ -258,7 +263,7 @@ def gen_rnd_expr(func_set,term_set,max_depth,method):
 
 # Method ramped half-and-half.	
 def ramped_half_and_half(func_set,term_set,size, max_depth):
-	depth=list(range(3,max_depth))
+	depth=list(range(2,max_depth))
 	pop=[]
 	for i in range(size//2):
 		pop.append(gen_rnd_expr(func_set,term_set,choice(depth),'grow'))
@@ -393,7 +398,7 @@ def run(num_runs,target,problem,numb_gen,pop_size, in_max_depth, max_len,prob_mu
 
 if __name__ == '__main__':
 	count = 0
-	run(1,'Simbolic Regression','data_symb.txt',10,100,6,10000,0.05,0.9,10,0.05, False)
+	run(1,'Simbolic Regression','data_symb.txt',2,2,3,10000,0.05,0.9,1,0.05, False)
 	#gp('data_sin.txt',100,50,6,1000,0.1,0.7,3, True)
 
   

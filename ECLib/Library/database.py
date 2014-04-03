@@ -91,7 +91,7 @@ class Database():
 					'generation':	generation.rastrigin,
 					'fitness':		fitness.rastrigin,
 					'phenotype':	phenotype.rastrigin,
-					'parents':		parents.tournament,
+					'parents':		parents.roulette,
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.one_point,
 					'mutation':		mutation.rastrigin,

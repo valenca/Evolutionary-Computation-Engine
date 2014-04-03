@@ -15,7 +15,7 @@ class Crossover():
 		offspring = []
 		for i in range(0, len(parents)-1, 2):
 			if random() < self.crossover_probability:
-				offspring1,offspring2 = self.crossover_function(parents[i]['gen'],parents[i+1]['gen'])
+				offspring1,offspring2 = self.crossover_function(parents[i],parents[i+1])
 				offspring.append({'gen':offspring1})
 				offspring.append({'gen':offspring2})
 			else:
@@ -25,7 +25,8 @@ class Crossover():
 	######################################
 
 	##### Subtree #####
-	def subtree(self, parent1, parent2):
+	def subtree(self, parent_1, parent_2):
+		parent1 = parent_1['gen']; parent2 = parent_2['gen']
 		size_1 = self.indiv_size(parent1)
 		size_2 = self.indiv_size(parent2)
 		cross_point_1 = choice(range(size_1))
