@@ -15,6 +15,13 @@ from random import uniform, seed
 from os import listdir
 from cPickle import dump
 
+global testing_type
+testing_type = 'Full'
+global testing_directory
+testing_directory = 'Results/'+testing_type+'/'
+global compare
+compare = []
+
 def testing(n_generations, population_size, individual_size, crossover_probability, mutation_probability,
 	disturbance_probability, values, parents_function, survivors_function, crossover_function, algorithm):
 
@@ -62,27 +69,25 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 	print(algorithm+' '+str(n_generations)+' '+str(population_size)+' '+str(individual_size)+' '+\
 		str(crossover_probability)+' '+str(mutation_probability)+' '+str(disturbance_probability)+' '+\
 		str(values['tournament_size'])+' '+str(values['elite_percentage'])+' '+str(values['n_points_cut'])+\
-		' '+parents_function+' '+survivors_function+' '+crossover_function)
+		' '+parents_function+' '+survivors_function+' '+crossover_function),
 
-	#with open(algorithm+' '+str(n_generations)+' '+str(population_size)+' '+str(individual_size)+' '+\
-	#	str(crossover_probability)+' '+str(mutation_probability)+' '+str(disturbance_probability)+' '+\
-	#	str(values['tournament_size'])+' '+str(values['elite_percentage'])+' '+str(values['n_points_cut'])+\
-	#	' '+parents_function+' '+survivors_function+' '+crossover_function, 'w') as f:
-	#	pass
-
-	testing_directory = 'Results/Full/'
-	with open(testing_directory+'test_'+str(len(listdir(testing_directory))+1)+'.out', 'w') as f:
-		dump(results, f)
+	if testing_type == 'Full':
+		print('-> '+testing_directory+'test_'+str(len(listdir(testing_directory))+1)+'.out')
+		with open(testing_directory+'test_'+str(len(listdir(testing_directory))+1)+'.out', 'w') as f:
+			dump(results, f)
+	elif testing_type == 'Compare':
+		print('\n'),
+		compare.append(results['best_fitnesses'])
 
 if __name__ == '__main__':
 
 	##########################
 	algorithms = ['sea']
 	n_generations = [500]
-	population_size = [500]
+	population_size = [250]
 	individual_size = [10]
 	crossover_probability = [0.9]
-	mutation_probability = [0.1,0.2]
+	mutation_probability = [0.1]
 	disturbance_probability = [0.5]
 	print_type = ''
 	##########################
@@ -95,7 +100,7 @@ if __name__ == '__main__':
 	values['A'] = 10
 	values['sigma'] = 0.4
 	##########################
-	parents_function = ['tournament']
+	parents_function = ['tournament','roulette']
 	survivors_function = ['elitism']
 	crossover_function = ['one_point']
 
@@ -118,3 +123,9 @@ if __name__ == '__main__':
 														testing(generation,population,individual,crossover,
 															mutation,disturbance,values,parents_f,survivors_f,
 															crossover_f,algorithm)
+
+	if testing_type == 'Compare':
+		print('-> '+testing_directory+'compare_'+str(len(listdir(testing_directory))+1)+'.csv')
+		with open(testing_directory+'compare_'+str(len(listdir(testing_directory))+1)+'.csv', 'w') as f:
+			compare = zip(*compare)
+			[f.write(','.join(map(str,line))+'\n') for line in compare]
