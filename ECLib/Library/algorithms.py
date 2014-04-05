@@ -41,7 +41,8 @@ class Algorithms():
 		fitness(population)															# Evaluate population
 		for i in range(self.n_generations):											# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
-			if stop(i,population,best_fitnesses,average_fitnesses): i -=1 ; break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses):					# Stop condition
+				return population, best_fitnesses, average_fitnesses				# Return final data
 			neighbors = neighborhood(population[0])									# Generate neighbors
 			fitness(neighbors); sort(neighbors)										# Evaluate and sort neighbors
 			population = survivors_selection(population, neighbors)					# Survivors selection
@@ -57,7 +58,8 @@ class Algorithms():
 		fitness(population); sort(population)										# Evaluate and sort population
 		for i in range(self.n_generations):											# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
-			if stop(i,population,best_fitnesses,average_fitnesses): i -= 1; break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses):					# Stop condition
+				return population, best_fitnesses, average_fitnesses				# Return final data
 			for j in range(len(population)):										# Over the population
 				neighbors = neighborhood(population[j])								# Generate neighbors
 				fitness(neighbors); sort(neighbors)									# Evaluate and sort neighbors
@@ -74,7 +76,8 @@ class Algorithms():
 		fitness(population)															# Evaluate population
 		for i in range(self.n_generations):											# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
-			if stop(i,population,best_fitnesses,average_fitnesses): i -= 1; break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses):					# Stop condition
+				return population, best_fitnesses, average_fitnesses				# Return final data
 			backup = deepcopy(population)											# Save population
 			[individual.pop('fit') for individual in population]					# Remove fitness evaluation
 			disturbance(population)													# Disturb population
@@ -98,7 +101,8 @@ class Algorithms():
 		fitness(population); sort(population)										# Evaluate and sort population
 		for i in range(self.n_generations):											# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
-			if stop(i,population,best_fitnesses,average_fitnesses): i -= 1; break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses):					# Stop condition
+				return population, best_fitnesses, average_fitnesses				# Return final data
 			parents = parents_selection(population)									# Parents selection
 			offspring = crossover(parents)											# Generate offspring
 			mutation(offspring)														# Mutate offspring

@@ -36,7 +36,7 @@ class Crossover():
 	def n_points(self, parent1, parent2):
 		parents = [parent1, parent2]
 		cut_indexes = [0]
-		cut_indexes.extend(sorted(sample(list(range(1,self.individual_size)),self.values['n_points'])))
+		cut_indexes.extend(sorted(sample(list(range(1,self.individual_size)),self.values['n_points_cut'])))
 		cut_indexes.append(self.individual_size)
 		offspring1 = []
 		offspring2 = []

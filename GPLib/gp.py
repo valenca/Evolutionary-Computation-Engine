@@ -26,14 +26,14 @@ if __name__ == '__main__':
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
 	print_type = 'all'
-
+	##########################
 	values = Values(problem, individual_size)
 	values.values['c_vs_m'] = 1
 	values.values['tournament_size'] = 3
-	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1
+	values.values['n_points_cut'] = 2
+	values.values['stabilize_percentage'] = 0.2
 	values.values['stop_interval'] = 0.00001
-	values.values['n_points'] = 2
 	values.values['fitness_arrival'] = 1
 	##########################
 

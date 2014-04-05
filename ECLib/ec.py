@@ -20,19 +20,19 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'rastrigin'
 	n_generations = 500
-	population_size = 250
+	population_size = 500
 	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = ''
-
+	print_type = 'bar'
+	##########################
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3
-	values.values['stabilize_percentage'] = 1
 	values.values['elite_percentage'] = 0.1
+	values.values['n_points_cut'] = 2
+	values.values['stabilize_percentage'] = 0.2
 	values.values['stop_interval'] = 0.00001
-	values.values['n_points'] = 2
 	values.values['fitness_arrival'] = 0
 	##########################
 
@@ -66,35 +66,9 @@ if __name__ == '__main__':
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
-	out = [[],[]]
 
-	seed('rastrigin')
-
-	for i in range(50):
-		print i
-		results = {}
-		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
-		out[0].append(results['best_fitnesses'][-1])
-
-	functions['parents'] = parents.tournament
-	#crossover.crossover_function = functions['crossover']
-	algorithms = Algorithms(n_generations,functions['generation'],fitness.fitness,functions['sort'],
-		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
-		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
-
-	seed('rastrigin')
-
-	for i in range(50):
-		print i
-		results = {}
-		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
-		out[1].append(results['best_fitnesses'][-1])
-
-	with open('results2.csv','w') as f:
-		for i in range(50):
-			f.write(str(out[0][i]*100000)+','+str(out[1][i]*100000)+'\n')
-
-
+	results = {}
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
 
 	print''
 	#status.print_type = 'all'
