@@ -15,12 +15,33 @@ from random import uniform, seed
 from os import listdir
 from cPickle import dump
 
-global testing_type
-testing_type = 'Full'
-global testing_directory
-testing_directory = 'Results/'+testing_type+'/'
-global compare
-compare = []
+global testing_type; testing_type = 'Full'
+global testing_directory; testing_directory = 'Results/'+testing_type+'/'
+global compare; compare = []
+
+##### EDIT ONLY THIS #####
+algorithms = ['sea']
+n_generations = [500]
+population_size = [250]
+individual_size = [10]
+crossover_probability = [0.9]
+mutation_probability = [0.1]
+disturbance_probability = [0.5]
+print_type = ''
+##########################
+tournament_size = [3]
+elite_percentage = [0.1]
+n_points_cut = [2]
+##########################
+parents_function = ['tournament','roulette']
+survivors_function = ['elitism']
+crossover_function = ['one_point']
+##########################
+# Rastrigin #
+values = {}
+values['A'] = 10
+values['sigma'] = 0.4
+##########################
 
 def testing(n_generations, population_size, individual_size, crossover_probability, mutation_probability,
 	disturbance_probability, values, parents_function, survivors_function, crossover_function, algorithm):
@@ -80,29 +101,6 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 		compare.append(results['best_fitnesses'])
 
 if __name__ == '__main__':
-
-	##########################
-	algorithms = ['sea']
-	n_generations = [500]
-	population_size = [250]
-	individual_size = [10]
-	crossover_probability = [0.9]
-	mutation_probability = [0.1]
-	disturbance_probability = [0.5]
-	print_type = ''
-	##########################
-	tournament_size = [3]
-	elite_percentage = [0.1]
-	n_points_cut = [2]
-	##########################
-	# Rastrigin #
-	values = {}
-	values['A'] = 10
-	values['sigma'] = 0.4
-	##########################
-	parents_function = ['tournament','roulette']
-	survivors_function = ['elitism']
-	crossover_function = ['one_point']
 
 	for algorithm in algorithms:
 		for generation in n_generations:
