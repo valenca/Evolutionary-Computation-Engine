@@ -9,6 +9,10 @@ def subtree( parent1, parent2):
 		size_2 = indiv_size(parent2)
 		cross_point_1 = choice(range(size_1))
 		cross_point_2 = choice(range(size_2))
+		print "crosspoints:"
+		pprint(cross_point_1)
+		print "---"
+		pprint(cross_point_2)
 		sub_tree_1 = sub_tree(parent1, cross_point_1,0)
 		sub_tree_2 = sub_tree(parent2, cross_point_2,0)
 		new_par_1 = deepcopy(parent1)
@@ -52,6 +56,9 @@ def replace_sub_tree(tree, sub_tree_1, sub_tree_2):
 
 L=[{'gen': ['mult_w', ['sub_w', ['div_prot_w', 'x0', 'x0'], ['div_prot_w', 4.6275349411101185, 'x0']], ['div_prot_w', ['div_prot_w', 2.922818185622247, 'x0'], ['mult_w', 'x0', 'x0']]]}, {'gen': ['div_prot_w', ['div_prot_w', ['add_w', 'x0', 'x0'], ['add_w', 'x0', 2.440119537695997]], ['mult_w', ['div_prot_w', 4.871296878916581, 0.18883870429373673], ['add_w', 'x0', 0.49514898717472366]]]}]
 
+L=[{'gen':['add_w',['mult_w',1,2],3]},{'gen':['sub_w',['div_prot_w',4,5],6]}]
+
 p1=L[0]["gen"]
 p2=L[1]["gen"]
-print(subtree(p1,p2))
+out=subtree(p1,p2)
+print out

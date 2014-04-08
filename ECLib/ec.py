@@ -76,8 +76,12 @@ if __name__ == '__main__':
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
 		out[0].append(results['best_fitnesses'][-1])
 
-	functions['crossover'] = crossover.uniform
-	crossover.crossover_function = functions['crossover']
+	functions['parents'] = parents.tournament
+	#crossover.crossover_function = functions['crossover']
+
+	algorithms = Algorithms(n_generations,functions['generation'],fitness.fitness,functions['sort'],
+		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
+		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
 	seed('rastrigin')
 
@@ -87,9 +91,9 @@ if __name__ == '__main__':
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
 		out[1].append(results['best_fitnesses'][-1])
 
-	with open('results.csv','w') as f:
+	with open('results2.csv','w') as f:
 		for i in range(50):
-			f.write(str(out[0][i])+','+str(out[1][i])+'\n')
+			f.write(str(out[0][i]*100000)+','+str(out[1][i]*100000)+'\n')
 
 
 
