@@ -6,7 +6,7 @@ class Values():
 	def __init__(self, problem, individual_size):
 		self.individual_size = individual_size
 		self.values = {}
-		eval('self.'+problem)
+		eval('self.'+problem+'()')
 
 
 	##### Onemax #####
