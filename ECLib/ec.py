@@ -18,7 +18,7 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'jbrandao'
+	problem = 'onemax'
 	algorithm = 'sea'
 	n_generations = 500
 	population_size = 500

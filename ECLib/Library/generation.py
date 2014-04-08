@@ -24,7 +24,7 @@ class Generation():
 		for i in range(self.population_size):
 			population.append({'gen':sample([1]*static+[0]*(self.individual_size-static),self.individual_size)})
 		return population
-	###########################
+	##################################
 
 	##### Integer genotype #####
 	def integer(self):
