@@ -25,13 +25,28 @@ class Mutation():
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 	##########################
 
-	##### Swap Values #####
-	def swap(self, population):
+	##### Bubble Swap #####
+	def bubble_swap(self, population):
 		for individual in population:
-			for j in range(0,self.individual_size-1,2):
+			if random() < 0.5:
+				iterations = list(range(0,self.individual_size-1,2))
+			else:
+				iterations = range(1,self.individual_size,2)
+			for j in iterations:
 				if random() < self.mutation_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
 	#######################
+
+	##### Swap Different Values #####
+	def swap(self, population):
+		for individual in population:
+			if random() < self.mutation_probability:
+				indexes = [0, 0]
+				while individual['gen'][indexes[0]] == individual['gen'][indexes[1]]
+					indexes = sorted(sample(list(range(self.individual_size)),2))
+				individual['gen'][indexes[0]],individual['gen'][indexes[1]] =\
+				individual['gen'][indexes[1]],individual['gen'][indexes[0]]
+	#################################
 
 	##### Insert #####
 	def insert(self, population):
