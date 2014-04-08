@@ -109,7 +109,7 @@ class Database():
 					'phenotype':	phenotype.rastrigin,
 					'parents':		parents.roulette,
 					'survivors':	survivors.elitism,
-					'crossover':	crossover.pmx,
+					'crossover':	crossover.ordered,
 					'mutation':		mutation.swap,
 					'disturbance':	disturbance.rastrigin,
 					'neighbors':	neighbors.rastrigin,

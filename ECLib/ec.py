@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	problem = 'dispersion'
 	algorithm = 'sea'
 	n_generations = 500
-	population_size = 500
+	population_size = 1000
 	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 	values.values['tournament_size'] = 3
 	values.values['elite_percentage'] = 0.1
 	values.values['n_points_cut'] = 2
-	values.values['stabilize_percentage'] = 0.2
+	values.values['stabilize_percentage'] = 1
 	values.values['stop_interval'] = 0.00001
 	values.values['fitness_arrival'] = 0
 	##########################

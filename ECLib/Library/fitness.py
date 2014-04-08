@@ -62,19 +62,17 @@ class Fitness():
 		return total_distance
 	######################################
 
-	##### Rastrigin #####
-	def rastrigin(self, genotype):
-		value = self.values['A'] * self.individual_size
-		for i in range(self.individual_size):
-			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
-		return value
-	#####################
+	##### Dispersion Problem #############
+	def dispersion(self, genotype):		
+		def dist(p1,p2):
+			res = 0
+			for c1,c2 in zip(p1,p2):
+				res += (c1-c2)**2
+			return res**0.5
 
-	##### Dispersion Problem #####
-	def dispersion(self, genotype):
 		def closestPair(L,dp):
 			best = [dist(L[0],L[1]), (L[0],L[1]),(0,1)]
-			dim = len(vector[0])
+			dim = len(L[0])
 			threshold = (3**dim)-(3**(dim-1))
 			# 2, 6, 18, 54, 162, 486, 1458, 4374, 13122
 
@@ -120,5 +118,13 @@ class Fitness():
 			return best
 
 		points=[self.values['coords'][i] for i in range(len(genotype)) if genotype[i]==1]
-		return closestPair(points,self.values['dp'])
-	##############################
+		return closestPair(points,self.values['dp'])[0]
+	######################################
+
+	##### Rastrigin #####
+	def rastrigin(self, genotype):
+		value = self.values['A'] * self.individual_size
+		for i in range(self.individual_size):
+			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
+		return value
+	#####################
