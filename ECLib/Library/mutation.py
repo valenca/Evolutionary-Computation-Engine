@@ -46,9 +46,7 @@ class Mutation():
 	def scramble(self, population):
 		for individual in population:
 			if random() < self.mutation_probability:
-				indexes = sample(list(range(self.individual_size)),2)
-				if indexes[1] < indexes[0]:
-					indexes[0],indexes[1] = indexes[1],indexes[0]
+				indexes = sorted(sample(list(range(self.individual_size)),2))
 				temp = individual['gen'][indexes[0]:indexes[1]]
 				shuffle(temp)
 				individual['gen'][indexes[0]:indexes[1]] = temp
