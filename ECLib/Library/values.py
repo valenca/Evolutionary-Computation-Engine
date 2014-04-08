@@ -68,7 +68,6 @@ class Values():
 
 	##### Dispersion Problem #####
 	def dispersion(self):
-		print 'qwerqwerqwerqwer'
 		with open('Data/in100.disp') as f:
 
 			N=int(f.readline())
