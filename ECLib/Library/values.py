@@ -15,6 +15,8 @@ class Values():
 			self.knapsack()
 		elif problem == 'tsp':
 			self.tsp()
+		elif problem == 'dispersion':
+			self.dispersion()
 		elif problem == 'rastrigin':
 			self.rastrigin()
 
