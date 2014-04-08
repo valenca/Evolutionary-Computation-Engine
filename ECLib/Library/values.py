@@ -8,7 +8,6 @@ class Values():
 		self.values = {}
 		eval('self.'+problem+'()')
 
-
 	##### Onemax #####
 	def onemax(self):
 		pass
