@@ -78,7 +78,7 @@ class Values():
 				for j in range(D):
 					a.append(float(f.readline()))
 				vector.append(a)
-			
+			vector.sort()
 			self.values['coords']=vector
 			self.values['dp']=dict()
 			self.values['static_binary']=k
