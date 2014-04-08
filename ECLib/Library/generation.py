@@ -4,9 +4,10 @@ from string import letters, printable
 ##### Population Generator #####
 class Generation():
 
-	def __init__(self, population_size, individual_size):
+	def __init__(self, population_size, individual_size, values):
 		self.population_size = population_size
 		self.individual_size = individual_size
+		self.values = values
 
 	##### Binary genotype #####
 	def binary(self):

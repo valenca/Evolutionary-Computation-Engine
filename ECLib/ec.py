@@ -19,6 +19,7 @@ if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
 	problem = 'dispersion'
+	algorithm = 'sea'
 	n_generations = 500
 	population_size = 1000
 	individual_size = 100
@@ -36,7 +37,7 @@ if __name__ == '__main__':
 	values.values['fitness_arrival'] = 0
 	##########################
 
-	generation = Generation(population_size, individual_size)
+	generation = Generation(population_size, individual_size, values)
 	fitness = Fitness(individual_size,values.values)
 	phenotype = Phenotype(individual_size, values.values)
 	parents = Parents(population_size, individual_size, values.values)
@@ -66,7 +67,7 @@ if __name__ == '__main__':
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
 	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
 	print''
 	#status.print_type = 'all'

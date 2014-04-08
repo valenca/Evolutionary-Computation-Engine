@@ -7,7 +7,9 @@ class Values():
 		self.individual_size = individual_size
 		self.values = {}
 
-		if problem == 'methinks':
+		if problem == 'onemax':
+			pass
+		elif problem == 'methinks':
 			self.methinks()
 		elif problem == 'jbrandao':
 			pass
@@ -62,7 +64,13 @@ class Values():
 					self.values['distances'][i][j] = self.values['distances'][j][i] = distance
 	######################################
 
-	##### Traveling Salesman Problem #####
+	##### Rastrigin #####
+	def rastrigin(self):
+		self.values['A'] = 10
+		self.values['sigma'] = 0.4
+	#####################
+
+	##### Dispersion Problem #####
 	def dispersion(self):
 		with open('Data/in100.disp') as f:
 
@@ -78,10 +86,5 @@ class Values():
 			
 			self.values['coords']=vector
 			self.values['dp']=dict()
-	######################################
-
-	##### Rastrigin #####
-	def rastrigin(self):
-		self.values['A'] = 10
-		self.values['sigma'] = 0.4
-	#####################
+			self.values['static_binary']=80
+	##############################

@@ -24,6 +24,11 @@ class Crossover():
 		return offspring
 	######################################
 
+	##### Return parents #####
+	def nothing(self, parent1, parent2):
+		return deepcopy(parent1), deepcopy(parent2)
+	##########################
+
 	##### One-Point #####
 	def one_point(self, parent1, parent2):
 		cut_index = randint(1, self.individual_size-1)
