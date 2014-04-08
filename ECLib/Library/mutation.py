@@ -48,6 +48,22 @@ class Mutation():
 				individual['gen'][indexes[1]],individual['gen'][indexes[0]]
 	#################################
 
+	##### Swap Different Values Optimized for binaries #####
+	def swap_bin(self, population):
+		for individual in population:
+			if random() < self.mutation_probability:
+				tmp=sample(list(range(self.individual_size)),self.individual_size)
+				ind1=individual['gen'][tmp[0]]
+				ind2=individual['gen'][tmp[1]]
+				i=2
+				while ind2==ind1:
+					ind2=individual['gen'][tmp[i]]
+					i+=1
+
+				individual['gen'][ind1],individual['gen'][ind2] =\
+				individual['gen'][ind2],individual['gen'][ind1]
+	#########################################################
+
 	##### Insert #####
 	def insert(self, population):
 		for individual in population:

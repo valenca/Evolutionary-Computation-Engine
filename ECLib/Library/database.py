@@ -110,7 +110,7 @@ class Database():
 					'parents':		parents.roulette,
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.ordered,
-					'mutation':		mutation.swap,
+					'mutation':		mutation.swap_bin,
 					'disturbance':	disturbance.rastrigin,
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.maximization,

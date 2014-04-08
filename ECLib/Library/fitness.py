@@ -110,6 +110,7 @@ class Fitness():
 				return L
 			L.sort()
 			try:
+				pass
 				return dp[tuple([tuple(i) for i in L])]
 			except KeyError:
 				pass

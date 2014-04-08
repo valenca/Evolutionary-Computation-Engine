@@ -2,6 +2,7 @@
 *.loc
 *.pyc
 *.pdf
+*.jnl
 *.out
 *.csv
 *#
