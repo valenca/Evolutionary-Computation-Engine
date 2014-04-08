@@ -7,7 +7,9 @@ class Values():
 		self.individual_size = individual_size
 		self.values = {}
 
-		if problem == 'methinks':
+		if problem == 'onemax':
+			pass
+		elif problem == 'methinks':
 			self.methinks()
 		elif problem == 'jbrandao':
 			pass
