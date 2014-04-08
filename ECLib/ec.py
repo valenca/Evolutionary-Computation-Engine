@@ -37,7 +37,7 @@ if __name__ == '__main__':
 	values.values['fitness_arrival'] = 0
 	##########################
 
-	generation = Generation(population_size, individual_size, values)
+	generation = Generation(population_size, individual_size, values.values)
 	fitness = Fitness(individual_size,values.values)
 	phenotype = Phenotype(individual_size, values.values)
 	parents = Parents(population_size, individual_size, values.values)

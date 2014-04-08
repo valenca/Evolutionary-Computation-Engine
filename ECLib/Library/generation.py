@@ -20,7 +20,7 @@ class Generation():
 	##### Static Binary genotype #####
 	def static_binary(self):
 		population = []
-		static=5 #self.values["static_binary"]
+		static=self.values["static_binary"]
 		for i in range(self.population_size):
 			population.append({'gen':sample([1]*static+[0]*(self.individual_size-static),self.individual_size)})
 		return population
