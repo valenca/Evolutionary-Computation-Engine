@@ -42,7 +42,7 @@ class Mutation():
 		for individual in population:
 			if random() < self.mutation_probability:
 				indexes = [0, 0]
-				while individual['gen'][indexes[0]] == individual['gen'][indexes[1]]
+				while individual['gen'][indexes[0]] == individual['gen'][indexes[1]]:
 					indexes = sorted(sample(list(range(self.individual_size)),2))
 				individual['gen'][indexes[0]],individual['gen'][indexes[1]] =\
 				individual['gen'][indexes[1]],individual['gen'][indexes[0]]
