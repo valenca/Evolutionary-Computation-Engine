@@ -6,26 +6,23 @@ class Values():
 	def __init__(self, problem, individual_size):
 		self.individual_size = individual_size
 		self.values = {}
+		eval('self.'+problem)
 
-		if problem == 'onemax':
-			pass
-		elif problem == 'methinks':
-			self.methinks()
-		elif problem == 'jbrandao':
-			pass
-		elif problem == 'knapsack':
-			self.knapsack()
-		elif problem == 'tsp':
-			self.tsp()
-		elif problem == 'dispersion':
-			self.dispersion()
-		elif problem == 'rastrigin':
-			self.rastrigin()
+
+	##### Onemax #####
+	def onemax(self):
+		pass
+	##################
 
 	##### Methinks ######
 	def methinks(self):
 		self.values['sentence'] = 'Methinks it is like a weasel'
 	#####################
+
+	##### Joao Brandao Numbers ######
+	def jbrandao(self):
+		pass
+	#################################
 
 	##### Knapsack ######
 	def knapsack(self):
