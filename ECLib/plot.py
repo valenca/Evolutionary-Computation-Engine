@@ -28,7 +28,6 @@ if __name__ == '__main__':
 	option = int(input())
 	if not 0 <= option <= 12:
 		exit()
-	print()
 
 	data_g = []
 	data_r = []
@@ -66,7 +65,7 @@ if __name__ == '__main__':
 	axis1.set_title(parameters[option],fontsize=20)
 
 	figure2 = pyplot.figure(2)
-	axis2 = figure2.add_axes([0.1, 0.175, 0.825, 0.75])
+	axis2 = figure2.add_axes([0.1, 0.1, 0.825, 0.825])
 	bp = axis2.boxplot([i[1] for i in data_r], sym='x')
 	#handles, labels = axis2.get_legend_handles_labels()
 	#axis2.legend(handles, labels, loc=9, ncol=4, bbox_to_anchor=(.5,-.075), borderaxespad=0.)
