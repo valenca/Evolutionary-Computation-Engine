@@ -18,10 +18,10 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'rastrigin'
+	problem = 'dispersion'
 	n_generations = 500
 	population_size = 500
-	individual_size = 10
+	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
@@ -35,7 +35,6 @@ if __name__ == '__main__':
 	values.values['stop_interval'] = 0.00001
 	values.values['fitness_arrival'] = 0
 	##########################
-
 
 	generation = Generation(population_size, individual_size)
 	fitness = Fitness(individual_size,values.values)

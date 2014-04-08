@@ -62,6 +62,59 @@ class Fitness():
 		return total_distance
 	######################################
 
+	##### Dispersion Problem #############
+	def dispersion(self, genotype):
+		def closestPair(L,dp):
+			best = [dist(L[0],L[1]), (L[0],L[1]),(0,1)]
+			dim = len(vector[0])
+			threshold = (3**dim)-(3**(dim-1))
+			# 2, 6, 18, 54, 162, 486, 1458, 4374, 13122
+
+			def testPair(p,q,ip,iq):
+				d = dist(p,q)
+				if d < best[0]:
+					best[0] = d
+					best[1] = p,q
+					best[2] = ip,iq
+			
+			def merge(A,B):	   
+				i = 0
+				j = 0
+				while i < len(A) or j < len(B):
+					if j >= len(B) or (i < len(A) and A[i][1] <= B[j][1]):
+						yield A[i]
+						i += 1
+					else:
+						yield B[j]
+						j += 1
+
+			def recur(L,ind):
+				if len(L) < 2:
+					return L
+				split = int(len(L)/2)
+				splitx = L[split][0]
+				L2 = list(merge(recur(L[:split],ind), recur(L[split:],ind+split)))
+	
+				E = [p for p in L2 if abs(p[0]-splitx) < best[0]]
+				for i in range(len(E)):
+					#for j in range(1,len(E)):
+					for j in range(1,threshold+1):
+						if i+j < len(E):
+							testPair(E[i],E[i+j],ind+L.index(E[i]),ind+L.index(E[i+j]))
+				return L
+			L.sort()
+			try:
+				return dp[tuple([tuple(i) for i in L])]
+			except KeyError:
+				pass
+			recur(L,0)
+			dp[tuple([tuple(i) for i in L])]=best
+			return best
+
+		points=[self.values['coords'][i] for i in range(len(genotype)) if genotype[i]==1]
+		return closestPair(points,self.values['dp'])
+	######################################
+
 	##### Rastrigin #####
 	def rastrigin(self, genotype):
 		value = self.values['A'] * self.individual_size

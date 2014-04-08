@@ -16,6 +16,15 @@ class Generation():
 		return population
 	###########################
 
+	##### Static Binary genotype #####
+	def static_binary(self):
+		population = []
+		static=80
+		for i in range(self.population_size):
+			population.append({'gen':sample([1]*static+[0]*(self.individual_size-static),self.individual_size)})
+		return population
+	###########################
+
 	##### Integer genotype #####
 	def integer(self):
 		population = []
