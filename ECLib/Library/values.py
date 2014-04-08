@@ -70,7 +70,6 @@ class Values():
 	##### Dispersion Problem #####
 	def dispersion(self):
 		with open('Data/in100.disp') as f:
-
 			N=int(f.readline())
 			D=int(f.readline())
 			k=int(f.readline())
@@ -83,5 +82,6 @@ class Values():
 			
 			self.values['coords']=vector
 			self.values['dp']=dict()
-			self.values['static_binary']=80
+			self.values['static_binary']=k
+			self.values['dimension']=D
 	##############################
