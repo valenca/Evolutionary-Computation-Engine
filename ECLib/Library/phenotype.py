@@ -36,3 +36,8 @@ class Phenotype():
 	def rastrigin(self, genotype):
 		return genotype
 	######################
+
+	##### Dispersion Problem #####
+	def dispersion(self,genotype):
+		return [self.values['coords'][i] for i in range(len(genotype)) if genotype[i]==1]
+	##############################

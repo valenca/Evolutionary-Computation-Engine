@@ -48,7 +48,7 @@ values['sigma'] = 0.4
 def testing(n_generations, population_size, individual_size, crossover_probability, mutation_probability,
 	disturbance_probability, values, parents_function, survivors_function, crossover_function, algorithm):
 
-	generation = Generation(population_size, individual_size)
+	generation = Generation(population_size, individual_size, values)
 	fitness = Fitness(individual_size,values)
 	phenotype = Phenotype(individual_size, values)
 	parents = Parents(population_size, individual_size, values)

@@ -67,3 +67,22 @@ class Values():
 		self.values['A'] = 10
 		self.values['sigma'] = 0.4
 	#####################
+
+	##### Dispersion Problem #####
+	def dispersion(self):
+		with open('Data/in100.disp') as f:
+
+			N=int(f.readline())
+			D=int(f.readline())
+			k=int(f.readline())
+			vector=[]
+			for i in range(N):
+				a=[]
+				for j in range(D):
+					a.append(float(f.readline()))
+				vector.append(a)
+			
+			self.values['coords']=vector
+			self.values['dp']=dict()
+			self.values['static_binary']=80
+	##############################
