@@ -17,28 +17,27 @@ from random import uniform, seed
 
 if __name__ == '__main__':
 
-
 	##### EDIT ONLY THIS #####
-	problem = 'jbrandao'
+	problem = 'symb_reg'
 	n_generations = 500
-	population_size = 250
+	population_size = 6
 	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
 	print_type = 'all'
-
+	##########################
 	values = Values(problem, individual_size)
+	values.values['c_vs_m'] = 1
 	values.values['tournament_size'] = 3
-	values.values['stabilize_percentage'] = 0.2
 	values.values['elite_percentage'] = 0.1
-	values.values['stop_interval'] = 1
-	values.values['n_points'] = 2
-	values.values['fitness_arrival'] = 0
+	values.values['n_points_cut'] = 2
+	values.values['stabilize_percentage'] = 0.2
+	values.values['stop_interval'] = 0.00001
+	values.values['fitness_arrival'] = 1
 	##########################
 
-
-	generation = Generation(population_size, individual_size)
+	generation = Generation(population_size, individual_size, values.values)
 	fitness = Fitness(individual_size,values.values)
 	phenotype = Phenotype(individual_size, values.values)
 	parents = Parents(population_size, individual_size, values.values)
@@ -65,10 +64,10 @@ if __name__ == '__main__':
 
 	algorithms = Algorithms(n_generations,functions['generation'],fitness.fitness,functions['sort'],
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
-		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
+		functions['disturbance'],functions['survivors'],status.status,functions['stop'],values.values)
 
 	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('cmea')
 
 	print''
 	#status.print_type = 'all'
