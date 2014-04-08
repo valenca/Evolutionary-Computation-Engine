@@ -2,3 +2,5 @@
 *.loc
 *.pyc
 *.pdf
+*.out
+*.csv

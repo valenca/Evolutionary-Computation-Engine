@@ -37,7 +37,8 @@ class Algorithms():
 		fitness(population); sort(population)										# Evaluate and sort population
 		for i in range(self.n_generations):											# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
-			if stop(i,population,best_fitnesses,average_fitnesses): i -= 1; break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses):					# Stop condition
+				return population, best_fitnesses, average_fitnesses				# Return final data
 			parents = parents_selection(population)									# Parents selection
 			offspring = crossover(parents)											# Generate offspring
 			mutation(offspring)														# Mutate offspring
@@ -55,7 +56,8 @@ class Algorithms():
 		fitness(population); sort(population)										# Evaluate and sort population
 		for i in range(self.n_generations):											# Over the generations
 			status(i, population, best_fitnesses, average_fitnesses)				# Collecting data from population
-			if stop(i,population,best_fitnesses,average_fitnesses): i -= 1; break	# Stop condition
+			if stop(i,population,best_fitnesses,average_fitnesses):					# Stop condition
+				return population, best_fitnesses, average_fitnesses				# Return final data
 			parents = parents_selection(population)									# Parents selection
 			offspring=crossover(parents[:int(len(parents)*self.values['c_vs_m'])])	# Generate crossover offspring
 			m_offspring=deepcopy(parents[int(len(parents)*self.values['c_vs_m']):])	# Generate mutation offspring
