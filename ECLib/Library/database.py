@@ -106,7 +106,7 @@ class Database():
 				{
 					'generation':	generation.static_binary,
 					'fitness':		fitness.dispersion,
-					'phenotype':	phenotype.rastrigin,
+					'phenotype':	phenotype.dispersion,
 					'parents':		parents.roulette,
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.ordered,

@@ -26,7 +26,7 @@ if __name__ == '__main__':
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'all'
+	print_type = 'fit'
 	##########################
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3
