@@ -15,6 +15,7 @@ from random import uniform, seed
 from os import listdir
 from cPickle import dump
 from sys import stdout
+from gc import collect
 
 global testing_type; testing_type = 'Compare'
 global testing_directory; testing_directory = 'Results/'+testing_type+'/'
@@ -23,26 +24,33 @@ global compare; compare = []
 ##### EDIT ONLY THIS #####
 algorithms = ['sea']
 n_runs = 50
-n_generations = [250]
-population_size = [100]
-individual_size = [10]
+n_generations = [500]
+population_size = [250]
+individual_size = [52]
 crossover_probability = [0.9]
-mutation_probability = [0.1,0.15,0.2]
+mutation_probability = [0.052]
 disturbance_probability = [0.5]
 print_type = ''
 ##########################
-tournament_size = [3,5]
+tournament_size = [3]
 elite_percentage = [0.1]
 n_points_cut = [2]
 ##########################
-parents_function = ['tournament','roulette']
+parents_function = ['tournament','roulette','sus']
 survivors_function = ['elitism']
 crossover_function = ['one_point']
 ##########################
-# Rastrigin #
+# TSP #
 values = {}
-values['A'] = 10
-values['sigma'] = 0.4
+with open('Data/berlin52.tsp') as f:
+	while f.readline() != "NODE_COORD_SECTION\n": True
+	coord = [[float(string) for string in line.split()[1:]] for line in f]
+	coord.pop(-1)
+	values['distances'] = [[0 for j in range(len(coord))] for i in range(len(coord))]
+	for i in range(len(coord)):
+		for j in range(i,len(coord)):
+			distance = (((coord[i][0]-coord[j][0])**2+(coord[i][1]-coord[j][1])**2))**(0.5)
+			values['distances'][i][j] = values['distances'][j][i] = distance
 ##########################
 
 def testing(n_generations, population_size, individual_size, crossover_probability, mutation_probability,
@@ -62,17 +70,17 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 	stop = Stop(n_generations, values)
 
 	functions = {
-		'generation':	generation.rastrigin,
-		'fitness':		fitness.rastrigin,
-		'phenotype':	phenotype.rastrigin,
+		'generation':	generation.integer,
+		'fitness':		fitness.tsp,
+		'phenotype':	phenotype.tsp,
 		'parents':		eval('parents.'+parents_function),
 		'survivors':	eval('survivors.'+survivors_function),
 		'crossover':	eval('crossover.'+crossover_function),
-		'mutation':		mutation.rastrigin,
-		'disturbance':	disturbance.rastrigin,
-		'neighbors':	neighbors.rastrigin,
+		'mutation':		mutation.bubble_swap,
+		'disturbance':	None,
+		'neighbors':	None,
 		'sort':			sort.minimization,
-		'status':		status.rastrigin,
+		'status':		status.tsp,
 		'stop':			stop.nothing
 	}
 
@@ -91,6 +99,7 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 		result = {}
 		result['population'],result['best_fitnesses'],result['average_fitnesses']=algorithms.call(algorithm)
 		results.append(result)
+		collect()
 		stdout.write('\rRun: ('+str(i+1)+'/'+str(n_runs)+')')
 		stdout.flush()
 

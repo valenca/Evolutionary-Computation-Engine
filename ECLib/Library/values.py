@@ -49,7 +49,7 @@ class Values():
 
 	##### Traveling Salesman Problem #####
 	def tsp(self):
-		with open('Data/wi29.tsp') as f:
+		with open('Data/berlin52.tsp') as f:
 			while f.readline() != "NODE_COORD_SECTION\n": True
 			coord = [[float(string) for string in line.split()[1:]] for line in f]
 			coord.pop(-1)

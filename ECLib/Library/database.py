@@ -78,12 +78,12 @@ class Database():
 					'parents':		parents.tournament,
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.ordered,
-					'mutation':		mutation.swap,
+					'mutation':		mutation.bubble_swap,
 					'disturbance':	disturbance.swap,
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.minimization,
 					'status':		status.tsp,
-					'stop':			stop.interval_stabilization
+					'stop':			stop.best_stabilization
 				},
 
 			'rastrigin':
