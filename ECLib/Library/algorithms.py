@@ -69,7 +69,7 @@ class Algorithms():
 		return population, best_fitnesses, average_fitnesses						# Return final data
 	##################################
 
-	##### Iterated Local Search #####
+	##### Iterative Local Search #####
 	def ils(self,generation,fitness,sort,disturbance,mutation,neighborhood,survivors_selection,status,stop):
 		best_fitnesses = []; average_fitnesses = []
 		population = generation()													# Generate initial population
@@ -92,7 +92,7 @@ class Algorithms():
 			fitness(population); sort(population)									# Evaluate and sort population
 		status(i+1, population, best_fitnesses, average_fitnesses)					# Collecting data from population
 		return population, best_fitnesses, average_fitnesses						# Return final data
-	#################################
+	##################################
 
 	##### Simple Evolutionary Algorithm #####
 	def sea(self,generation,fitness,sort,parents_selection,crossover,mutation,survivors_selection,status,stop):
