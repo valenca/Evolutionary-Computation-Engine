@@ -62,7 +62,7 @@ class Mutation():
 
 				individual['gen'][ind1],individual['gen'][ind2] =\
 				individual['gen'][ind2],individual['gen'][ind1]
-	#########################################################
+	########################################################
 
 	##### Insert #####
 	def insert(self, population):
