@@ -28,10 +28,10 @@ class Mutation():
 	##### Bubble Swap #####
 	def bubble_swap(self, population):
 		for individual in population:
-			if random() < 0.5:
+			if random() < 1.1:
 				iterations = list(range(0,self.individual_size-1,2))
 			else:
-				iterations = range(1,self.individual_size,2)
+				iterations = list(range(1,self.individual_size,2))
 			for j in iterations:
 				if random() < self.mutation_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
