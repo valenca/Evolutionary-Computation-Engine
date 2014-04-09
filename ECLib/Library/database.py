@@ -91,7 +91,7 @@ class Database():
 					'generation':	generation.rastrigin,
 					'fitness':		fitness.rastrigin,
 					'phenotype':	phenotype.rastrigin,
-					'parents':		parents.tournament,
+					'parents':		parents.roulette,
 					'survivors':	survivors.elitism,
 					'crossover':	crossover.one_point,
 					'mutation':		mutation.rastrigin,
@@ -99,6 +99,22 @@ class Database():
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.minimization,
 					'status':		status.rastrigin,
+					'stop':			stop.interval_stabilization
+				},
+
+			'dispersion':
+				{
+					'generation':	generation.static_binary,
+					'fitness':		fitness.dispersion,
+					'phenotype':	phenotype.dispersion,
+					'parents':		parents.roulette,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.ordered,
+					'mutation':		mutation.swap,
+					'disturbance':	disturbance.rastrigin,
+					'neighbors':	neighbors.rastrigin,
+					'sort':			sort.maximization,
+					'status':		status.dispersion,
 					'stop':			stop.interval_stabilization
 				}
 			}

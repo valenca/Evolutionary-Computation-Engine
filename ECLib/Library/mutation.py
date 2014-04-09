@@ -25,13 +25,44 @@ class Mutation():
 					individual['gen'][j] += gauss(0, self.values['sigma'])
 	##########################
 
-	##### Swap Values #####
-	def swap(self, population):
+	##### Bubble Swap #####
+	def bubble_swap(self, population):
 		for individual in population:
-			for j in range(0,self.individual_size-1,2):
+			if random() < 0.5:
+				iterations = list(range(0,self.individual_size-1,2))
+			else:
+				iterations = range(1,self.individual_size,2)
+			for j in iterations:
 				if random() < self.mutation_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
 	#######################
+
+	##### Swap Different Values #####
+	def swap(self, population):
+		for individual in population:
+			if random() < self.mutation_probability:
+				indexes = [0, 0]
+				while individual['gen'][indexes[0]] == individual['gen'][indexes[1]]:
+					indexes = sorted(sample(list(range(self.individual_size)),2))
+				individual['gen'][indexes[0]],individual['gen'][indexes[1]] =\
+				individual['gen'][indexes[1]],individual['gen'][indexes[0]]
+	#################################
+
+	##### Swap Different Values Optimized for binaries #####
+	def swap_bin(self, population):
+		for individual in population:
+			if random() < self.mutation_probability:
+				tmp=sample(list(range(self.individual_size)),self.individual_size)
+				ind1=individual['gen'][tmp[0]]
+				ind2=individual['gen'][tmp[1]]
+				i=2
+				while ind2==ind1:
+					ind2=individual['gen'][tmp[i]]
+					i+=1
+
+				individual['gen'][ind1],individual['gen'][ind2] =\
+				individual['gen'][ind2],individual['gen'][ind1]
+	#########################################################
 
 	##### Insert #####
 	def insert(self, population):
@@ -46,9 +77,7 @@ class Mutation():
 	def scramble(self, population):
 		for individual in population:
 			if random() < self.mutation_probability:
-				indexes = sample(list(range(self.individual_size)),2)
-				if indexes[1] < indexes[0]:
-					indexes[0],indexes[1] = indexes[1],indexes[0]
+				indexes = sorted(sample(list(range(self.individual_size)),2))
 				temp = individual['gen'][indexes[0]:indexes[1]]
 				shuffle(temp)
 				individual['gen'][indexes[0]:indexes[1]] = temp

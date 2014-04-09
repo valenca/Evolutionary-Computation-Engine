@@ -90,3 +90,8 @@ class Status():
 	def rastrigin(self, population, best_fitnesses, average_fitnesses):
 		pass
 	#####################
+
+	##### Dispersion Problem #####
+	def dispersion(self, population, best_fitnesses, average_fitnesses):
+		pass
+	##############################

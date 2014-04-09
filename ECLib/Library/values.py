@@ -6,22 +6,22 @@ class Values():
 	def __init__(self, problem, individual_size):
 		self.individual_size = individual_size
 		self.values = {}
+		eval('self.'+problem+'()')
 
-		if problem == 'methinks':
-			self.methinks()
-		elif problem == 'jbrandao':
-			pass
-		elif problem == 'knapsack':
-			self.knapsack()
-		elif problem == 'tsp':
-			self.tsp()
-		elif problem == 'rastrigin':
-			self.rastrigin()
+	##### Onemax #####
+	def onemax(self):
+		pass
+	##################
 
 	##### Methinks ######
 	def methinks(self):
 		self.values['sentence'] = 'Methinks it is like a weasel'
 	#####################
+
+	##### Joao Brandao Numbers ######
+	def jbrandao(self):
+		pass
+	#################################
 
 	##### Knapsack ######
 	def knapsack(self):
@@ -65,3 +65,22 @@ class Values():
 		self.values['A'] = 10
 		self.values['sigma'] = 0.4
 	#####################
+
+	##### Dispersion Problem #####
+	def dispersion(self):
+		with open('Data/in100.disp') as f:
+			N=int(f.readline())
+			D=int(f.readline())
+			k=int(f.readline())
+			vector=[]
+			for i in range(N):
+				a=[]
+				for j in range(D):
+					a.append(float(f.readline()))
+				vector.append(a)
+			vector.sort()
+			self.values['coords']=vector
+			self.values['dp']=dict()
+			self.values['static_binary']=k
+			self.values['dimension']=D
+	##############################

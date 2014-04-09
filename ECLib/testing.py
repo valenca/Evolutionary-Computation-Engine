@@ -14,6 +14,7 @@ from Library.stop import Stop
 from random import uniform, seed
 from os import listdir
 from cPickle import dump
+from sys import stdout
 
 global testing_type; testing_type = 'Compare' # 'Full'
 global testing_directory; testing_directory = 'Results/'+testing_type+'/'
@@ -21,15 +22,16 @@ global compare; compare = []
 
 ##### EDIT ONLY THIS #####
 algorithms = ['sea']
-n_generations = [500]
-population_size = [250]
+n_runs = 50
+n_generations = [250]
+population_size = [100]
 individual_size = [10]
 crossover_probability = [0.9]
-mutation_probability = [0.1]
+mutation_probability = [0.1,0.15,0.2]
 disturbance_probability = [0.5]
 print_type = ''
 ##########################
-tournament_size = [3]
+tournament_size = [3,5]
 elite_percentage = [0.1]
 n_points_cut = [2]
 ##########################
@@ -46,7 +48,7 @@ values['sigma'] = 0.4
 def testing(n_generations, population_size, individual_size, crossover_probability, mutation_probability,
 	disturbance_probability, values, parents_function, survivors_function, crossover_function, algorithm):
 
-	generation = Generation(population_size, individual_size)
+	generation = Generation(population_size, individual_size, values)
 	fitness = Fitness(individual_size,values)
 	phenotype = Phenotype(individual_size, values)
 	parents = Parents(population_size, individual_size, values)
@@ -84,10 +86,15 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
-	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses']=algorithms.call(algorithm)
+	results = []
+	for i in range(n_runs):
+		result = {}
+		result['population'],result['best_fitnesses'],result['average_fitnesses']=algorithms.call(algorithm)
+		results.append(result)
+		stdout.write('\rRun: ('+str(i+1)+'/'+str(n_runs)+')')
+		stdout.flush()
 
-	print(algorithm+' '+str(n_generations)+' '+str(population_size)+' '+str(individual_size)+' '+\
+	print('\r'+algorithm+' '+str(n_generations)+' '+str(population_size)+' '+str(individual_size)+' '+\
 		str(crossover_probability)+' '+str(mutation_probability)+' '+str(disturbance_probability)+' '+\
 		str(values['tournament_size'])+' '+str(values['elite_percentage'])+' '+str(values['n_points_cut'])+\
 		' '+parents_function+' '+survivors_function+' '+crossover_function),
@@ -95,10 +102,31 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 	if testing_type == 'Full':
 		print('-> '+testing_directory+'test_'+str(len(listdir(testing_directory))+1)+'.out')
 		with open(testing_directory+'test_'+str(len(listdir(testing_directory))+1)+'.out', 'w') as f:
+			header = {'Algorithm':algorithm,
+			'Number of Generations':str(n_generations),
+			'Population Size':str(population_size),
+			'Individual Size':str(individual_size),
+			'Crossover Probability':str(crossover_probability),
+			'Mutation Probability':str(mutation_probability),
+			'Disturbance Probability':str(disturbance_probability),
+			'Tournament Size':str(values['tournament_size']),
+			'Elite Percentage':str(values['elite_percentage']),
+			'Number of Points Cut':str(values['n_points_cut']),
+			'Parents Function':parents_function,
+			'Survivors Function':survivors_function,
+			'Crossover Function':crossover_function}
+			dump(header, f)
 			dump(results, f)
 	elif testing_type == 'Compare':
 		print('\n'),
-		compare.append(results['best_fitnesses'])
+		results = [result['best_fitnesses'] for result in results]
+		means = [0]*(n_generations+1)
+		for i in range(n_runs):
+			for j in range(n_generations+1):
+				means[j] += results[i][j]
+		for i in range(n_generations+1):
+			means[i] /= float(n_runs)
+		compare.append(means)
 
 if __name__ == '__main__':
 

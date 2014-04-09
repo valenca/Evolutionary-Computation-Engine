@@ -4,9 +4,10 @@ from string import letters, printable
 ##### Population Generator #####
 class Generation():
 
-	def __init__(self, population_size, individual_size):
+	def __init__(self, population_size, individual_size, values):
 		self.population_size = population_size
 		self.individual_size = individual_size
+		self.values = values
 
 	##### Binary genotype #####
 	def binary(self):
@@ -15,6 +16,15 @@ class Generation():
 			population.append({'gen':[choice([0,1]) for j in range(self.individual_size)]})
 		return population
 	###########################
+
+	##### Static Binary genotype #####
+	def static_binary(self):
+		population = []
+		static=self.values["static_binary"]
+		for i in range(self.population_size):
+			population.append({'gen':sample([1]*static+[0]*(self.individual_size-static),self.individual_size)})
+		return population
+	##################################
 
 	##### Integer genotype #####
 	def integer(self):

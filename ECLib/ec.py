@@ -18,12 +18,13 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'rastrigin'
-	n_generations = 500
-	population_size = 500
-	individual_size = 10
+	problem = 'dispersion'
+	algorithm = 'sea'
+	n_generations = 50000
+	population_size = 1000
+	individual_size = 100
 	crossover_probability = 0.9
-	mutation_probability = 1.0/individual_size
+	mutation_probability = 2.0/individual_size
 	disturbance_probability = 5.0/individual_size
 	print_type = 'bar'
 	##########################
@@ -31,13 +32,12 @@ if __name__ == '__main__':
 	values.values['tournament_size'] = 3
 	values.values['elite_percentage'] = 0.1
 	values.values['n_points_cut'] = 2
-	values.values['stabilize_percentage'] = 0.2
+	values.values['stabilize_percentage'] = 0.1
 	values.values['stop_interval'] = 0.00001
 	values.values['fitness_arrival'] = 0
 	##########################
 
-
-	generation = Generation(population_size, individual_size)
+	generation = Generation(population_size, individual_size, values.values)
 	fitness = Fitness(individual_size,values.values)
 	phenotype = Phenotype(individual_size, values.values)
 	parents = Parents(population_size, individual_size, values.values)
@@ -66,9 +66,8 @@ if __name__ == '__main__':
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
-
 	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call('sea')
+	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
 	print''
 	#status.print_type = 'all'
