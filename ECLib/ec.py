@@ -20,8 +20,8 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'tsp'
 	algorithm = 'sea'
-	n_generations = 1000
-	population_size = 500
+	n_generations = 500
+	population_size = 250
 	individual_size = 52
 	crossover_probability = 0.9
 	mutation_probability = 2.0/individual_size
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 	values.values['tournament_size'] = 3
 	values.values['elite_percentage'] = 0.1
 	values.values['n_points_cut'] = 2
-	values.values['stabilize_percentage'] = 0.1
+	values.values['stabilize_percentage'] = 1
 	values.values['stop_interval'] = 0.00001
 	values.values['fitness_arrival'] = 0
 	##########################

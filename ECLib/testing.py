@@ -15,6 +15,7 @@ from random import uniform, seed
 from os import listdir
 from cPickle import dump
 from sys import stdout
+from gc import collect
 
 global testing_type; testing_type = 'Compare'
 global testing_directory; testing_directory = 'Results/'+testing_type+'/'
@@ -23,8 +24,8 @@ global compare; compare = []
 ##### EDIT ONLY THIS #####
 algorithms = ['sea']
 n_runs = 50
-n_generations = [250]
-population_size = [100]
+n_generations = [500]
+population_size = [250]
 individual_size = [52]
 crossover_probability = [0.9]
 mutation_probability = [0.052]
@@ -98,6 +99,7 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 		result = {}
 		result['population'],result['best_fitnesses'],result['average_fitnesses']=algorithms.call(algorithm)
 		results.append(result)
+		collect()
 		stdout.write('\rRun: ('+str(i+1)+'/'+str(n_runs)+')')
 		stdout.flush()
 

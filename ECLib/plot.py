@@ -50,9 +50,10 @@ if __name__ == '__main__':
 				data_g.append([parameter, array(bests), array(averages)])
 				data_r.append([parameter, final_bests])
 
-	#for i in data_g:
-	#	i[1] = mean(i[1], axis=0)
-	#	i[2] = mean(i[2], axis=0)
+	if len(data_g[0][1].shape) > 1:
+		for i in data_g:
+			i[1] = mean(i[1], axis=0)
+			i[2] = mean(i[2], axis=0)
 
 	figure1 = pyplot.figure(1)
 	axis1 = figure1.add_axes([0.1, 0.175, 0.825, 0.75])
