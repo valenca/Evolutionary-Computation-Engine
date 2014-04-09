@@ -15,7 +15,7 @@ from random import uniform, seed
 from os import listdir
 from cPickle import dump
 
-global testing_type; testing_type = 'Full'
+global testing_type; testing_type = 'Compare' # 'Full'
 global testing_directory; testing_directory = 'Results/'+testing_type+'/'
 global compare; compare = []
 
