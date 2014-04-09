@@ -94,6 +94,7 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
+	seed('testing')
 	results = []
 	for i in range(n_runs):
 		result = {}
