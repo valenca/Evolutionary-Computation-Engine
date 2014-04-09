@@ -1,6 +1,6 @@
 from sys import stdout
 from math import ceil, floor
-
+from cPickle import dump
 ##### Population Analyzer #####
 class Status():
 
@@ -49,6 +49,13 @@ class Status():
 			stdout.write('Phenotype: '+str(population[0]['phen'])+'\n')
 			self.status_function(population, best_fitnesses, average_fitnesses)
 			stdout.flush()
+		elif self.print_type == 'scatter':
+			stdout.write('\rIteration: ('+str(generation)+'/'+str(self.n_generations)+') ')
+			stdout.write(' Fitness: '+str(best_fitnesses[-1])+' / '+str(average_fitnesses[-1]))
+			stdout.flush()
+			with open('scatter.plt','a') as f:
+				dump(population[0]['phen'],f)
+			
 	###################################
 
 	##### Onemax #####

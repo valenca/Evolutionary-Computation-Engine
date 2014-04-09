@@ -20,13 +20,13 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'dispersion'
 	algorithm = 'sea'
-	n_generations = 50000
+	n_generations = 1000
 	population_size = 1000
 	individual_size = 100
 	crossover_probability = 0.9
-	mutation_probability = 2.0/individual_size
+	mutation_probability = 5.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'bar'
+	print_type = 'scatter'
 	##########################
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3
@@ -60,7 +60,6 @@ if __name__ == '__main__':
 	status.status_function = functions['status']
 	status.phenotype_function = functions['phenotype']
 	survivors.sort_function = functions['sort']
-
 
 	algorithms = Algorithms(n_generations,functions['generation'],fitness.fitness,functions['sort'],
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
