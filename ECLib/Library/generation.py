@@ -19,7 +19,7 @@ class Generation():
 	def sd(self):
 		population = []
 		for i in range(self.population_size):
-			stdout.write('\rSQ Generation: ('+str(i)+'/'+str(self.population_size)+')')
+			stdout.write('\rSD Generation: ('+str(i)+'/'+str(self.population_size)+')')
 			stdout.flush()
 			while True:
 				candidate = self.individuals_function()
