@@ -80,7 +80,7 @@ class Database():
 
 			'tsp':
 				{
-					'generation':	generation.rus,
+					'generation':	generation.sd,
 					'individuals':	individuals.integer,
 					'distance':		distance.hamming,
 					'fitness':		fitness.tsp,
