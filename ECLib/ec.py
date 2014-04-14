@@ -24,7 +24,7 @@ if __name__ == '__main__':
 	population_size = 1000
 	individual_size = 100
 	crossover_probability = 0.9
-	mutation_probability = 5.0/individual_size
+	mutation_probability = 50.0/individual_size
 	disturbance_probability = 5.0/individual_size
 	print_type = 'scatter'
 	##########################
