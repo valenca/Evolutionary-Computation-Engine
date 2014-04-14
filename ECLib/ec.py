@@ -20,13 +20,13 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'dispersion'
 	algorithm = 'sea'
-	n_generations = 50000
-	population_size = 1000
+	n_generations = 1000
+	population_size = 500
 	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 2.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'bar'
+	print_type = 'all'
 	##########################
 	values = Values(problem, individual_size)
 	values.values['tournament_size'] = 3
