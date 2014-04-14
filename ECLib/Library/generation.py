@@ -1,5 +1,4 @@
-from random import choice, sample, random
-from string import letters, printable
+from sys import stdout
 
 ##### Population Generator #####
 class Generation():
@@ -8,61 +7,34 @@ class Generation():
 		self.population_size = population_size
 		self.individual_size = individual_size
 		self.values = values
+		self.individuals_function = None
+		self.distance_function = None
 
-	##### Binary genotype #####
-	def binary(self):
+	##### Random Uniform Sampling #####
+	def rus(self):
+		return [self.individuals_function() for i in range(self.population_size)]
+	###################################
+
+	##### Sequencial Diversification #####
+	def sd(self):
 		population = []
 		for i in range(self.population_size):
-			population.append({'gen':[choice([0,1]) for j in range(self.individual_size)]})
+			stdout.write('\rSQ Generation: ('+str(i)+'/'+str(self.population_size)+')')
+			stdout.flush()
+			while True:
+				candidate = self.individuals_function()
+				if self.acceptance(population, candidate): break
+			population.append(candidate)
 		return population
-	###########################
 
-	##### Static Binary genotype #####
-	def static_binary(self):
-		population = []
-		static=self.values["static_binary"]
-		for i in range(self.population_size):
-			population.append({'gen':sample([1]*static+[0]*(self.individual_size-static),self.individual_size)})
-		return population
-	##################################
+	def acceptance(self, population, candidate):
+		for individual in population:
+			if self.distance_function(individual['gen'],candidate['gen']) < self.values['generation_distance']:
+				return False
+		return True
+	######################################
 
-	##### Integer genotype #####
-	def integer(self):
-		population = []
-		for i in range(self.population_size):
-			population.append({'gen': sample(range(self.individual_size),self.individual_size)})
-		return population
-	############################
-
-	##### Float genotype #####
-	def float(self):
-		population = []
-		for i in range(self.population_size):
-			population.append({'gen': [random() for j in range(self.individual_size)]})
-		return population
-	##########################
-
-	##### Character genotype #####
-	def character(self):
-		population = []
-		for i in range(self.population_size):
-			population.append({'gen': [choice(letters[:26]) for j in range(self.individual_size)]})
-		return population
-	##############################
-
-	##### Methinks #####
-	def methinks(self):
-		population = []
-		for i in range(self.population_size):
-			population.append({'gen': [choice(printable) for j in range(self.individual_size)]})
-		return population
-	####################
-
-	##### Rastrigin #####
-	def rastrigin(self):
-		population = []
-		for i in range(self.population_size):
-			population.append({'gen': [random()*10.24-5.12 for j in range(self.individual_size)]})
-		return population
-	#####################
-
+	##### Parallel Diversification #####
+	def pd(self):
+		pass
+	####################################
