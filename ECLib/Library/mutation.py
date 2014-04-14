@@ -28,25 +28,23 @@ class Mutation():
 	##### Bubble Swap #####
 	def bubble_swap(self, population):
 		for individual in population:
-			if random() < 0.5:
-				iterations = list(range(0,self.individual_size-1,2))
+			if self.individual_size%2 == 1 and random() < 0.5:
+				iterations = list(range(1,self.individual_size,2))
 			else:
-				iterations = range(1,self.individual_size,2)
+				iterations = list(range(0,self.individual_size-1,2))
 			for j in iterations:
 				if random() < self.mutation_probability:
 					individual['gen'][j],individual['gen'][j+1] = individual['gen'][j+1],individual['gen'][j]
 	#######################
 
-	##### Swap Different Values #####
+	##### Swap Values #####
 	def swap(self, population):
 		for individual in population:
-			if random() < self.mutation_probability:
-				indexes = [0, 0]
-				while individual['gen'][indexes[0]] == individual['gen'][indexes[1]]:
-					indexes = sorted(sample(list(range(self.individual_size)),2))
-				individual['gen'][indexes[0]],individual['gen'][indexes[1]] =\
-				individual['gen'][indexes[1]],individual['gen'][indexes[0]]
-	#################################
+			for j in range(self.individual_size):
+				if random() < self.mutation_probability:
+					k = sample(list(range(j))+list(range(j+1,self.individual_size)),1)[0]
+					individual['gen'][j],individual['gen'][k] = individual['gen'][k],individual['gen'][j]
+	#######################
 
 	##### Swap Different Values Optimized for binaries #####
 	def swap_bin(self, population):
@@ -62,7 +60,7 @@ class Mutation():
 
 				individual['gen'][ind1],individual['gen'][ind2] =\
 				individual['gen'][ind2],individual['gen'][ind1]
-	#########################################################
+	########################################################
 
 	##### Insert #####
 	def insert(self, population):
@@ -73,12 +71,20 @@ class Mutation():
 					individual['gen'].insert(randint(0,self.individual_size-2), value)
 	##################
 
+	##### Revert #####
+	def revert(self, population):
+		for individual in population:
+			if random() < self.mutation_probability:
+				indexes = sorted(sample(list(range(self.individual_size)),2))
+				individual['gen'][indexes[0]:indexes[1]+1]=reversed(individual['gen'][indexes[0]:indexes[1]+1])
+	##################
+
 	##### Scramble #####
 	def scramble(self, population):
 		for individual in population:
 			if random() < self.mutation_probability:
 				indexes = sorted(sample(list(range(self.individual_size)),2))
-				temp = individual['gen'][indexes[0]:indexes[1]]
+				temp = individual['gen'][indexes[0]:indexes[1]+1]
 				shuffle(temp)
 				individual['gen'][indexes[0]:indexes[1]] = temp
 	####################

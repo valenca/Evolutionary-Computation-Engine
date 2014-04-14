@@ -64,7 +64,7 @@ class Crossover():
 	####################
 
 	##### Order #####
-	def ordered(self, parent1, parent2):
+	def order(self, parent1, parent2):
 		parents = [parent1, parent2]
 		offspring = [[None]*self.individual_size,[None]*self.individual_size]
 		cut_index = sorted(sample(list(range(self.individual_size)),2))

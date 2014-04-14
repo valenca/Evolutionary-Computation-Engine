@@ -1,6 +1,6 @@
 from sys import stdout
 from math import ceil, floor
-
+from cPickle import dump
 ##### Population Analyzer #####
 class Status():
 
@@ -20,8 +20,21 @@ class Status():
 
 		if 'phen' not in population[0]:
 			population[0]['phen'] = self.phenotype_function(population[0]['gen'])
+
+		if self.print_type == 'iter':
+			stdout.write('\rIteration: ('+str(generation)+'/'+str(self.n_generations)+') ')
+			stdout.flush()
+		
+		elif self.print_type == 'fit':
+			stdout.write('\rFitness: '+str(best_fitnesses[-1])+' / '+str(average_fitnesses[-1]))
+			stdout.flush()
+
+		elif self.print_type == 'info':			
+			stdout.write('\rIteration: ('+str(generation)+'/'+str(self.n_generations)+') ')
+			stdout.write(' Fitness: '+str(best_fitnesses[-1])+' / '+str(average_fitnesses[-1]))
+			stdout.flush()
 			
-		if self.print_type == 'bar':
+		elif self.print_type == 'bar':
 			length=40
 			pcurr=int((length*generation*1.0/self.n_generations)+0.5)
 			#if pcurr - int((length*(generation-1)*1.0/self.n_generations)+0.5) > 0 or generation == 0:
@@ -34,21 +47,15 @@ class Status():
 			stdout.write(clean+bar+perc+bfit+afit)
 			stdout.flush()
 
-		elif self.print_type == 'iter':
-			stdout.write('\rIteration: ('+str(generation)+'/'+str(self.n_generations)+') ')
-			stdout.flush()
-		
-		elif self.print_type == 'fit':
-			stdout.write('\rFitness: '+str(best_fitnesses[-1])+' / '+str(average_fitnesses[-1]))
-			stdout.flush()
-
 		elif self.print_type == 'all':
 			stdout.write('\nIteration: ('+str(generation)+'/'+str(self.n_generations)+')\n')
 			stdout.write('     Best: '+str(best_fitnesses[-1])+'\n')
 			stdout.write('  Average: '+str(average_fitnesses[-1])+'\n')
 			stdout.write('Phenotype: '+str(population[0]['phen'])+'\n')
-			self.status_function(population, best_fitnesses, average_fitnesses)
 			stdout.flush()
+
+		self.status_function(population, best_fitnesses, average_fitnesses)
+			
 	###################################
 
 	##### Onemax #####
@@ -63,17 +70,18 @@ class Status():
 
 	##### Joao Brandao Numbers ######
 	def jbrandao(self, population, best_fitnesses, average_fitnesses):
-		stdout.write('    Value: '+str(sum(population[0]['gen']))+'\n')
-		violations_t = 0;
-		violations = 0;
-		for i in range(self.individual_size):
-			if population[0]['gen'][i] == 1:
-				flag = 0
-				for j in range(1,min(i+1, self.individual_size-i)):
-					if population[0]['gen'][i-j] == population[0]['gen'][i+j] == 1:
-						violations_t += 1;
-						if flag == 0: violations += 1; flag=1
-		stdout.write('Violation: '+str(violations)+' '+str(violations_t)+'\n')
+		if self.print_type == 'all':
+			stdout.write('    Value: '+str(sum(population[0]['gen']))+'\n')
+			violations_t = 0;
+			violations = 0;
+			for i in range(self.individual_size):
+				if population[0]['gen'][i] == 1:
+					flag = 0
+					for j in range(1,min(i+1, self.individual_size-i)):
+						if population[0]['gen'][i-j] == population[0]['gen'][i+j] == 1:
+							violations_t += 1;
+							if flag == 0: violations += 1; flag=1
+			stdout.write('Violation: '+str(violations)+' '+str(violations_t)+'\n')
 	#################################
 
 	##### Knapsack ######
@@ -93,5 +101,6 @@ class Status():
 
 	##### Dispersion Problem #####
 	def dispersion(self, population, best_fitnesses, average_fitnesses):
-		pass
+		with open('Results/scatter.plt','a') as f:
+			dump(population[0]['phen'],f)
 	##############################
