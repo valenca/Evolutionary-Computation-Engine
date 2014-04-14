@@ -36,9 +36,9 @@ tournament_size = [3]
 elite_percentage = [0.1]
 n_points_cut = [2]
 ##########################
-parents_function = ['tournament','roulette','sus']
+parents_function = ['tournament']
 survivors_function = ['elitism']
-crossover_function = ['one_point']
+crossover_function = ['ordered']
 ##########################
 # TSP #
 values = {}
@@ -76,7 +76,7 @@ def testing(n_generations, population_size, individual_size, crossover_probabili
 		'parents':		eval('parents.'+parents_function),
 		'survivors':	eval('survivors.'+survivors_function),
 		'crossover':	eval('crossover.'+crossover_function),
-		'mutation':		mutation.bubble_swap,
+		'mutation':		mutation.swap,
 		'disturbance':	None,
 		'neighbors':	None,
 		'sort':			sort.minimization,

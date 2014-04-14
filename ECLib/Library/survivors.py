@@ -16,7 +16,7 @@ class Survivors():
 	##### Generational #####
 	def generational(self, population, candidates):
 		return candidates
-	#################
+	########################
 
 	##### Elite #####
 	def elitism(self, population, candidates):
@@ -26,6 +26,15 @@ class Survivors():
 		else:
 			return candidates
 	#################
+
+	##### Worst Out #####
+	def worst_out(self, population, candidates):
+		worst_size = int(self.population_size * self.values['worst_percentage'])
+		if worst_size > 0:
+			return population[:-worst_size] + candidates[:worst_size]
+		else:
+			return population
+	#####################
 
 	##### Steady-State #####
 	def steady_state(self, population, candidates):

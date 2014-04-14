@@ -1,14 +1,16 @@
 ##### Database #####
 class Database():
 
-	def __init__(self, generation, fitness, phenotype, parents, survivors,
-		crossover, mutation, disturbance, neighbors, sort, status, stop):
+	def __init__(self, generation, individuals, distance, fitness, phenotype, parents,
+		survivors, crossover, mutation, disturbance, neighbors, sort, status, stop):
 
 		self.database = {
 
 			'onemax':
 				{
-					'generation':	generation.binary,
+					'generation':	generation.rus,
+					'individuals':	individuals.binary,
+					'distance':		distance.euclidian,
 					'fitness':		fitness.onemax,
 					'phenotype':	phenotype.onemax,
 					'parents':		parents.tournament,
@@ -24,7 +26,9 @@ class Database():
 
 			'methinks':
 				{
-					'generation':	generation.methinks,
+					'generation':	generation.rus,
+					'individuals':	individuals.methinks,
+					'distance':		distance.euclidian,
 					'fitness':		fitness.methinks,
 					'phenotype':	phenotype.methinks,
 					'parents':		parents.tournament,
@@ -40,7 +44,9 @@ class Database():
 
 			'jbrandao':
 				{
-					'generation':	generation.binary,
+					'generation':	generation.rus,
+					'individuals':	individuals.binary,
+					'distance':		distance.euclidian,
 					'fitness':		fitness.jbrandao,
 					'phenotype':	phenotype.jbrandao,
 					'parents':		parents.tournament,
@@ -56,7 +62,9 @@ class Database():
 
 			'knapsack':
 				{
-					'generation':	generation.binary,
+					'generation':	generation.rus,
+					'individuals':	individuals.binary,
+					'distance':		distance.euclidian,
 					'fitness':		fitness.knapsack,
 					'phenotype':	phenotype.knapsack,
 					'parents':		parents.tournament,
@@ -72,13 +80,15 @@ class Database():
 
 			'tsp':
 				{
-					'generation':	generation.integer,
+					'generation':	generation.sd,
+					'individuals':	individuals.integer,
+					'distance':		distance.hamming,
 					'fitness':		fitness.tsp,
 					'phenotype':	phenotype.tsp,
 					'parents':		parents.tournament,
 					'survivors':	survivors.elitism,
-					'crossover':	crossover.ordered,
-					'mutation':		mutation.bubble_swap,
+					'crossover':	crossover.pmx,
+					'mutation':		mutation.revert,
 					'disturbance':	disturbance.swap,
 					'neighbors':	neighbors.rastrigin,
 					'sort':			sort.minimization,
@@ -88,7 +98,9 @@ class Database():
 
 			'rastrigin':
 				{
-					'generation':	generation.rastrigin,
+					'generation':	generation.rus,
+					'individuals':	individuals.rastrigin,
+					'distance':		distance.euclidian,
 					'fitness':		fitness.rastrigin,
 					'phenotype':	phenotype.rastrigin,
 					'parents':		parents.roulette,
@@ -104,12 +116,14 @@ class Database():
 
 			'dispersion':
 				{
-					'generation':	generation.static_binary,
+					'generation':	generation.rus,
+					'individuals':	individuals.static_binary,
+					'distance':		distance.euclidian,
 					'fitness':		fitness.dispersion,
 					'phenotype':	phenotype.dispersion,
 					'parents':		parents.roulette,
 					'survivors':	survivors.elitism,
-					'crossover':	crossover.ordered,
+					'crossover':	crossover.order,
 					'mutation':		mutation.swap,
 					'disturbance':	disturbance.rastrigin,
 					'neighbors':	neighbors.rastrigin,

@@ -43,7 +43,7 @@ class PolygonHandler:
 
 P = PolygonHandler()
 
-with open("scatter.plt","r") as f:
+with open("Results/scatter.plt","r") as f:
 	for i in range(1000):
 		P.add(load(f))
 

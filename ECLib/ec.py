@@ -2,6 +2,8 @@ from Library.database import Database
 from Library.values import Values
 from Library.algorithms import Algorithms
 from Library.generation import Generation
+from Library.individuals import Individuals
+from Library.distance import Distance
 from Library.fitness import Fitness
 from Library.phenotype import Phenotype
 from Library.parents import Parents
@@ -18,19 +20,21 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'dispersion'
+	problem = 'tsp'
 	algorithm = 'sea'
 	n_generations = 1000
-	population_size = 1000
-	individual_size = 100
+	population_size = 500
+	individual_size = 52
 	crossover_probability = 0.9
-	mutation_probability = 50.0/individual_size
+	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'scatter'
+	print_type = 'bar'
 	##########################
 	values = Values(problem, individual_size)
+	values.values['generation_distance'] = 49
 	values.values['tournament_size'] = 3
-	values.values['elite_percentage'] = 0.1
+	values.values['elite_percentage'] = 0.05
+	values.values['worst_percentage'] = 0.5
 	values.values['n_points_cut'] = 2
 	values.values['stabilize_percentage'] = 1
 	values.values['stop_interval'] = 0.00001
@@ -38,6 +42,8 @@ if __name__ == '__main__':
 	##########################
 
 	generation = Generation(population_size, individual_size, values.values)
+	individuals = Individuals(population_size, individual_size, values.values)
+	distance = Distance(individual_size)
 	fitness = Fitness(individual_size,values.values)
 	phenotype = Phenotype(individual_size, values.values)
 	parents = Parents(population_size, individual_size, values.values)
@@ -50,11 +56,13 @@ if __name__ == '__main__':
 	status = Status(n_generations, population_size, individual_size, print_type)
 	stop = Stop(n_generations, values.values)
 
-	database = Database(generation, fitness, phenotype, parents, survivors,
-		crossover, mutation, disturbance, neighbors, sort, status, stop)
+	database = Database(generation, individuals, distance, fitness, phenotype, parents,
+		survivors, crossover, mutation, disturbance, neighbors, sort, status, stop)
 	
 	functions = database.database[problem]
 
+	generation.individuals_function = functions['individuals']
+	generation.distance_function = functions['distance']
 	fitness.fitness_function = functions['fitness']
 	crossover.crossover_function = functions['crossover']
 	status.status_function = functions['status']
