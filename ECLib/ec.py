@@ -28,7 +28,7 @@ if __name__ == '__main__':
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'bar'
+	print_type = 'all'
 	##########################
 	values = Values(problem, individual_size)
 	values.values['generation_distance'] = 49

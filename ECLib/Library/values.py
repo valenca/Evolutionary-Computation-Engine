@@ -68,7 +68,7 @@ class Values():
 
 	##### Dispersion Problem #####
 	def dispersion(self):
-		with open('Data/in100.disp') as f:
+		with open('Data/in10000.disp') as f:
 			N=int(f.readline())
 			D=int(f.readline())
 			k=int(f.readline())
