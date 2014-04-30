@@ -31,7 +31,7 @@ class Status():
 
 		elif self.print_type == 'info':			
 			stdout.write('\rIteration: ('+str(generation)+'/'+str(self.n_generations)+') ')
-			stdout.write(' Fitness: '+str(best_fitnesses[-1])+' / '+str(average_fitnesses[-1]))
+			stdout.write('Fitness: '+str(best_fitnesses[-1])+' / '+str(average_fitnesses[-1]))
 			stdout.flush()
 			
 		elif self.print_type == 'bar':
