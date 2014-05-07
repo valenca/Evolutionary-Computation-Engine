@@ -4,8 +4,8 @@ __author__ = 'Ernesto Costa'
 __date__ = 'April 2014'
 
 
-import matplotlib
-from pylab import *
+#import matplotlib
+#from pylab import *
 from random import random,randint, shuffle,choice
 from operator import itemgetter
 from math import sqrt
@@ -28,7 +28,7 @@ def run(num_runs, max_iter,problem,numb_ants,alpha=1.0, beta=2.5, rho=0.1):
         f_out.write(line)
     f_out.close()
     # Show
-    ylabel('Fitness')
+    '''ylabel('Fitness')
     xlabel('Iteration')
     my_title = 'TSP by ACO %d Runs, Alpha: %0.2f, Beta: %0.2f, Rho: %0.2f' % (num_runs, alpha, beta, rho)
     title(my_title)
@@ -36,7 +36,10 @@ def run(num_runs, max_iter,problem,numb_ants,alpha=1.0, beta=2.5, rho=0.1):
     p1 = plot(bests,'r-o',label="Best")
     p2 = plot(average_bests,'g-s',label="Average")
     legend(loc='upper right')
-    show()
+    show()'''
+    bests = [r[-1] for r in statistics]
+    with open('data.csv','a') as f:
+        f.write(','.join(list(map(str,bests)))+'\n')
 
 
 def aco(max_iter,problem,numb_ants,alpha=1,beta=2.5,rho=0.1):
@@ -182,9 +185,6 @@ def phenotype(genotype,dict_cities):
     return pheno
 
 def evaluate(tour):
-    print(tour)
-    import sys
-    sys.exit()
     numb_cities = len(tour)
     dist = 0
     for i in range(numb_cities):
@@ -206,7 +206,7 @@ def distance(cid_i, cid_j):
 def main(numb_runs,filename):
     coordinates = get_coordinates_tsp(filename)
     cities = dict_cities(coordinates)
-    numb_iter = 50
+    numb_iter = 100
     numb_ants = len(cities)
     #numb_ants = 50
     run(numb_runs,numb_iter,cities,numb_ants,1,5,0.5)
@@ -221,6 +221,6 @@ if __name__ == '__main__':
     numb_ants = 30
     print(aco(numb_iter,cities,numb_ants,1,2.5,0.1))
     """
-    main(3,'berlin52.tsp')
+    main(30,'berlin52.tsp')
 
     
