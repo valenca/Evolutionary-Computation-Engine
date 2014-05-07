@@ -204,8 +204,8 @@ def main(numb_runs,filename):
     coordinates = get_coordinates_tsp(filename)
     cities = dict_cities(coordinates)
     numb_iter = 50
-    numb_ants = len(cities)
-    #numb_ants = 50
+    #numb_ants = len(cities)
+    numb_ants = 100
     run(numb_runs,numb_iter,cities,numb_ants,1,5,0.5)
     
 if __name__ == '__main__':
@@ -218,6 +218,6 @@ if __name__ == '__main__':
     numb_ants = 30
     print(aco(numb_iter,cities,numb_ants,1,2.5,0.1))
     """
-    main(3,'Berlin52.tsp')
+    main(1,'berlin52.tsp')
 
     
