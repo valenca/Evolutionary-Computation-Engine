@@ -182,6 +182,9 @@ def phenotype(genotype,dict_cities):
     return pheno
 
 def evaluate(tour):
+    print(tour)
+    import sys
+    sys.exit()
     numb_cities = len(tour)
     dist = 0
     for i in range(numb_cities):
@@ -218,6 +221,6 @@ if __name__ == '__main__':
     numb_ants = 30
     print(aco(numb_iter,cities,numb_ants,1,2.5,0.1))
     """
-    main(3,'Berlin52.tsp')
+    main(3,'berlin52.tsp')
 
     
