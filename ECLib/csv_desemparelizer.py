@@ -11,6 +11,7 @@ for path in argv[1:]:
 
 	data=zip(cla,new)
 	with open("new_"+path,'w') as f:
+		print "Writing to new_"+path
 		for line in data:
 			f.write(",".join(line)+"\n")
 		
