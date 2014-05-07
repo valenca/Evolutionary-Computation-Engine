@@ -4,7 +4,6 @@
 *.pdf
 *.jnl
 *.out
-*.csv
 .DS_Store
 .DS_Store?
 .Spotlight-V100
