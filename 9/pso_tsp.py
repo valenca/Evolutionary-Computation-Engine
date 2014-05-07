@@ -220,7 +220,7 @@ def decode_rk(vector):
 
 
 if __name__== '__main__':
-	filename = '/Users/ernestojfcosta/tmp/wi29.tsp'
+	filename = 'wi29.tsp'
 	coordinates = get_coordinates_tsp(filename)
 	problem = dict_cities(coordinates)
 	size = len(problem)
