@@ -206,9 +206,15 @@ def distance(cid_i, cid_j):
 def main(numb_runs,filename):
     coordinates = get_coordinates_tsp(filename)
     cities = dict_cities(coordinates)
+<<<<<<< HEAD
     numb_iter = 100
     numb_ants = len(cities)
     #numb_ants = 50
+=======
+    numb_iter = 50
+    #numb_ants = len(cities)
+    numb_ants = 100
+>>>>>>> 259cec260bbab3db77e735695898abf4f7de7756
     run(numb_runs,numb_iter,cities,numb_ants,1,5,0.5)
     
 if __name__ == '__main__':
@@ -221,6 +227,5 @@ if __name__ == '__main__':
     numb_ants = 30
     print(aco(numb_iter,cities,numb_ants,1,2.5,0.1))
     """
-    main(30,'berlin52.tsp')
 
-    
+    main(30,'berlin52.tsp')
