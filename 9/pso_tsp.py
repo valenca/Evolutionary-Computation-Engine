@@ -9,7 +9,7 @@ Ernesto Costa, May 2014.
 """
 
 # imports
-from pylab import *
+#from pylab import *
 from random import random,uniform
 from copy import deepcopy
 from math import sqrt,sin,cos,pi
@@ -22,12 +22,12 @@ def run(numb_runs,numb_generations,numb_particles,weight_inertia, phi_1,phi_2,ve
     statistics_total = [pso(numb_generations,numb_particles,weight_inertia, phi_1,phi_2,vel_max, domain, function,problem,type_problem) for i in range(numb_runs)]
     print("That's it!")
     # Process data: best and average by generation
-    results = list(zip(*statistics_total))   
+    results = list(zip(*statistics_total))
     best = [type_problem([result[0] for result in generation]) for generation in results]
     best_average = [sum([result[0] for result in generation])/numb_runs for generation in results]
     average = [sum([indiv[1] for indiv in genera])/numb_runs for genera in results]
     # Mostra
-    ylabel('Fitness')
+    '''ylabel('Fitness')
     xlabel('Generation')
     tit = 'Runs: %d , Phi: %0.2f, Vel: %0.2f' % (numb_runs,phi_1, vel_max)
     title(tit)
@@ -39,7 +39,10 @@ def run(numb_runs,numb_generations,numb_particles,weight_inertia, phi_1,phi_2,ve
         legend(loc='lower right')
     else:
         legend(loc='upper right')
-    show()
+    show()'''
+    bests = [b[-1][0] for b in statistics_total]
+    with open('data.csv','w') as f:
+        f.write(','.join(list(map(str,bests)))+'\n')
     
 # main program
 
@@ -220,9 +223,9 @@ def decode_rk(vector):
 
 
 if __name__== '__main__':
-	filename = 'wi29.tsp'
+	filename = 'berlin52.tsp'
 	coordinates = get_coordinates_tsp(filename)
 	problem = dict_cities(coordinates)
 	size = len(problem)
-	run(1,100,100,0.8,1.3,2.7,0.8,[(0,1) for i in range(size)],evaluate,problem,min)
+	run(30,100,100,0.8,1.3,2.7,0.8,[(0,1) for i in range(size)],evaluate,problem,min)
     
