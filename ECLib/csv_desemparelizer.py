@@ -6,9 +6,12 @@ for path in argv[1:]:
 		for line in f:
 			data.append(list(line[:-1].split(',')))
 
-	print data
+	new=[item for sublist in data for item in sublist]
+	cla=['0']*len(data[0])+['1']*len(data[1])
 
-	with open(path,'w') as f:
-		for line in data[]:
-			print 
-			#f.write(",".join(line)+"\n")
+	data=zip(cla,new)
+	with open("new_"+path,'w') as f:
+		print "Writing to new_"+path
+		for line in data:
+			f.write(",".join(line)+"\n")
+		
