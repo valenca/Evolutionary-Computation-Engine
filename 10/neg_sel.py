@@ -42,12 +42,16 @@ def ns_classification(s_ns,tcr,threshold):
     threshold = the threshold for affinity.
     """
     danger = []
-    for elem in s_ns:
+    for n,elem in enumerate(s_ns):
+        temp = 0
         for detector in tcr:
             aff = affinity(elem, detector)
             if aff >= threshold:
-                danger.append(elem)
+                danger.append(1)
+                temp = 1
                 break
+        if temp == 0:
+            danger.append(0)
     return danger
         
 def create_detector(size):
@@ -82,12 +86,12 @@ if __name__ == '__main__':
     #print(create_detector([5,4]))
     # Data
     self = [one,two,three,four]
-    threshold = 12
+    threshold = 10
     size = [5,4]
     number = 10
     detectors = ns_training(self,threshold,size,number)
     #print(detectors)
-    patterns = [one, five, two, three, six, seven,eight]
+    patterns = [one, two, three, four, five, six, seven, eight]
     print(ns_classification(patterns,detectors,threshold))
 
     
