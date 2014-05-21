@@ -10,7 +10,7 @@ from random import random, uniform, gauss
 from operator import itemgetter
 from math import exp,cos,pi
 from copy import deepcopy
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 def bat(numb_bats, numb_gener, frequency, loudness_0, alpha, pulse_rate_0, gamma, domain, fitness):
     """
@@ -37,13 +37,13 @@ def bat(numb_bats, numb_gener, frequency, loudness_0, alpha, pulse_rate_0, gamma
             velocity[i] = [ velocity[i][j] + (pop[i][0][j] - best[0][j]) * freq for j in range(dim)]
             x = [pop[i][0][j] + velocity[i][j] for j in range(dim)] 
             if random() > pulse_rate[i]:
-                print('variant of best...')
+                #print('variant of best...')
                 # construct a local variant of the best by a random walk
                 x =  [ best[0][j] + 0.01 * gauss(0,1) for j in range(dim)]
             # evaluate new  solution 
             x = [x, fitness(x)]
             if (random() < loudness[i]) and (x[1] < pop[i][1]):
-                print('accept...')
+                #print('accept...')
                 # accept new solution
                 pop[i] = x
                 # increase r_i and decrease A_i
@@ -60,9 +60,11 @@ def bat(numb_bats, numb_gener, frequency, loudness_0, alpha, pulse_rate_0, gamma
 def run(numb_runs, numb_bats, numb_gener, frequency, loudness,alpha, pulse_rate, gamma, domain, fitness):
     best_ate = []
     for r in range(numb_runs):
+        print r,
         best_ate.append(bat(numb_bats, numb_gener, frequency, loudness, alpha, pulse_rate, gamma, domain, fitness)[1])   
+        print best_ate[-1]
     # Show
-    plt.ylabel(' Best Fitness')
+    '''plt.ylabel(' Best Fitness')
     plt.xlabel('Run')
     my_title = 'BAT %d Runs, Fitness: %s' % (numb_runs, fitness)
     plt.title(my_title)
@@ -70,7 +72,9 @@ def run(numb_runs, numb_bats, numb_gener, frequency, loudness,alpha, pulse_rate,
     plt.plot(best_ate,'r-o',label="Best")
     #p2 = plt.plot(average_bests,'g-s',label="Average")
     plt.legend(loc='upper right')
-    plt.show()    
+    plt.show()'''
+    with open('data.csv','a') as f:
+        f.write(','.join(list(map(str,best_ate)))+'\n')  
 
 
 def best_individual(population):
@@ -79,7 +83,8 @@ def best_individual(population):
     return aux[0]
 
 def show(gener, best):
-    print('Generation: %d \nCromo: %s\nFitness: %10.8f\n' % (gener,best[0], best[1]))
+    #print('Generation: %d \nCromo: %s\nFitness: %10.8f\n' % (gener,best[0], best[1]))
+    pass
 
 
 def update_loudness(a, bat,alpha=0.98):
@@ -94,7 +99,7 @@ def update_pulse_rate(t,r_0 = 0.2,gamma=0.05):
 # --------------- Functions -------------------
 
 def rastrigin_nd(indiv):
-    """ Rastrigin. Domínio [(-5.12,5.12),(-5.12,5.12),(-5.12,5.12)]."""
+    """ Rastrigin. Dominio [(-5.12,5.12),(-5.12,5.12),(-5.12,5.12)]."""
     n = len(indiv)
     # keep values inside the domain
     domain = [[-5.12,5.12] for i in range(n)]
@@ -118,15 +123,15 @@ def verify(value,domain_value):
     
 if __name__ == '__main__':
     # parameters for the  algorithm
-    numb_bats = 25
-    numb_gener = 350
+    numb_bats = 250
+    numb_gener = 500
     frequency = [0,2]
     loudness = 0.5
     alpha = 0.99
     pulse_rate = 0.1
     gamma = 0.05
     # problem
-    dim = 3
+    dim = 10
     domain = [(-5.12, 5.12) for i in range(dim)]
     fitness = rastrigin_nd
     # do it
@@ -135,7 +140,7 @@ if __name__ == '__main__':
     #show(numb_gener,best)
     
     # runs
-    numb_runs = 20
+    numb_runs = 30
     run(numb_runs,numb_bats, numb_gener, frequency, loudness, alpha, pulse_rate,gamma, domain, fitness)
 
    

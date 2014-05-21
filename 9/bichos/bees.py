@@ -73,7 +73,8 @@ def search_neigh(cromo,neigh_size,patch_size,search_space,fitness):
                                                               
 
 def show(indiv):
-    print('Cromo: %s, Fitness: %10.8f' % (indiv[0], indiv[1]))
+    #print('Cromo: %s, Fitness: %10.8f' % (indiv[0], indiv[1]))
+    pass
 
 def sphere(indiv):
     """
@@ -104,24 +105,30 @@ def schwefel(indiv):
 if __name__ == '__main__':
     # Problem configuration
     # 1
-    problem_size = 2
+    problem_size = 10
     domain_1 = [-5.12, 5.12]
     search_space_1 = [domain_1] * problem_size
     # 2
     domain_2 = [-500,500]
     search_space_2 = [domain_2] * problem_size
     # algorithm configuration
-    numb_gener = 100
-    numb_bees = 20
-    numb_sites = 5
-    elite_sites = 2
+    numb_gener = 500
+    numb_bees = 250
+    numb_sites = 100
+    elite_sites = 40
     patch_size = 5.0
     e_bees = 10
     o_bees = 3
     # do it
-    best = bees(rastrigin,numb_gener,search_space_1,numb_bees,numb_sites,elite_sites, patch_size,e_bees, o_bees)
-    show(best)
+    bests = []
+    for i in range(30):
+        print i+1,
+        bests.append(bees(rastrigin,numb_gener,search_space_1,numb_bees,numb_sites,elite_sites,patch_size,e_bees,o_bees)[1])
+        print bests[-1]
+    #show(bests)
     #best = bees(schwefel,numb_gener,search_space_2,numb_bees,numb_sites,elite_sites, patch_size,e_bees, o_bees)
-    #show(best)    
+    #show(best)
+    with open('data.csv','w') as f:
+        f.write(','.join(list(map(str,bests)))+'\n')
     
     
