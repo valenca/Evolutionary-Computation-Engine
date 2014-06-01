@@ -45,8 +45,8 @@ class Individuals():
 		return {'gen': [random()*10.24-5.12 for j in range(self.individual_size)]}
 	#####################
 
-	##### Rastrigin #####
-	def schewefel(self):
-		return {'gen': [random()*841.9374-420.9687 for j in range(self.individual_size)]}
-	#####################
+	##### Griewank #####
+	def griewank(self):
+		return {'gen': [random()*1200-600 for j in range(self.individual_size)], 'sigma': random()}
+	####################
 

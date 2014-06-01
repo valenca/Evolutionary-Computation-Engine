@@ -62,6 +62,24 @@ class Fitness():
 		return total_distance
 	######################################
 
+	##### Rastrigin #####
+	def rastrigin(self, genotype):
+		value = self.values['A'] * self.individual_size
+		for i in range(self.individual_size):
+			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
+		return value
+	#####################
+
+	##### Griewank #####
+	def griewank(self, genotype):
+		value1 = 0
+		value2 = 1
+		for i in range(self.individual_size):
+			value1 += genotype[i]**2
+			value2 *= cos(genotype[i] / ((i+1)**0.5))
+		return value1 / 4000.0 - value2 + 1
+	####################
+
 	##### Dispersion Problem #############
 	def dispersion(self, genotype):		
 		def dist(p1,p2):
@@ -121,22 +139,3 @@ class Fitness():
 		points=[self.values['coords'][i] for i in range(len(genotype)) if genotype[i]==1]
 		return closestPair(points,self.values['dp'])[0]
 	######################################
-
-	##### Rastrigin #####
-	def rastrigin(self, genotype):
-		value = self.values['A'] * self.individual_size
-		for i in range(self.individual_size):
-			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
-		return value
-	#####################
-
-	##### De Jong #####
-
-	def schewefel(self,genotype):
-		#value = self.values['A'] * self.individual_size
-		value = 0
-		for i in range(self.individual_size):
-			value += -genotype[i]*sin(abs(genotype[i]))
-		return value
-
-	###################

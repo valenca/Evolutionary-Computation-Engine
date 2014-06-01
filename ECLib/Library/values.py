@@ -66,9 +66,9 @@ class Values():
 		self.values['sigma'] = 0.4
 	#####################
 
-	##### Schewefel #####
-	def schewefel(self):
-		self.values['sigma'] = 0.4
+	##### Griewank #####
+	def griewank(self):
+		self.values['sigma'] = 5
 	#####################
 
 	##### Dispersion Problem #####

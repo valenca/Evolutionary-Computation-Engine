@@ -20,24 +20,24 @@ from random import uniform, seed
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'schewefel'
+	problem = 'griewank'
 	algorithm = 'sea'
-	n_generations = 5000
-	population_size = 1000
-	individual_size = 5
+	n_generations = 1000
+	population_size = 500
+	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
-	print_type = 'all'
+	print_type = 'bar'
 	##########################
 	values = Values(problem, individual_size)
-	values.values['generation_distance'] = 49
+	values.values['generation_distance'] = 2000
 	values.values['tournament_size'] = 3
 	values.values['elite_percentage'] = 0.05
 	values.values['worst_percentage'] = 0.5
-	values.values['n_points_cut'] = 2
+	values.values['n_points_cut'] = 4
 	values.values['stabilize_percentage'] = 1
-	values.values['stop_interval'] = 0.00001
+	values.values['stop_interval'] = 0.001
 	values.values['fitness_arrival'] = 0
 	##########################
 
@@ -73,9 +73,18 @@ if __name__ == '__main__':
 		functions['neighbors'],functions['parents'],crossover.crossover,functions['mutation'],
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
-	results = {}
-	results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
+	final = []
+	for i in range(10):
+		results = {}
+		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
-	print''
+		print ''
+		final.append(results['population'][0]['fit'])
+	
+	with open('output','a') as f:
+		f.write(','.join(list(map(str,final)))+'\n')
+
+
+
 	#status.print_type = 'all'
 	#status.status('Final',results['population'],results['best_fitnesses'],results['average_fitnesses'])

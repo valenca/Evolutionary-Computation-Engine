@@ -16,8 +16,8 @@ class Crossover():
 		for i in range(0, len(parents)-1, 2):
 			if random() < self.crossover_probability:
 				offspring1,offspring2 = self.crossover_function(parents[i]['gen'],parents[i+1]['gen'])
-				offspring.append({'gen':offspring1})
-				offspring.append({'gen':offspring2})
+				offspring.append({'gen':offspring1, 'sigma':parents[i]['sigma']})
+				offspring.append({'gen':offspring2, 'sigma':parents[i+1]['sigma']})
 			else:
 				offspring.append(deepcopy(parents[i]))
 				offspring.append(deepcopy(parents[i+1]))

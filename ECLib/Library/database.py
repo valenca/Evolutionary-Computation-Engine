@@ -114,20 +114,19 @@ class Database():
 					'stop':			stop.interval_stabilization
 				},
 
-			
-			'schewefel':
+			'griewank':
 				{
 					'generation':	generation.rus,
-					'individuals':	individuals.schewefel,
+					'individuals':	individuals.griewank,
 					'distance':		distance.euclidian,
-					'fitness':		fitness.schewefel,
-					'phenotype':	phenotype.schewefel,
+					'fitness':		fitness.griewank,
+					'phenotype':	phenotype.griewank,
 					'parents':		parents.tournament,
 					'survivors':	survivors.elitism,
-					'crossover':	crossover.one_point,
-					'mutation':		mutation.schewefel,
-					'disturbance':	disturbance.rastrigin,
-					'neighbors':	neighbors.rastrigin,
+					'crossover':	crossover.n_points,
+					'mutation':		mutation.griewank,
+					'disturbance':	disturbance.griewank,
+					'neighbors':	None,
 					'sort':			sort.minimization,
 					'status':		status.rastrigin,
 					'stop':			stop.interval_stabilization

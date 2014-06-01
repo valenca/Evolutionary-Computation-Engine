@@ -37,10 +37,10 @@ class Phenotype():
 		return genotype
 	######################
 
-	##### Schewefel ######
-	def schewefel(self, genotype):
+	##### Griewank ######
+	def griewank(self, genotype):
 		return genotype
-	######################
+	#####################
 
 	##### Dispersion Problem #####
 	def dispersion(self,genotype):

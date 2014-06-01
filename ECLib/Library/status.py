@@ -99,6 +99,11 @@ class Status():
 		pass
 	#####################
 
+	##### Griewank #####
+	def griewank(self, population, best_fitnesses, average_fitnesses):
+		pass
+	####################
+
 	##### Dispersion Problem #####
 	def dispersion(self, population, best_fitnesses, average_fitnesses):
 		with open('Results/scatter.plt','a') as f:
