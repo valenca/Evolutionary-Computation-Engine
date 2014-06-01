@@ -74,7 +74,7 @@ if __name__ == '__main__':
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
 	final = []
-	for i in range(10):
+	for i in range(100):
 		results = {}
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
