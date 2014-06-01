@@ -1,4 +1,4 @@
-from math import cos, pi
+from math import cos, pi,sin
 from string import printable
 
 ##### Individual Evaluator #####
@@ -129,3 +129,14 @@ class Fitness():
 			value += (genotype[i]**2 - self.values['A']*cos(2*pi*genotype[i]))
 		return value
 	#####################
+
+	##### De Jong #####
+
+	def schewefel(self,genotype):
+		#value = self.values['A'] * self.individual_size
+		value = 0
+		for i in range(self.individual_size):
+			value += -genotype[i]*sin(abs(genotype[i]))
+		return value
+
+	###################

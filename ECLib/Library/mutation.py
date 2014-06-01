@@ -111,3 +111,13 @@ class Mutation():
 					if individual['gen'][j] > 5.12: individual['gen'][j] = 5.12
 					elif individual['gen'][j] < -5.12: individual['gen'][j] = -5.12
 	#####################
+
+		##### Rastrigin #####
+	def schewefel(self, population):
+		for individual in population:
+			for j in range(self.individual_size):
+				if random() < self.mutation_probability:
+					individual['gen'][j] += gauss(0, self.values['sigma'])
+					if individual['gen'][j] > 5.12: individual['gen'][j] = 420.9687
+					elif individual['gen'][j] < -5.12: individual['gen'][j] = -420.9687
+	#####################

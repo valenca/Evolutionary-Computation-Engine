@@ -66,6 +66,11 @@ class Values():
 		self.values['sigma'] = 0.4
 	#####################
 
+	##### Schewefel #####
+	def schewefel(self):
+		self.values['sigma'] = 0.4
+	#####################
+
 	##### Dispersion Problem #####
 	def dispersion(self):
 		with open('Data/in10000.disp') as f:

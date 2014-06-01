@@ -114,6 +114,25 @@ class Database():
 					'stop':			stop.interval_stabilization
 				},
 
+			
+			'schewefel':
+				{
+					'generation':	generation.rus,
+					'individuals':	individuals.schewefel,
+					'distance':		distance.euclidian,
+					'fitness':		fitness.schewefel,
+					'phenotype':	phenotype.schewefel,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.one_point,
+					'mutation':		mutation.schewefel,
+					'disturbance':	disturbance.rastrigin,
+					'neighbors':	neighbors.rastrigin,
+					'sort':			sort.minimization,
+					'status':		status.rastrigin,
+					'stop':			stop.interval_stabilization
+				},
+
 			'dispersion':
 				{
 					'generation':	generation.rus,
