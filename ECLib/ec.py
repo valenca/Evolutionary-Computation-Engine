@@ -32,7 +32,7 @@ if __name__ == '__main__':
 	print_type = 'bar'
 	##########################
 	values = Values(problem, individual_size)
-	values.values['generation_distance'] = 2000
+	values.values['generation_distance'] = 4750
 	values.values['tournament_size'] = 3
 	values.values['elite_percentage'] = 0.05
 	values.values['worst_percentage'] = 0.5
@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
 	final = []
 	seed('griewank')
-	for i in range(50):
+	for i in range(2):
 		results = {}
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 

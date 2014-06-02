@@ -4,14 +4,14 @@ from numpy import array, mean, vstack
 
 py = plotly.plotly("Mehlins", "vq0aqwkoz4")
 
-with open('fixed5', 'rb') as f:
+with open('output1', 'rb') as f:
 	results = load(f)
 
 bests1 = mean(array([result['best_fitnesses'] for result in results]), axis=0)
 averages1 = mean(array([result['average_fitnesses'] for result in results]), axis=0)
 final_bests1 = [result['best_fitnesses'][-1] for result in results]
 
-with open('fixed10', 'rb') as f:
+with open('output2', 'rb') as f:
 	results = load(f)
 
 bests2 = mean(array([result['best_fitnesses'] for result in results]), axis=0)
