@@ -38,7 +38,7 @@ class Phenotype():
 	#####################
 
 	##### De Jong #####
-	def griewank(self, genotype):
+	def dejong(self, genotype):
 		return genotype
 	###################
 

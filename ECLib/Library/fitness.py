@@ -1,5 +1,6 @@
 from math import cos, pi,sin
 from string import printable
+from random import gauss
 
 ##### Individual Evaluator #####
 class Fitness():
