@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
 	final = []
 	seed('griewank')
-	for i in range(2):
+	for i in range(50):
 		results = {}
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
