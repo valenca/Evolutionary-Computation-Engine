@@ -21,11 +21,11 @@ from cPickle import dump
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'dejong'
+	problem = 'griewank'
 	algorithm = 'sea'
 	n_generations = 1000
 	population_size = 500
-	individual_size = 10
+	individual_size = 150
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size

@@ -76,7 +76,7 @@ class Fitness():
 		value = 0
 		for i in range(self.individual_size):
 			value += (i+1) * genotype[i]**4
-		return value + gauss(0,1)
+		return value
 	###################
 
 	##### Griewank #####
@@ -86,7 +86,7 @@ class Fitness():
 		for i in range(self.individual_size):
 			value1 += genotype[i]**2
 			value2 *= cos(genotype[i] / ((i+1)**0.5))
-		return value1 / 1000.0 - value2 + 1
+		return value1 / 4000.0 - value2 + 1
 	####################
 
 	##### Dispersion Problem #############
