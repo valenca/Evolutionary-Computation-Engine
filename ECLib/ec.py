@@ -25,7 +25,7 @@ if __name__ == '__main__':
 	algorithm = 'sea'
 	n_generations = 1000
 	population_size = 500
-	individual_size = 150
+	individual_size = 100
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
 	final = []
 	seed('griewank')
-	for i in range(100):
+	for i in range(50):
 		results = {}
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
