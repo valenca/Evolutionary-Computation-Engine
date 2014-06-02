@@ -73,7 +73,7 @@ class Values():
 
 	##### Griewank #####
 	def griewank(self):
-		self.values['sigma'] = 5
+		self.values['sigma'] = 10
 	#####################
 
 	##### Dispersion Problem #####
