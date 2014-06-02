@@ -66,6 +66,11 @@ class Values():
 		self.values['sigma'] = 0.4
 	#####################
 
+	##### De Jong #####
+	def dejong(self):
+		self.values['sigma'] = 0.4
+	####################
+
 	##### Griewank #####
 	def griewank(self):
 		self.values['sigma'] = 5
