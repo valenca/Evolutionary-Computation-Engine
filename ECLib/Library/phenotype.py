@@ -32,15 +32,20 @@ class Phenotype():
 		return genotype
 	######################################
 
-	##### Rastrigin ######
+	##### Rastrigin #####
 	def rastrigin(self, genotype):
 		return genotype
-	######################
+	#####################
 
-	##### Griewank ######
+	##### De Jong #####
 	def griewank(self, genotype):
 		return genotype
-	#####################
+	###################
+
+	##### Griewank #####
+	def griewank(self, genotype):
+		return genotype
+	####################
 
 	##### Dispersion Problem #####
 	def dispersion(self,genotype):

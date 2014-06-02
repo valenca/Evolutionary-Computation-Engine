@@ -16,15 +16,16 @@ from Library.status import Status
 from Library.stop import Stop
 
 from random import uniform, seed
+from cPickle import dump
 
 if __name__ == '__main__':
 
 	##### EDIT ONLY THIS #####
-	problem = 'griewank'
+	problem = 'dejong'
 	algorithm = 'sea'
 	n_generations = 1000
 	population_size = 500
-	individual_size = 100
+	individual_size = 10
 	crossover_probability = 0.9
 	mutation_probability = 1.0/individual_size
 	disturbance_probability = 5.0/individual_size
@@ -74,15 +75,16 @@ if __name__ == '__main__':
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
 	final = []
+	seed('griewank')
 	for i in range(100):
 		results = {}
 		results['population'],results['best_fitnesses'],results['average_fitnesses'] = algorithms.call(algorithm)
 
 		print ''
-		final.append(results['population'][0]['fit'])
+		final.append(results)
 	
 	with open('output','a') as f:
-		f.write(','.join(list(map(str,final)))+'\n')
+		dump(final, f)
 
 
 

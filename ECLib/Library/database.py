@@ -114,6 +114,24 @@ class Database():
 					'stop':			stop.interval_stabilization
 				},
 
+			'dejong':
+				{
+					'generation':	generation.rus,
+					'individuals':	individuals.dejong,
+					'distance':		distance.euclidian,
+					'fitness':		fitness.dejong,
+					'phenotype':	phenotype.dejong,
+					'parents':		parents.tournament,
+					'survivors':	survivors.elitism,
+					'crossover':	crossover.n_points,
+					'mutation':		mutation.dejong,
+					'disturbance':	disturbance.dejong,
+					'neighbors':	None,
+					'sort':			sort.minimization,
+					'status':		status.rastrigin,
+					'stop':			stop.interval_stabilization
+				},
+
 			'griewank':
 				{
 					'generation':	generation.rus,

@@ -112,12 +112,23 @@ class Mutation():
 					elif individual['gen'][j] < -5.12: individual['gen'][j] = -5.12
 	#####################
 
+	##### De Jong #####
+	def dejong(self, population):
+		for individual in population:
+			for j in range(self.individual_size):
+				if random() < self.mutation_probability:
+					individual['gen'][j] += gauss(0, individual['sigma'])
+					if individual['gen'][j] > 1.28: individual['gen'][j] = 1.28
+					elif individual['gen'][j] < -1.28: individual['gen'][j] = -1.28
+					individual['sigma'] += gauss(0, individual['sigma'])
+	####################
+
 	##### Griewank #####
 	def griewank(self, population):
 		for individual in population:
 			for j in range(self.individual_size):
 				if random() < self.mutation_probability:
-					individual['gen'][j] += gauss(0, self.values['sigma'])
+					individual['gen'][j] += gauss(0, individual['sigma'])
 					if individual['gen'][j] > 600: individual['gen'][j] = 600
 					elif individual['gen'][j] < -600: individual['gen'][j] = -600
 					individual['sigma'] += gauss(0, individual['sigma'])

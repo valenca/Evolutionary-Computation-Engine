@@ -45,8 +45,12 @@ class Individuals():
 		return {'gen': [random()*10.24-5.12 for j in range(self.individual_size)]}
 	#####################
 
+	##### De Jong #####
+	def dejong(self):
+		return {'gen': [random()*2.56-1.28 for j in range(self.individual_size)], 'sigma': random()}
+	###################
+
 	##### Griewank #####
 	def griewank(self):
 		return {'gen': [random()*1200-600 for j in range(self.individual_size)], 'sigma': random()}
 	####################
-
