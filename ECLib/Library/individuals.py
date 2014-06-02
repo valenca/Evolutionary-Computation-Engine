@@ -52,5 +52,5 @@ class Individuals():
 
 	##### Griewank #####
 	def griewank(self):
-		return {'gen': [random()*1200-600 for j in range(self.individual_size)], 'sigma': random()}
+		return {'gen': [random()*1200-600 for j in range(self.individual_size)], 'sigma': 5}
 	####################
