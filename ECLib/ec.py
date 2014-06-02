@@ -83,7 +83,7 @@ if __name__ == '__main__':
 		print ''
 		final.append(results)
 	
-	with open('output','a') as f:
+	with open('output','w') as f:
 		dump(final, f)
 
 
