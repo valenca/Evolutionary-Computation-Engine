@@ -23,7 +23,7 @@ if __name__ == '__main__':
 	##### EDIT ONLY THIS #####
 	problem = 'griewank'
 	algorithm = 'sea'
-	n_generations = 1000
+	n_generations = 2000
 	population_size = 500
 	individual_size = 100
 	crossover_probability = 0.9
