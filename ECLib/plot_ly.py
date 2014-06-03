@@ -11,8 +11,11 @@ bests1 = mean(array([result['best_fitnesses'] for result in results]), axis=0)
 averages1 = mean(array([result['average_fitnesses'] for result in results]), axis=0)
 final_bests1 = [result['best_fitnesses'][-1] for result in results]
 
-with open('fixed10', 'rb') as f:
+with open('adapt', 'rb') as f:
 	results = load(f)
+
+
+#results[-15] = results[-16]
 
 bests2 = mean(array([result['best_fitnesses'] for result in results]), axis=0)
 averages2 = mean(array([result['average_fitnesses'] for result in results]), axis=0)
@@ -24,7 +27,6 @@ trace1 = {'x': indexes, 'y': bests1}
 trace2 = {'x': indexes, 'y': averages1}
 trace3 = {'x': indexes, 'y': bests2}
 trace4 = {'x': indexes, 'y': averages2}
-
 
 py.plot([trace1, trace2, trace3, trace4])
 
