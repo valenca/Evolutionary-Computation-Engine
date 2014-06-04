@@ -41,6 +41,7 @@ if __name__ == '__main__':
 	values.values['stop_interval'] = 0.001
 	values.values['fitness_arrival'] = 0
 	##########################
+	values.values['sigmas'] = []
 
 	generation = Generation(population_size, individual_size, values.values)
 	individuals = Individuals(population_size, individual_size, values.values)
@@ -54,7 +55,7 @@ if __name__ == '__main__':
 	disturbance = Mutation(individual_size, disturbance_probability, values.values)
 	neighbors = Neighbors(individual_size, values.values)
 	sort = Sort()
-	status = Status(n_generations, population_size, individual_size, print_type)
+	status = Status(n_generations, population_size, individual_size, print_type, values.values)
 	stop = Stop(n_generations, values.values)
 
 	database = Database(generation, individuals, distance, fitness, phenotype, parents,
@@ -75,6 +76,7 @@ if __name__ == '__main__':
 		functions['disturbance'],functions['survivors'],status.status,functions['stop'])
 
 	final = []
+	final2 = []
 	seed('griewank')
 	for i in range(50):
 		results = {}
@@ -82,10 +84,12 @@ if __name__ == '__main__':
 
 		print ''
 		final.append(results)
+		final2.append(values.values['sigmas'])
 	
 	with open('output','w') as f:
 		dump(final, f)
-
+	with open('output2','w') as f:
+		dump(final2, f)
 
 
 	#status.print_type = 'all'

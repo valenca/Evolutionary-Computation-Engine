@@ -4,11 +4,12 @@ from cPickle import dump
 ##### Population Analyzer #####
 class Status():
 
-	def __init__(self, n_generations, population_size, individual_size, print_type):
+	def __init__(self, n_generations, population_size, individual_size, print_type, values):
 		self.n_generations = n_generations
 		self.population_size = population_size
 		self.individual_size = individual_size
 		self.print_type = print_type
+		self.values = values
 		self.phenotype_function = None
 		self.status_function = None
 
@@ -17,6 +18,8 @@ class Status():
 
 		best_fitnesses.append(population[0]['fit'])
 		average_fitnesses.append(sum([individual['fit'] for individual in population])/self.population_size)
+
+		self.values['sigmas'].append(sum([p['sigma'] for p in population])/float(len(population)))
 
 		if 'phen' not in population[0]:
 			population[0]['phen'] = self.phenotype_function(population[0]['gen'])
