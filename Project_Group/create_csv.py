@@ -10,7 +10,6 @@ final_bests_f10 = [result['best_fitnesses'][-1] for result in results]
 
 with open('adapt', 'rb') as f:
 	results = load(f)
-results[-15] = results[-16]
 final_bests_a = [result['best_fitnesses'][-1] for result in results]
 
 with open('f5_f10.csv', 'w') as f:
